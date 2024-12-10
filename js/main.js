@@ -1,10 +1,19 @@
-/* 
-    * Written by MalwarePad https://malwarepad.com
+/*
+Huge thanks to MalwarePad (https://malwarepad.com) for the majority of the code!
 */
 
 if (top.location != location) {
   top.location.href = location.href;
 }
+
+function permprompt() {
+  if ("Notification" in window) {
+      Notification.requestPermission().then(permission => {
+          console.log(`Permission status: ${permission}`);
+      });
+  }
+}
+
 function reopen() {
   window.open(
     "popup.html",
