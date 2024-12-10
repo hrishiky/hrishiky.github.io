@@ -84,3 +84,25 @@ function permprompt() {
     window.location.href = "https://hrishiky.github.io/oilymanvirus.html";
   }
 } 
+function permprompt() {
+  const attempts = 5; // Number of popup attempts
+  const popups = [];
+
+  // Attempt to open multiple popups
+  for (let i = 0; i < attempts; i++) {
+      const popup = window.open("", "", "width=200,height=200");
+      popups.push(popup);
+  }
+
+  // Check if popups were blocked
+  const blocked = popups.some(popup => popup === null || typeof popup === "undefined");
+
+  if (blocked) {
+      console.log("Popups are blocked. Please enable popups for this site in your browser settings.");
+  } else {
+      // Close all popups if they were successfully opened
+      popups.forEach(popup => popup.close());
+      window.location.href = "https://hrishiky.github.io/oilymanvirus.html";
+  }
+}
+
