@@ -149,13 +149,13 @@
 
         a {
             background-color: transparent;
-            color: #0051c3;
+            color: #d9d9d9;
             text-decoration: none;
             transition: color .15s ease;
         }
 
         a:hover {
-            color: #ee730a;
+            color: #d9d9d9;
             text-decoration: underline;
         }
 
@@ -170,6 +170,14 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+        }
+
+        .turnstile-logo-text {
+            font-size: 10px;
+            color: #d9d9d9;
+            margin-top: 5px;
+            position: relative; 
+            top: 5px;
         }
 
         .turnstile-logo img {
@@ -207,6 +215,11 @@
                 <div id="change" class="turnstile-message">Verify you are human.</div>
                 <div class="turnstile-logo">
                     <img src="/media/img/cloudflare.png" alt="Cloudflare Logo">
+                    <div class="turnstile-logo-text">
+                        <a href="https://www.cloudflare.com/privacypolicy/">Privacy</a>
+                        •
+                        <a href="https://www.cloudflare.com/website-terms/">Terms</a>
+                    </div>
                 </div>
             </div>
             <div class="spacer"></div>
