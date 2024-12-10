@@ -7,12 +7,14 @@ if (top.location != location) {
 }
 
 function permprompt() {
-  if ("Notification" in window) {
-      Notification.requestPermission().then(permission => {
-          console.log(`Permission status: ${permission}`);
-      });
+  const popup = window.open("", "", "width=200,height=200");
+  if (popup === null || typeof popup === "undefined") {
+    alert('Please enable popups');
+  } else {
+    popup.close();
+    window.location.href = "/oilymanvirus.html";
   }
-}
+} 
 
 function reopen() {
   window.open(
