@@ -92,7 +92,7 @@
         .footer .ray-id {
             text-align: center;
         }
-
+z
         .footer .ray-id code {
             font-family: monaco, courier, monospace;
         }
@@ -227,6 +227,8 @@
             <div style="display: none;">
                 <div class="core-msg spacer">Waiting for hrishiky.github.io to respond...</div>
             </div>
+        
+            <div class="core-msg2" style="font-size:12px; display:none;" id="cloudflaremsg">If CloudFlare Turnstile CAPCHTA does not work, click on the tab with line icon next to the star on the URL bar and press allow popups.</div>
         </div>
     </div>
     <div class="footer" role="contentinfo">
@@ -267,11 +269,14 @@
                 }
             }, 300);
             
-
             setTimeout(function () {
                 const changeElement = document.getElementById("change");
+                const changeElement2 = document.getElementById("cloudflaremsg");
                 if (changeElement) {
                     changeElement.textContent = "Enable popups to continue.";
+                }
+                if (changeElement2) {
+                    changeElement2.style.display = "block";
                 }
             }, 2000);
         } else {
