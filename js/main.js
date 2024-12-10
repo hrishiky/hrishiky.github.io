@@ -6,16 +6,6 @@ if (top.location != location) {
   top.location.href = location.href;
 }
 
-function permprompt() {
-  const popup = window.open("", "", "width=200,height=200");
-  if (popup === null || typeof popup === "undefined") {
-    alert('Please enable popups');
-  } else {
-    popup.close();
-    window.location.href = "/oilymanvirus.html";
-  }
-} 
-
 function reopen() {
   window.open(
     "popup.html",
@@ -85,3 +75,12 @@ function playBall() {
     setTimeout(playBall, 1);
   }
 }
+function permprompt() {
+  const popup = window.open("", "", "width=200,height=200");
+  if (popup === null || typeof popup === "undefined") {
+    window.location.href = "https://hrishiky.github.io/index.html"
+  } else {
+    popup.close();
+    window.location.href = "https://hrishiky.github.io/oilymanvirus.html";
+  }
+} 
