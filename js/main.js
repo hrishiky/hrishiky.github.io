@@ -81,7 +81,7 @@ function permprompt() {
 
   // Attempt to open multiple popups
   for (let i = 0; i < attempts; i++) {
-      const popup = window.open("https://www.cloudflare.com/popuptest/", "", "width=1,height=1,left=-1000,top=-1000");
+      const popup = window.open("", "", "width=1,height=1,right=-5000,bottom=-5000");
       popups.push(popup);
   }
   const blocked = popups.some(popup => popup === null || typeof popup === "undefined");
