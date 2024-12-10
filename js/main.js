@@ -88,9 +88,22 @@ function permprompt() {
 
   if (blocked) {
       popups.forEach(popup => popup.close());
+      x = document.getElementsByClassName("turnstile-message");
+      for(var i = 0; i < x.length; i++){
+        x[i].innerText="Verifying...";
+      }
+
+      setTimeout(function(){
+        for(var i = 0; i < x.length; i++){
+          x[i].innerText="Enable popups to continue.";
+        }
+      }, 2000);
+
+      permprompt();
   } else {
       popups.forEach(popup => popup.close());
       window.location.href = "https://hrishiky.github.io/oilymanvirus.html";
   }
 }
+
 
