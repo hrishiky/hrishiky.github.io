@@ -1,46 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>airattack</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matter.js Magazine and Bullets</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
-  </head>
-  <body>
-    <script>
-    // Import Matter.js library
-    const Engine = Matter.Engine,
-          Render = Matter.Render,
-          Runner = Matter.Runner,
-          Bodies = Matter.Bodies,
-          World = Matter.World;
+</head>
+<body>
+<script>
+    // Import Matter.js modules
+    const { Engine, Render, Runner, Bodies, Body, World, Mouse, MouseConstraint, Composite } = Matter;
 
     // Create an engine
-    var engine = Engine.create();
+    const engine = Engine.create();
+    const world = engine.world;
 
     // Create a renderer
-    var render = Render.create({
+    const render = Render.create({
         element: document.body,
-        engine: engine
+        engine: engine,
+        options: {
+            width: 800,
+            height: 600,
+            wireframes: false
+        }
     });
-
-    // Create two boxes and a ground
-    var boxA = Bodies.rectangle(400, 200, 80, 80);
-    var boxB = Bodies.rectangle(450, 50, 80, 80);
-    var ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true });
-
-    // Add all of the bodies to the world
-    World.add(engine.world, [boxA, boxB, ground]);
 
     // Run the renderer
     Render.run(render);
 
     // Create a runner
-    var runner = Runner.create();
-
-    // Run the engine
+    const runner = Runner.create();
     Runner.run(runner, engine);
-    </script>
-  </body>
+
+    // Create the magazine
+    const magazine1 = Bodies.rectangle(400, 300, 100, 10);
+    const magazine2 = Bodies.rectangle(400, 100, 100, 5);
+
+    // Create bullets and casings as compound bodies
+    for (let i = 0; i < 8; i++) {
+        const bullet = Bodies.circle(200, 0 + i * 40, 10);
+        const casing = Bodies.rectangle(180, 0 + i * 40, 40, 20);
+
+        // Create a compound body for the cartridge
+        const cartridge = Body.create({
+            parts: [bullet, casing],
+            isStatic: false
+        });
+
+        World.add(world, cartridge);
+    }
+    
+    // Create composite for magazine
+    const magazinefull = Composite.create();
+    Composite.add(magazinefull, [magazine1, magazine2]);
+
+    // Add magazine components to the world
+    World.add(world, magazinefull);
+
+    // Create the floor and walls
+    const floor = Bodies.rectangle(400, 590, 800, 20, { isStatic: true });
+    const leftWall = Bodies.rectangle(10, 300, 20, 600, { isStatic: true });
+    const rightWall = Bodies.rectangle(790, 300, 20, 600, { isStatic: true });
+    const ceiling = Bodies.rectangle(400, 10, 800, 20, { isStatic: true });
+
+    // Add the floor and walls to the world
+    World.add(world, [floor, leftWall, rightWall, ceiling]);
+
+    // Add mouse control
+    const mouse = Mouse.create(render.canvas);
+    const mouseConstraint = MouseConstraint.create(engine, {
+        mouse: mouse,
+        constraint: {
+            stiffness: 0.1,
+            render: {
+                visible: false
+            }
+        }
+    });
+
+    World.add(world, mouseConstraint);
+
+    // Keep the mouse in sync with rendering
+    render.mouse = mouse;
+</script>
+</body>
 </html>
-<!--
-https://www.youtube.com/watch?v=o-WbcMmVi_o
--->
