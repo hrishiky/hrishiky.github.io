@@ -28,10 +28,11 @@
     const runner = Runner.create();
     Runner.run(runner, engine);
 
-    const magspring = Bodies.rectangle(400, 400, 60, 5);
-    const magbase = Bodies.rectangle(400, 490, 60, 8);
-    const magedge1 = Bodies.rectangle(366, 474, 8, 210, {isStatic: true});
-    const magedge2 = Bodies.rectangle(434, 474, 8, 210, {isStatic: true});
+    const magspring = Bodies.rectangle(400, 400, 52, 10);
+    const magbase = Bodies.rectangle(400, 490, 52, 10);
+    const magedge1 = Bodies.rectangle(370, 470, 8, 215, {isStatic: true});
+    const magedge2 = Bodies.rectangle(430, 470, 8, 215, {isStatic: true}); //215
+    const magstiff = 0.1
 
     const magspringConstraint = Constraint.create({
         bodyA: magspring,
@@ -39,8 +40,8 @@
         pointA: {x: 16, y: 0},
         pointB: {x: 16, y: 0},
         length: 200,
-        stiffness: 0.05,
-        damping: 0.1,
+        stiffness: 0.01,
+        damping: magstiff,
         render: {
             lineWidth: 2,
             strokeStyle: '#ffffff'
@@ -53,7 +54,19 @@
         pointA: {x: -16, y: 0},
         pointB: {x: -16, y: 0},
         length: 200,
-        stiffness: 0.05,
+        stiffness: magstiff,
+        damping: 0.1,
+        render: {
+            lineWidth: 2,
+            strokeStyle: '#ffffff'
+        }
+    });
+    
+    const magspringConstraint3 = Constraint.create({
+        bodyA: magspring,
+        bodyB: magbase,
+        length: 200,
+        stiffness: magstiff,
         damping: 0.1,
         render: {
             lineWidth: 2,
@@ -74,8 +87,8 @@
     });
 
     for (let i = 0; i < 8; i++) {
-        const bullet = Bodies.circle(200, 420 + i * 20, 10);
-        const casing = Bodies.rectangle(180, 420 + i * 20, 40, 20);
+        const bullet = Bodies.circle(410, 0 + i * 30, 10);
+        const casing = Bodies.rectangle(390, 0 + i * 30, 40, 20);
 
         const cartridge = Body.create({
             parts: [bullet, casing],
@@ -86,16 +99,15 @@
     }
     
     const magazinefull = Composite.create();
-    Composite.add(magazinefull, [magspring, magbase, magspringConstraint, magspringConstraint2, magedge1, magedge2, magedgeConstraint]);
+    Composite.add(magazinefull, [magspring, magbase, magspringConstraint, magspringConstraint2, magspringConstraint3, magedge1, magedge2, magedgeConstraint]);
 
     World.add(world, magazinefull);
 
     const floor = Bodies.rectangle(400, 590, 800, 20, { isStatic: true });
     const leftWall = Bodies.rectangle(10, 300, 20, 600, { isStatic: true });
     const rightWall = Bodies.rectangle(790, 300, 20, 600, { isStatic: true });
-    const ceiling = Bodies.rectangle(400, 10, 800, 20, { isStatic: true });
 
-    World.add(world, [floor, leftWall, rightWall, ceiling]);
+    World.add(world, [floor, leftWall, rightWall]);
 
     const mouse = Mouse.create(render.canvas);
     const mouseConstraint = MouseConstraint.create(engine, {
