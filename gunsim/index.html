@@ -9,7 +9,7 @@
 <body>
 <script>
     // Import Matter.js modules
-    const { Engine, Render, Runner, Bodies, Body, World, Mouse, MouseConstraint, Composite } = Matter;
+    const { Engine, Render, Runner, Bodies, Body, World, Mouse, MouseConstraint, Composite, Constraint } = Matter;
 
     // Create an engine
     const engine = Engine.create();
@@ -34,13 +34,28 @@
     Runner.run(runner, engine);
 
     // Create the magazine
-    const magazine1 = Bodies.rectangle(400, 300, 100, 10);
-    const magazine2 = Bodies.rectangle(400, 100, 100, 5);
+    const magspring = Bodies.rectangle(400, 300, 64, 10);
+    const magbase = Bodies.rectangle(400, 100, 64, 5);
+    const magedge1 = Bodies.rectangle(400, 100, 64, 5);
+    const magedge2 = Bodies.rectangle(400, 100, 64, 5);
+
+    // Create a spring-like constraint to link the two parts of the magazine
+    const magazineConstraint = Constraint.create({
+        bodyA: magspring,
+        bodyB: magbase,
+        length: 200,
+        stiffness: 0.05,
+        damping: 0.1,
+        render: {
+            lineWidth: 2,
+            strokeStyle: '#ffffff'
+        }
+    });
 
     // Create bullets and casings as compound bodies
     for (let i = 0; i < 8; i++) {
-        const bullet = Bodies.circle(200, 0 + i * 40, 10);
-        const casing = Bodies.rectangle(180, 0 + i * 40, 40, 20);
+        const bullet = Bodies.circle(200, 420 + i * 20, 10);
+        const casing = Bodies.rectangle(180, 420 + i * 20, 40, 20);
 
         // Create a compound body for the cartridge
         const cartridge = Body.create({
@@ -53,7 +68,7 @@
     
     // Create composite for magazine
     const magazinefull = Composite.create();
-    Composite.add(magazinefull, [magazine1, magazine2]);
+    Composite.add(magazinefull, [magspring, magbase, magazineConstraint]);
 
     // Add magazine components to the world
     World.add(world, magazinefull);
