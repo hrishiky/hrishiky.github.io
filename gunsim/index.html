@@ -33,7 +33,7 @@
     const magbase = Bodies.rectangle(400, 582, 68, 8);
     const magedge1 = Bodies.rectangle(370, 470, 8, 215);
     const magedge2 = Bodies.rectangle(430, 470, 8, 215);
-    const magstiff = 0.07;
+    const magstiff = 0.05;
 
     const magspringConstraint = Constraint.create({
         bodyA: magspring,
@@ -107,7 +107,8 @@
     const mouseConstraint = MouseConstraint.create(engine, {
         mouse: mouse,
         constraint: {
-            stiffness: 0.1,
+            stiffness: 0.01,
+            damping: 0.1,
             render: {
                 visible: false
             }
