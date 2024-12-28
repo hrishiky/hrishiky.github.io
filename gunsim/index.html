@@ -35,7 +35,7 @@
     const magbase = Bodies.rectangle(400, 582, 68, 8);
     const magedge1 = Bodies.rectangle(370, 470, 8, 215);
     const magedge2 = Bodies.rectangle(430, 470, 8, 215);
-    const magstiff = 0.01;
+    const magstiff = 0.012;
 
     const magspringConstraint = Constraint.create({
         bodyA: magspring,
@@ -83,6 +83,7 @@
 
         const cartridge = Body.create({
             parts: [bullet, casing],
+            mass: 0.8,
             isStatic: false
         });
 
