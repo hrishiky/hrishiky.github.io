@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matter.js Magazine and Bullets</title>
+    <title>gunsim</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
 </head>
 <body>
@@ -28,12 +28,14 @@
     const runner = Runner.create();
     Runner.run(runner, engine);
 
-    const magspring = Bodies.rectangle(400, 200, 52, 20, {inertia: Infinity});
-    const magplate = Bodies.rectangle(400, 400, 52, 20, {inertia: Infinity});
+    const magspring = Bodies.rectangle(400, 350, 52, 20, {inertia: Infinity});
+    const magplate = Bodies.rectangle(400, 550, 52, 20, {inertia: Infinity});
+    const magtop = Bodies.rectangle(395, 338, 50, 8);
+    Matter.Body.setAngle(magtop, -3.31); 
     const magbase = Bodies.rectangle(400, 582, 68, 8);
     const magedge1 = Bodies.rectangle(370, 470, 8, 215);
     const magedge2 = Bodies.rectangle(430, 470, 8, 215);
-    const magstiff = 0.05;
+    const magstiff = 0.01;
 
     const magspringConstraint = Constraint.create({
         bodyA: magspring,
@@ -88,7 +90,7 @@
     }
 
     const magborder = Body.create({
-        parts: [magbase, magedge1, magedge2],
+        parts: [magbase, magedge1, magedge2, magtop],
         isStatic: false
     });
 
