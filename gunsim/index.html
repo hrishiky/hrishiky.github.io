@@ -28,7 +28,7 @@
     const runner = Runner.create();
     Runner.run(runner, engine);
 
-    const magspring = Bodies.rectangle(400, 400, 52, 10);
+    const magspring = Bodies.rectangle(400, 400, 52, 10, {inertia: Infinity});
     const magbase = Bodies.rectangle(400, 490, 52, 10);
     const magedge1 = Bodies.rectangle(370, 470, 8, 215, {isStatic: true});
     const magedge2 = Bodies.rectangle(430, 470, 8, 215, {isStatic: true}); //215
