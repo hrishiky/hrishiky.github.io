@@ -28,8 +28,8 @@
     const runner = Runner.create();
     Runner.run(runner, engine);
 
-    const magspring = Bodies.rectangle(400, 350, 52, 20, {inertia: Infinity});
-    const magplate = Bodies.rectangle(400, 550, 52, 20, {inertia: Infinity});
+    const magspring = Bodies.rectangle(400, 350, 52, 20);
+    const magplate = Bodies.rectangle(400, 550, 52, 20);
     const magtop = Bodies.rectangle(395, 338, 50, 8);
     Matter.Body.setAngle(magtop, -3.31); 
     const magbase = Bodies.rectangle(400, 582, 68, 8);
@@ -110,6 +110,7 @@
         mouse: mouse,
         constraint: {
             stiffness: 0.01,
+            angularStiffness: 0.0001,
             damping: 0.1,
             render: {
                 visible: false
