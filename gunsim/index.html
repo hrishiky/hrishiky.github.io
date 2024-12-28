@@ -8,14 +8,11 @@
 </head>
 <body>
 <script>
-    // Import Matter.js modules
     const { Engine, Render, Runner, Bodies, Body, World, Mouse, MouseConstraint, Composite, Constraint } = Matter;
 
-    // Create an engine
     const engine = Engine.create();
     const world = engine.world;
 
-    // Create a renderer
     const render = Render.create({
         element: document.body,
         engine: engine,
@@ -26,23 +23,21 @@
         }
     });
 
-    // Run the renderer
     Render.run(render);
 
-    // Create a runner
     const runner = Runner.create();
     Runner.run(runner, engine);
 
-    // Create the magazine
-    const magspring = Bodies.rectangle(400, 300, 64, 10);
-    const magbase = Bodies.rectangle(400, 100, 64, 5);
-    const magedge1 = Bodies.rectangle(400, 100, 64, 5);
-    const magedge2 = Bodies.rectangle(400, 100, 64, 5);
+    const magspring = Bodies.rectangle(400, 400, 60, 5);
+    const magbase = Bodies.rectangle(400, 490, 60, 8);
+    const magedge1 = Bodies.rectangle(366, 474, 8, 210, {isStatic: true});
+    const magedge2 = Bodies.rectangle(434, 474, 8, 210, {isStatic: true});
 
-    // Create a spring-like constraint to link the two parts of the magazine
-    const magazineConstraint = Constraint.create({
+    const magspringConstraint = Constraint.create({
         bodyA: magspring,
         bodyB: magbase,
+        pointA: {x: 16, y: 0},
+        pointB: {x: 16, y: 0},
         length: 200,
         stiffness: 0.05,
         damping: 0.1,
@@ -51,13 +46,37 @@
             strokeStyle: '#ffffff'
         }
     });
+    
+    const magspringConstraint2 = Constraint.create({
+        bodyA: magspring,
+        bodyB: magbase,
+        pointA: {x: -16, y: 0},
+        pointB: {x: -16, y: 0},
+        length: 200,
+        stiffness: 0.05,
+        damping: 0.1,
+        render: {
+            lineWidth: 2,
+            strokeStyle: '#ffffff'
+        }
+    });
+    
+    const magedgeConstraint = Constraint.create({
+        bodyA: magedge1,
+        bodyB: magedge2,
+        length: 72,
+        stiffness: 1,
+        damping: 0.1,
+        render: {
+            lineWidth: 2,
+            strokeStyle: '#ffffff'
+        }
+    });
 
-    // Create bullets and casings as compound bodies
     for (let i = 0; i < 8; i++) {
         const bullet = Bodies.circle(200, 420 + i * 20, 10);
         const casing = Bodies.rectangle(180, 420 + i * 20, 40, 20);
 
-        // Create a compound body for the cartridge
         const cartridge = Body.create({
             parts: [bullet, casing],
             isStatic: false
@@ -66,23 +85,18 @@
         World.add(world, cartridge);
     }
     
-    // Create composite for magazine
     const magazinefull = Composite.create();
-    Composite.add(magazinefull, [magspring, magbase, magazineConstraint]);
+    Composite.add(magazinefull, [magspring, magbase, magspringConstraint, magspringConstraint2, magedge1, magedge2, magedgeConstraint]);
 
-    // Add magazine components to the world
     World.add(world, magazinefull);
 
-    // Create the floor and walls
     const floor = Bodies.rectangle(400, 590, 800, 20, { isStatic: true });
     const leftWall = Bodies.rectangle(10, 300, 20, 600, { isStatic: true });
     const rightWall = Bodies.rectangle(790, 300, 20, 600, { isStatic: true });
     const ceiling = Bodies.rectangle(400, 10, 800, 20, { isStatic: true });
 
-    // Add the floor and walls to the world
     World.add(world, [floor, leftWall, rightWall, ceiling]);
 
-    // Add mouse control
     const mouse = Mouse.create(render.canvas);
     const mouseConstraint = MouseConstraint.create(engine, {
         mouse: mouse,
@@ -96,7 +110,6 @@
 
     World.add(world, mouseConstraint);
 
-    // Keep the mouse in sync with rendering
     render.mouse = mouse;
 </script>
 </body>
