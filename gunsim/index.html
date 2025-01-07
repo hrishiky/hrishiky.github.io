@@ -28,14 +28,14 @@
     const runner = Runner.create();
     Runner.run(runner, engine);
 
-    const magspring = Bodies.rectangle(400, 350, 52, 20);
+    const magspring = Bodies.rectangle(400, 350, 52, 30);
     const magplate = Bodies.rectangle(400, 550, 52, 20);
     const magtop = Bodies.rectangle(395, 338, 50, 8);
-    Matter.Body.setAngle(magtop, -3.31); 
+    const magtopedge = Bodies.rectangle(370, 340, 8, 12);
     const magbase = Bodies.rectangle(400, 582, 68, 8);
     const magedge1 = Bodies.rectangle(370, 470, 8, 215);
     const magedge2 = Bodies.rectangle(430, 470, 8, 215);
-    const magstiff = 0.012;
+    const magstiff = 0.013;
 
     const magspringConstraint = Constraint.create({
         bodyA: magspring,
@@ -91,7 +91,7 @@
     }
 
     const magborder = Body.create({
-        parts: [magbase, magedge1, magedge2, magtop],
+        parts: [magbase, magedge1, magedge2, magtop, magtopedge],
         isStatic: false
     });
 
