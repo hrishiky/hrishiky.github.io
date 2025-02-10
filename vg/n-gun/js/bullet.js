@@ -3929,6 +3929,50 @@ const b = {
         }
         bullet[me].do = function () { };
     },
+    test(pos, velocity, dmg = 1) {
+        dmg *= tech.bulletSize
+        const me = bullet.length;
+        bullet[me] = Bodies.rectangle(pos.x, pos.y, 25 * tech.bulletSize, 2 * tech.bulletSize, b.fireAttributes(Math.atan2(velocity.y, velocity.x)));
+        Matter.Body.setVelocity(bullet[me], velocity);
+        Composite.add(engine.world, bullet[me]); //add bullet to world
+        bullet[me].endCycle = simulation.cycle + 80 + 18 * Math.random();
+        bullet[me].dmg = tech.isNailRadiation ? 0 : dmg
+        bullet[me].beforeDmg = function (who) { //beforeDmg is rewritten with ice crystal tech
+            if (tech.isNailRadiation) mobs.statusDoT(who, dmg * (tech.isFastRadiation ? 1.3 : 0.44), tech.isSlowRadiation ? 360 : (tech.isFastRadiation ? 60 : 180)) // one tick every 30 cycles
+            if (tech.isNailCrit) { //makes bullet do explosive damage if it hits center
+                if (!who.shield && Vector.dot(Vector.normalise(Vector.sub(who.position, this.position)), Vector.normalise(this.velocity)) > 0.97 - 1 / who.radius) {
+                    b.explosion(this.position, 80 + 90 * (b.activeGun === 0) + 30 * Math.random()); //larger explosions for human aimed nail gun, smaller for auto aimed sources, like bots, and mine
+                }
+            }
+            this.ricochet(who)
+        };
+        bullet[me].ricochet = function (who) { //use for normal nails, and ice crystal nails
+            if (tech.isRicochet) {
+                const targets = [] //target nearby mobs
+                for (let i = 0, len = mob.length; i < len; i++) {
+                    const dist = Vector.magnitude(Vector.sub(this.position, mob[i].position));
+                    if (
+                        mob[i] !== who &&
+                        dist < 2500 + mob[i].radius &&
+                        !mob[i].isBadTarget && //|| mob[i].isMobBullet
+                        !mob[i].isInvulnerable &&
+                        Matter.Query.ray(body, this.position, mob[i].position).length === 0 &&
+                        Matter.Query.ray(map, this.position, mob[i].position).length === 0
+                    ) {
+                        targets.push(Vector.add(mob[i].position, Vector.mult(mob[i].velocity, dist / 60))) //predict where the mob will be in a few cycles
+                    }
+                }
+                if (targets.length > 0) { // aim near a random target in array
+                    const index = Math.floor(Math.random() * targets.length)
+                    Matter.Body.setVelocity(this, Vector.mult(Vector.normalise(Vector.sub(targets[index], this.position)), 45));
+                    Matter.Body.setAngle(this, Math.atan2(this.velocity.y, this.velocity.x))
+                    Matter.Body.setAngularVelocity(this, 0);
+                }
+                this.dmg += 2
+            }
+        }
+        bullet[me].do = function () { };
+    },
     bm1911(pos, velocity) {
         const me = bullet.length; // 6, 3
         bullet[me] = Bodies.rectangle(pos.x, pos.y, 30, 30, b.fireAttributes(Math.atan2(velocity.y, velocity.x)));
@@ -7888,7 +7932,7 @@ const b = {
                 this.baseFire(m.angle + (Math.random() - 0.5) * (Math.random() - 0.5) * (m.crouch ? 1.15 : 2) / 2)
             },
             baseFire(angle, speed = 30 + 6 * Math.random()) {
-                b.bm1911({
+                b.test({
                     x: m.pos.x + 30 * Math.cos(m.angle),
                     y: m.pos.y + 30 * Math.sin(m.angle)
                 }, {
