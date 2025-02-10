@@ -7612,8 +7612,24 @@ const b = {
             have: false,
             nextFireCycle: 0, //use to remember how longs its been since last fire, used to reset count
             startingHoldCycle: 0,
-            chooseFireMethod() {
-                this.fire = this.fireNormal
+            chooseFireMethod() { //set in simulation.startGame
+                if (tech.nailRecoil) {
+                    if (tech.isRivets) {
+                        this.fire = this.fireRecoilRivets
+                    } else {
+                        this.fire = this.fireRecoilNails
+                    }
+                } else if (tech.isRivets) {
+                    this.fire = this.fireRivets
+                } else if (tech.isNeedles) {
+                    this.fire = this.fireNeedles
+                } else if (tech.nailInstantFireRate) {
+                    this.fire = this.fireInstantFireRate
+                    // } else if (tech.nailFireRate) {
+                    // this.fire = this.fireNailFireRate
+                } else {
+                    this.fire = this.fireNormal
+                }
             },
             do() { },
             fire() { },
