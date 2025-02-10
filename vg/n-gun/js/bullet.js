@@ -3929,14 +3929,13 @@ const b = {
         }
         bullet[me].do = function () { };
     },
-    bm1911(pos, velocity, dmg = 4) {
-        dmg *= tech.bulletSize
-        const me = bullet.length;
-        bullet[me] = Bodies.rectangle(pos.x, pos.y, 6, 3, b.fireAttributes(Math.atan2(velocity.y, velocity.x)));
+    bm1911(pos, velocity) {
+        const me = bullet.length; // 6, 3
+        bullet[me] = Bodies.rectangle(pos.x, pos.y, 30, 30, b.fireAttributes(Math.atan2(velocity.y, velocity.x)));
         Matter.Body.setVelocity(bullet[me], velocity);
         Composite.add(engine.world, bullet[me]); //add bullet to world
         bullet[me].endCycle = simulation.cycle + 80 + 18 * Math.random();
-        bullet[me].dmg = dmg;
+        bullet[me].dmg = 4;
         bullet[me].do = function () { };
     },
     needle(angle = m.angle) {
@@ -7534,7 +7533,7 @@ const b = {
             },
         },
         {
-            name: "M1911",
+            name: "m1911",
             descriptionFunction() {
                 return `shoot high <strong class='color-d'>damage</strong> <strong>bullets</strong><br>has a slow <em>fire rate</em><br><strong>${this.ammoPack.toFixed(0)}</strong> nails per ${powerUps.orb.ammo()}`
             },
@@ -7585,7 +7584,7 @@ const b = {
             */
             fireNormal() {
                 if (this.nextFireCycle + 1 < m.cycle) this.startingHoldCycle = m.cycle //reset if not constantly firing
-                const CD = 5 //CD scales with cycles fire is held down
+                const CD = 20 //CD scales with cycles fire is held down
                 this.nextFireCycle = m.cycle + CD * b.fireCDscale //predict next fire cycle if the fire button is held down
 
                 m.fireCDcycle = m.cycle + Math.floor(CD * b.fireCDscale); // cool down
