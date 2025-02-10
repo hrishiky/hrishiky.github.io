@@ -7932,7 +7932,7 @@ const b = {
                 this.baseFire(m.angle + (Math.random() - 0.5) * (Math.random() - 0.5) * (m.crouch ? 1.15 : 2) / 2)
             },
             baseFire(angle, speed = 30 + 6 * Math.random()) {
-                b.test({
+                b.nail({
                     x: m.pos.x + 30 * Math.cos(m.angle),
                     y: m.pos.y + 30 * Math.sin(m.angle)
                 }, {
