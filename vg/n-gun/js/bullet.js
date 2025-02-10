@@ -7577,9 +7577,9 @@ const b = {
             },
         },
         {
-            name: "m1911",
+            name: "m1911", //12
             descriptionFunction() {
-                return `shoot high <strong class='color-d'>damage</strong> <strong>bullets</strong><br>has a slow <em>fire rate</em><br><strong>${this.ammoPack.toFixed(0)}</strong> nails per ${powerUps.orb.ammo()}`
+                return `shoot high <strong class='color-d'>damage</strong> <strong>bullets</strong><br>has a slow <em>fire rate</em><br><strong>${this.ammoPack.toFixed(0)}</strong> bullets per ${powerUps.orb.ammo()}`
             },
             ammo: 0,
             ammoPack: 8,
@@ -7593,39 +7593,6 @@ const b = {
             },
             do() { },
             fire() { },
-            /*
-            fireRecoilNails() {
-                if (this.nextFireCycle + 1 < m.cycle) this.startingHoldCycle = m.cycle //reset if not constantly firing
-                const CD = Math.max(11 - 0.06 * (m.cycle - this.startingHoldCycle), 0.99) //CD scales with cycles fire is held down
-                this.nextFireCycle = m.cycle + CD * b.fireCDscale //predict next fire cycle if the fire button is held down
-
-                m.fireCDcycle = m.cycle + Math.floor(CD * b.fireCDscale); // cool down
-                this.baseFire(m.angle + (Math.random() - 0.5) * (m.crouch ? 0.04 : 0.13) / CD, 45 + 6 * Math.random())
-                //very complex recoil system
-                if (m.onGround) {
-                    if (m.crouch) {
-                        const KNOCK = 0.006
-                        player.force.x -= KNOCK * Math.cos(m.angle)
-                        player.force.y -= KNOCK * Math.sin(m.angle) //reduce knock back in vertical direction to stop super jumps
-                        Matter.Body.setVelocity(player, {
-                            x: player.velocity.x * 0.5,
-                            y: player.velocity.y * 0.5
-                        });
-                    } else {
-                        const KNOCK = 0.03
-                        player.force.x -= KNOCK * Math.cos(m.angle)
-                        player.force.y -= KNOCK * Math.sin(m.angle) //reduce knock back in vertical direction to stop super jumps
-                        Matter.Body.setVelocity(player, {
-                            x: player.velocity.x * 0.8,
-                            y: player.velocity.y * 0.8
-                        });
-                    }
-                } else {
-                    player.force.x -= 0.06 * Math.cos(m.angle) * Math.min(1, 3 / (0.1 + Math.abs(player.velocity.x)))
-                    player.force.y -= 0.006 * Math.sin(m.angle) //reduce knock back in vertical direction to stop super jumps
-                }
-            },
-            */
             fireNormal() {
                 if (this.nextFireCycle + 1 < m.cycle) this.startingHoldCycle = m.cycle //reset if not constantly firing
                 const CD = 20 //CD scales with cycles fire is held down
@@ -7645,9 +7612,10 @@ const b = {
             },
         },
         {
-            name: "TEST GUN",
+            name: "TESTGUN", //13
+            // description: `use compressed air to shoot a stream of <strong>nails</strong><br><em>fire rate</em> <strong>increases</strong> the longer you fire<br><strong>60</strong> nails per ${powerUps.orb.ammo()}`,
             descriptionFunction() {
-                return `shoot high <strong class='color-d'>damage</strong> <strong>bullets</strong><br>has a slow <em>fire rate</em><br><strong>${this.ammoPack.toFixed(0)}</strong> nails per ${powerUps.orb.ammo()}`
+                return `use compressed air to rapidly drive <strong>nails</strong><br><em>fire rate</em> <strong>increases</strong> the longer you fire<br><strong>${this.ammoPack.toFixed(0)}</strong> nails per ${powerUps.orb.ammo()}`
             },
             ammo: 0,
             ammoPack: 27,
