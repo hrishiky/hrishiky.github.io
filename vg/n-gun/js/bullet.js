@@ -5603,6 +5603,7 @@ const b = {
                 }
             },
         },
+        /*
         {
             name: "TEST GUN", // 0
             // description: `use compressed air to shoot a stream of <strong>nails</strong><br><em>fire rate</em> <strong>increases</strong> the longer you fire<br><strong>60</strong> nails per ${powerUps.orb.ammo()}`,
@@ -5918,6 +5919,7 @@ const b = {
                 }
             },
         },
+        */
         {
             name: "shotgun", //1
             // description: `fire a wide <strong>burst</strong> of short range <strong> bullets</strong><br>with a low <strong><em>fire rate</em></strong><br><strong>3-4</strong> nails per ${powerUps.orb.ammo()}`,
