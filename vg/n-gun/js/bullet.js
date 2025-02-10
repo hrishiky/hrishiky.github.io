@@ -7585,13 +7585,13 @@ const b = {
             fireNormal() {
                 if (this.nextFireCycle + 1 < m.cycle) this.startingHoldCycle = m.cycle //reset if not constantly firing
                 const CD = 20 //CD scales with cycles fire is held down
-                this.nextFireCycle = m.cycle + CD * b.fireCDscale //predict next fire cycle if the fire button is held down
+                this.nextFireCycle = m.cycle + CD //predict next fire cycle if the fire button is held down
 
-                m.fireCDcycle = m.cycle + Math.floor(CD * b.fireCDscale); // cool down
+                m.fireCDcycle = m.cycle + 20; // cool down
                 this.baseFire(m.angle + (Math.random() - 0.5) * (m.crouch ? 0.05 : 0.3) / CD)
             },
             baseFire(angle, speed = 80) {
-                b.bm1911({
+                b.nail({
                     x: m.pos.x + 30 * Math.cos(m.angle),
                     y: m.pos.y + 30 * Math.sin(m.angle)
                 }, {
