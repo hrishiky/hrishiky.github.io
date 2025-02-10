@@ -5604,6 +5604,321 @@ const b = {
             },
         },
         {
+            name: "TEST GUN", // 0
+            // description: `use compressed air to shoot a stream of <strong>nails</strong><br><em>fire rate</em> <strong>increases</strong> the longer you fire<br><strong>60</strong> nails per ${powerUps.orb.ammo()}`,
+            descriptionFunction() {
+                return `use compressed air to rapidly drive <strong>nails</strong><br><em>fire rate</em> <strong>increases</strong> the longer you fire<br><strong>${this.ammoPack.toFixed(0)}</strong> nails per ${powerUps.orb.ammo()}`
+            },
+            ammo: 0,
+            ammoPack: 27,
+            defaultAmmoPack: 27,
+            recordedAmmo: 0,
+            have: false,
+            nextFireCycle: 0, //use to remember how longs its been since last fire, used to reset count
+            startingHoldCycle: 0,
+            chooseFireMethod() { //set in simulation.startGame
+                if (tech.nailRecoil) {
+                    if (tech.isRivets) {
+                        this.fire = this.fireRecoilRivets
+                    } else {
+                        this.fire = this.fireRecoilNails
+                    }
+                } else if (tech.isRivets) {
+                    this.fire = this.fireRivets
+                } else if (tech.isNeedles) {
+                    this.fire = this.fireNeedles
+                } else if (tech.nailInstantFireRate) {
+                    this.fire = this.fireInstantFireRate
+                    // } else if (tech.nailFireRate) {
+                    // this.fire = this.fireNailFireRate
+                } else {
+                    this.fire = this.fireNormal
+                }
+            },
+            do() { },
+            fire() { },
+            fireRecoilNails() {
+                if (this.nextFireCycle + 1 < m.cycle) this.startingHoldCycle = m.cycle //reset if not constantly firing
+                const CD = Math.max(11 - 0.06 * (m.cycle - this.startingHoldCycle), 0.99) //CD scales with cycles fire is held down
+                this.nextFireCycle = m.cycle + CD * b.fireCDscale //predict next fire cycle if the fire button is held down
+
+                m.fireCDcycle = m.cycle + Math.floor(CD * b.fireCDscale); // cool down
+                this.baseFire(m.angle + (Math.random() - 0.5) * (m.crouch ? 0.04 : 0.13) / CD, 45 + 6 * Math.random())
+                //very complex recoil system
+                if (m.onGround) {
+                    if (m.crouch) {
+                        const KNOCK = 0.006
+                        player.force.x -= KNOCK * Math.cos(m.angle)
+                        player.force.y -= KNOCK * Math.sin(m.angle) //reduce knock back in vertical direction to stop super jumps
+                        Matter.Body.setVelocity(player, {
+                            x: player.velocity.x * 0.5,
+                            y: player.velocity.y * 0.5
+                        });
+                    } else {
+                        const KNOCK = 0.03
+                        player.force.x -= KNOCK * Math.cos(m.angle)
+                        player.force.y -= KNOCK * Math.sin(m.angle) //reduce knock back in vertical direction to stop super jumps
+                        Matter.Body.setVelocity(player, {
+                            x: player.velocity.x * 0.8,
+                            y: player.velocity.y * 0.8
+                        });
+                    }
+                } else {
+                    player.force.x -= 0.06 * Math.cos(m.angle) * Math.min(1, 3 / (0.1 + Math.abs(player.velocity.x)))
+                    player.force.y -= 0.006 * Math.sin(m.angle) //reduce knock back in vertical direction to stop super jumps
+                }
+            },
+            fireNormal() {
+                if (this.nextFireCycle + 1 < m.cycle) this.startingHoldCycle = m.cycle //reset if not constantly firing
+                const CD = Math.max(11 - 0.06 * (m.cycle - this.startingHoldCycle), 1) //CD scales with cycles fire is held down
+                this.nextFireCycle = m.cycle + CD * b.fireCDscale //predict next fire cycle if the fire button is held down
+
+                m.fireCDcycle = m.cycle + Math.floor(CD * b.fireCDscale); // cool down
+                this.baseFire(m.angle + (Math.random() - 0.5) * (m.crouch ? 0.05 : 0.3) / CD)
+            },
+            fireNeedles() {
+                if (m.crouch) {
+                    m.fireCDcycle = m.cycle + 30 * b.fireCDscale; // cool down
+                    b.needle()
+
+                    function cycle() {
+                        if (simulation.paused || m.isTimeDilated) {
+                            requestAnimationFrame(cycle)
+                        } else {
+                            count++
+                            if (count % 2) b.needle()
+                            if (count < 7 && m.alive) requestAnimationFrame(cycle);
+                        }
+                    }
+                    let count = -1
+                    requestAnimationFrame(cycle);
+                } else {
+                    m.fireCDcycle = m.cycle + 22 * b.fireCDscale; // cool down
+                    b.needle()
+
+                    function cycle() {
+                        if (simulation.paused || m.isTimeDilated) {
+                            requestAnimationFrame(cycle)
+                        } else {
+                            count++
+                            if (count % 2) b.needle()
+                            if (count < 3 && m.alive) requestAnimationFrame(cycle);
+                        }
+                    }
+                    let count = -1
+                    requestAnimationFrame(cycle);
+                }
+            },
+            fireRivets() {
+                m.fireCDcycle = m.cycle + Math.floor((m.crouch ? 22 : 14) * b.fireCDscale); // cool down
+                const me = bullet.length;
+                const size = tech.bulletSize * 8
+                bullet[me] = Bodies.rectangle(m.pos.x + 35 * Math.cos(m.angle), m.pos.y + 35 * Math.sin(m.angle), 5 * size, size, b.fireAttributes(m.angle));
+                bullet[me].dmg = tech.isNailRadiation ? 0 : 2.75
+                Matter.Body.setDensity(bullet[me], 0.002);
+                Composite.add(engine.world, bullet[me]); //add bullet to world
+                const SPEED = m.crouch ? 60 : 44
+                Matter.Body.setVelocity(bullet[me], {
+                    x: SPEED * Math.cos(m.angle),
+                    y: SPEED * Math.sin(m.angle)
+                });
+                bullet[me].endCycle = simulation.cycle + 180
+
+                bullet[me].beforeDmg = function (who) { //beforeDmg is rewritten with ice crystal tech
+                    if (tech.isIncendiary) {
+                        this.endCycle = 0; //bullet ends cycle after hitting a mob and triggers explosion
+                        b.explosion(this.position, 100 + (Math.random() - 0.5) * 20); //makes bullet do explosive damage at end
+                    }
+                    if (tech.isNailCrit) {
+                        if (!who.shield && Vector.dot(Vector.normalise(Vector.sub(who.position, this.position)), Vector.normalise(this.velocity)) > 0.97 - 1 / who.radius) {
+                            b.explosion(this.position, 300 + 40 * Math.random()); //makes bullet do explosive damage at end
+                        }
+                    } else if (tech.isCritKill) b.crit(who, this)
+                    if (tech.isNailRadiation) mobs.statusDoT(who, 7 * (tech.isFastRadiation ? 0.7 : 0.24), tech.isSlowRadiation ? 360 : (tech.isFastRadiation ? 60 : 180)) // one tick every 30 cycles
+                    if (this.speed > 4 && tech.fragments) {
+                        b.targetedNail(this.position, 1.25 * tech.fragments * tech.bulletSize)
+                        this.endCycle = 0 //triggers despawn
+                    }
+                };
+
+                bullet[me].minDmgSpeed = 10
+                bullet[me].frictionAir = 0.006;
+                bullet[me].rotateToVelocity = function () { //rotates bullet to face current velocity?
+                    if (this.speed > 7) {
+                        const facing = {
+                            x: Math.cos(this.angle),
+                            y: Math.sin(this.angle)
+                        }
+                        const mag = 0.002 * this.mass
+                        if (Vector.cross(Vector.normalise(this.velocity), facing) < 0) {
+                            this.torque += mag
+                        } else {
+                            this.torque -= mag
+                        }
+                    }
+                };
+                if (tech.isIncendiary) {
+                    bullet[me].do = function () {
+                        this.force.y += this.mass * 0.0008
+                        this.rotateToVelocity()
+                        //collide with map
+                        if (Matter.Query.collides(this, map).length) { //penetrate walls
+                            this.endCycle = 0; //bullet ends cycle after hitting a mob and triggers explosion
+                            b.explosion(this.position, 300 + 40 * Math.random()); //makes bullet do explosive damage at end
+                        }
+                    };
+                } else {
+                    bullet[me].do = function () {
+                        this.force.y += this.mass * 0.0008
+                        this.rotateToVelocity()
+                    };
+                }
+                b.muzzleFlash();
+                //very complex recoil system
+                if (m.onGround) {
+                    if (m.crouch) {
+                        const KNOCK = 0.01
+                        player.force.x -= KNOCK * Math.cos(m.angle)
+                        player.force.y -= KNOCK * Math.sin(m.angle) //reduce knock back in vertical direction to stop super jumps
+                    } else {
+                        const KNOCK = 0.02
+                        player.force.x -= KNOCK * Math.cos(m.angle)
+                        player.force.y -= KNOCK * Math.sin(m.angle) //reduce knock back in vertical direction to stop super jumps
+                    }
+                } else {
+                    const KNOCK = 0.01
+                    player.force.x -= KNOCK * Math.cos(m.angle)
+                    player.force.y -= KNOCK * Math.sin(m.angle) * 0.5 //reduce knock back in vertical direction to stop super jumps    
+                }
+            },
+            fireRecoilRivets() {
+                // m.fireCDcycle = m.cycle + Math.floor((m.crouch ? 25 : 17) * b.fireCDscale); // cool down
+                if (this.nextFireCycle + 1 < m.cycle) this.startingHoldCycle = m.cycle //reset if not constantly firing
+                const CD = Math.max(25 - 0.14 * (m.cycle - this.startingHoldCycle), 5) //CD scales with cycles fire is held down
+                this.nextFireCycle = m.cycle + CD * b.fireCDscale //predict next fire cycle if the fire button is held down
+                m.fireCDcycle = m.cycle + Math.floor(CD * b.fireCDscale); // cool down
+
+                const me = bullet.length;
+                const size = tech.bulletSize * 8
+                bullet[me] = Bodies.rectangle(m.pos.x + 35 * Math.cos(m.angle), m.pos.y + 35 * Math.sin(m.angle), 5 * size, size, b.fireAttributes(m.angle));
+                bullet[me].dmg = tech.isNailRadiation ? 0 : 2.75
+                Matter.Body.setDensity(bullet[me], 0.002);
+                Composite.add(engine.world, bullet[me]); //add bullet to world
+                const SPEED = m.crouch ? 62 : 52
+                Matter.Body.setVelocity(bullet[me], {
+                    x: SPEED * Math.cos(m.angle),
+                    y: SPEED * Math.sin(m.angle)
+                });
+                bullet[me].endCycle = simulation.cycle + 180
+                bullet[me].beforeDmg = function (who) { //beforeDmg is rewritten with ice crystal tech
+                    if (tech.isIncendiary) {
+                        this.endCycle = 0; //bullet ends cycle after hitting a mob and triggers explosion
+                        b.explosion(this.position, 100 + (Math.random() - 0.5) * 20); //makes bullet do explosive damage at end
+                    }
+                    if (tech.isNailCrit) {
+                        if (!who.shield && Vector.dot(Vector.normalise(Vector.sub(who.position, this.position)), Vector.normalise(this.velocity)) > 0.97 - 1 / who.radius) {
+                            b.explosion(this.position, 300 + 40 * Math.random()); //makes bullet do explosive damage at end
+                        }
+                    } else if (tech.isCritKill) b.crit(who, this)
+                    if (tech.isNailRadiation) mobs.statusDoT(who, 7 * (tech.isFastRadiation ? 0.7 : 0.24), tech.isSlowRadiation ? 360 : (tech.isFastRadiation ? 60 : 180)) // one tick every 30 cycles
+                    if (this.speed > 4 && tech.fragments) {
+                        b.targetedNail(this.position, 1.25 * tech.fragments * tech.bulletSize)
+                        this.endCycle = 0 //triggers despawn
+                    }
+                };
+
+                bullet[me].minDmgSpeed = 10
+                bullet[me].frictionAir = 0.006;
+                bullet[me].rotateToVelocity = function () { //rotates bullet to face current velocity?
+                    if (this.speed > 7) {
+                        const facing = {
+                            x: Math.cos(this.angle),
+                            y: Math.sin(this.angle)
+                        }
+                        const mag = 0.002 * this.mass
+                        if (Vector.cross(Vector.normalise(this.velocity), facing) < 0) {
+                            this.torque += mag
+                        } else {
+                            this.torque -= mag
+                        }
+                    }
+                };
+                if (tech.isIncendiary) {
+                    bullet[me].do = function () {
+                        this.force.y += this.mass * 0.0008
+                        this.rotateToVelocity()
+                        //collide with map
+                        if (Matter.Query.collides(this, map).length) { //penetrate walls
+                            this.endCycle = 0; //bullet ends cycle after hitting a mob and triggers explosion
+                            b.explosion(this.position, 100 + (Math.random() - 0.5) * 20); //makes bullet do explosive damage at end
+                        }
+                    };
+                } else {
+                    bullet[me].do = function () {
+                        this.force.y += this.mass * 0.0008
+                        this.rotateToVelocity()
+                    };
+                }
+
+                b.muzzleFlash();
+                //very complex recoil system
+                if (m.onGround) {
+                    if (m.crouch) {
+                        const KNOCK = 0.03
+                        player.force.x -= KNOCK * Math.cos(m.angle)
+                        player.force.y -= KNOCK * Math.sin(m.angle) //reduce knock back in vertical direction to stop super jumps
+                        Matter.Body.setVelocity(player, {
+                            x: player.velocity.x * 0.4,
+                            y: player.velocity.y * 0.4
+                        });
+                    } else {
+                        const KNOCK = 0.1
+                        player.force.x -= KNOCK * Math.cos(m.angle)
+                        player.force.y -= KNOCK * Math.sin(m.angle) //reduce knock back in vertical direction to stop super jumps
+                        Matter.Body.setVelocity(player, {
+                            x: player.velocity.x * 0.7,
+                            y: player.velocity.y * 0.7
+                        });
+                    }
+                } else {
+                    player.force.x -= 0.2 * Math.cos(m.angle) * Math.min(1, 3 / (0.1 + Math.abs(player.velocity.x)))
+                    // player.force.x -= 0.06 * Math.cos(m.angle) * Math.min(1, 3 / (0.1 + Math.abs(player.velocity.x)))
+
+                    player.force.y -= 0.02 * Math.sin(m.angle) //reduce knock back in vertical direction to stop super jumps
+                }
+            },
+            fireInstantFireRate() {
+                m.fireCDcycle = m.cycle + Math.floor(1 * b.fireCDscale); // cool down
+                this.baseFire(m.angle + (Math.random() - 0.5) * (Math.random() - 0.5) * (m.crouch ? 1.15 : 2) / 2)
+            },
+            baseFire(angle, speed = 30 + 6 * Math.random()) {
+                b.bm1911({
+                    x: m.pos.x + 30 * Math.cos(m.angle),
+                    y: m.pos.y + 30 * Math.sin(m.angle)
+                }, {
+                    x: 0.8 * player.velocity.x + speed * Math.cos(angle),
+                    y: 0.5 * player.velocity.y + speed * Math.sin(angle)
+                }) //position, velocity, damage
+                if (tech.isIceCrystals) {
+                    bullet[bullet.length - 1].beforeDmg = function (who) {
+                        mobs.statusSlow(who, 60)
+                        if (tech.isNailRadiation) mobs.statusDoT(who, 1 * (tech.isFastRadiation ? 1.3 : 0.44), tech.isSlowRadiation ? 360 : (tech.isFastRadiation ? 60 : 180)) // one tick every 30 cycles
+                        if (tech.isNailCrit) {
+                            if (!who.shield && Vector.dot(Vector.normalise(Vector.sub(who.position, this.position)), Vector.normalise(this.velocity)) > 0.97 - 1 / who.radius) {
+                                b.explosion(this.position, 150 + 30 * Math.random()); //makes bullet do explosive damage at end
+                            }
+                        }
+                        this.ricochet(who)
+                    };
+                    if (m.energy < 0.01) {
+                        m.fireCDcycle = m.cycle + 60; // cool down
+                    } else {
+                        m.energy -= 0.01
+                    }
+                }
+            },
+        },
+        {
             name: "shotgun", //1
             // description: `fire a wide <strong>burst</strong> of short range <strong> bullets</strong><br>with a low <strong><em>fire rate</em></strong><br><strong>3-4</strong> nails per ${powerUps.orb.ammo()}`,
             descriptionFunction() {
