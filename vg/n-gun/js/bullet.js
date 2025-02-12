@@ -3935,7 +3935,7 @@ const b = {
         Matter.Body.setVelocity(bullet[me], velocity);
         Composite.add(engine.world, bullet[me]);
         bullet[me].endCycle = simulation.cycle + 80 + 18 * Math.random();
-        bullet[me].dmg = 4;
+        bullet[me].dmg = 100;
         bullet[me].do = function () { };
     },
     needle(angle = m.angle) {

@@ -97,8 +97,8 @@ const simulation = {
         powerUps.do();
         mobs.draw();
         console.log(b.activeGun);
-        if (b.activeGun == "Colt M1911") m.skin.m1911();
-        if (b.activeGun == "nail gun") m.skin.egg();
+        if (b.activeGun === "Colt M1911") m.skin.m1911();
+        if (b.activeGun === "nail gun") m.skin.egg();
         simulation.draw.cons();
         simulation.draw.body();
         if (!m.isTimeDilated) mobs.loop();
