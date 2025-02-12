@@ -97,8 +97,9 @@ const simulation = {
         powerUps.do();
         mobs.draw();
         console.log(b.activeGun);
-        if (b.activeGun === "Colt M1911") m.skin.m1911();
-        if (b.activeGun === "nail gun") m.skin.egg();
+        if (b.activeGun === 12) m.skin.m1911();
+        if (b.activeGun === 0) m.skin.egg();
+        if (b.activeGun == 1) m.skin.energy();
         simulation.draw.cons();
         simulation.draw.body();
         if (!m.isTimeDilated) mobs.loop();
@@ -1045,7 +1046,7 @@ const simulation = {
         simulation.clearNow = true;
         document.getElementById("text-log").style.display = "none"
         document.getElementById("fade-out").style.opacity = 0;
-        document.title = "n-gon";
+        document.title = "n-gun";
         simulation.inGameConsole(`Math.seed <span class='color-symbol'>=</span> ${Math.initialSeed}`);
         simulation.inGameConsole(`<span class='color-var'>const</span> engine <span class='color-symbol'>=</span> Engine.create(); <em>//simulation begin</em>`);
         simulation.inGameConsole(`engine.timing.timeScale <span class='color-symbol'>=</span> 1`);
