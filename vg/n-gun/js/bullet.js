@@ -7533,7 +7533,7 @@ const b = {
             },
         },
         {
-            name: "m1911", //12
+            name: "Colt M1911", //12
             descriptionFunction() {
                 return `shoot high <strong class='color-d'>damage</strong> <strong>bullets</strong><br>has a slow <em>fire rate</em><br><strong>${this.ammoPack.toFixed(0)}</strong> bullets per ${powerUps.orb.ammo()}`
             },
