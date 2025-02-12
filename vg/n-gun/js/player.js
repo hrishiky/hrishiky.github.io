@@ -1184,6 +1184,15 @@ const m = {
     skin: {
         none() {
             m.isAltSkin = true
+            const image = new Image()
+            image.src = '../img/animations/m1911/m1911.png'
+            ctx.drawImage(image, 100, 100, 50, 50)
+        },
+        m1911() {
+            m.isAltSkin = true
+            const image = new Image()
+            image.src = '../img/animations/m1911/m1911.png'
+            ctx.drawImage(image, 100, 100, 50, 50)
         },
         favicon() { //used to render the favicon, not actually in game
             m.yOffWhen.jump = 70
