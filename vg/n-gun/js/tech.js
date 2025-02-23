@@ -10317,6 +10317,27 @@ const tech = {
         }
     },
     {
+        name: "implosion",
+        link: `<a target="_blank" href='https://en.wikipedia.org/wiki/Implosion_(mechanical_process)' class="link">implosion</a>`,
+        description: "<strong>3x</strong> to all <strong class='color-dark-matter'>inflation</strong> effects</span>",
+        maxCount: 1,
+        count: 0,
+        frequency: 3,
+        frequencyDefault: 3,
+        allowed() {
+            return (tech.blockDamage > 0.075 || tech.isPrinter || tech.isAddBlockMass) && m.fieldMode !== 8 && m.fieldMode !== 9 && !tech.isTokamak
+        },
+        requires: "mass driver, printer, inflation, not pilot wave, tokamak, wormhole",
+        effect() {
+            tech.isAddBlockMassExtra = true
+            tech.isAddBlockMass = false
+        },
+        remove() {
+            tech.isAddBlockMassExtra = false
+            tech.isAddBlockMass = true
+        }
+    },
+    {
         name: "spinor",
         description: "the direction you aim is determined by your position",
         maxCount: 1,
@@ -12214,6 +12235,7 @@ const tech = {
     iceIXOnDeath: null,
     wimpCount: null,
     isAddBlockMass: null,
+    isAddBlockMassExtra: null,
     isDarkMatter: null,
     isHarmDarkMatter: null,
     isMoveDarkMatter: null,

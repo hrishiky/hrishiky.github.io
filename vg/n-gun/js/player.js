@@ -1087,6 +1087,7 @@ const m = {
         m.knee.y = (l / d) * (m.foot.y - m.hip.y) + (h / d) * (m.foot.x - m.hip.x) + m.hip.y;
     },
     draw() { },
+    drawModels() { },
     isAltSkin: false,
     drawBoost() {
 
@@ -1181,15 +1182,17 @@ const m = {
             ctx.restore();
         }
     },
-    skin: {
-        none() {
-            m.isAltSkin = true
-        },
-        m1911() {
+    /* 
+    m1911() {
             m.isAltSkin = true
             const image = new Image()
             image.src = '../img/animations/m1911/m1911.png'
             ctx.drawImage(image, m.pos.x + 20, m.pos.y, 50, 50)
+    }
+    */
+    skin: {
+        none() {
+            m.isAltSkin = true
         },
         favicon() { //used to render the favicon, not actually in game
             m.yOffWhen.jump = 70
@@ -2697,6 +2700,22 @@ const m = {
             }
         },
     },
+    models: {
+        m1911() {
+            m.drawModels = function () {
+                let model = Bodies.rectangle(m.pos.x, m.pos.y, 10, 30, {
+                    isStatic: true,
+                    render: {
+                      sprite: {
+                        texture: '../img/animations/m1911/m1911.png',
+                      }
+                    }
+                });
+                
+                World.add(engine.world, model);
+            }
+        }
+    },
     // *********************************************
     // **************** fields *********************
     // *********************************************
@@ -3139,6 +3158,14 @@ const m = {
                             }
                         };
                         expand(m.holdingTarget, Math.min(20, m.holdingTarget.mass * 3))
+                    }
+                    if (tech.isAddBlockMassExtra) {
+                        const expand = function (that) {
+                            const scale = 1.12;
+                            Matter.Body.scale(that, scale, scale);
+                            setTimeout(expand, 20, that);
+                        };
+                        expand(m.holdingTarget)
                     }
                     if (tech.isGroupThrow) {
                         const range = 810000

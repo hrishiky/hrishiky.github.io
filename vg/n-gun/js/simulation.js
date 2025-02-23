@@ -96,15 +96,12 @@ const simulation = {
         level.custom();
         powerUps.do();
         mobs.draw();
-        console.log(b.activeGun);
-        if (b.activeGun === 12) m.skin.m1911();
-        if (b.activeGun === 0) m.skin.egg();
-        if (b.activeGun == 1) m.skin.energy();
         simulation.draw.cons();
         simulation.draw.body();
         if (!m.isTimeDilated) mobs.loop();
         mobs.healthBar();
         m.draw();
+        m.drawModels();
         m.hold();
         level.customTopLayer();
         simulation.draw.drawMapPath();
