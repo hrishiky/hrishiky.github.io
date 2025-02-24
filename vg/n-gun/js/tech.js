@@ -10322,20 +10322,17 @@ const tech = {
         description: "<span><strong>3x</strong> to inflation <strong class='color-block'>block</strong> effects<br>no maximum <strong class='color-block'>block</strong> mass</span>",
         maxCount: 1,
         count: 0,
-        frequency: 3,
-        frequencyDefault: 3,
-        //isJunk: true,
+        frequency: 0,
+        isJunk: true,
         allowed() {
             return (tech.blockDamage > 0.075 || tech.isPrinter) && tech.isAddBlockMass && m.fieldMode !== 8 && m.fieldMode !== 9 && !tech.isTokamak
         },
         requires: "mass driver, printer, inflation, not pilot wave, tokamak, wormhole",
         effect() {
             tech.isAddBlockMassExtra = true
-            tech.isAddBlockMass = false
         },
         remove() {
             tech.isAddBlockMassExtra = false
-            tech.isAddBlockMass = true
         }
     },
     {
