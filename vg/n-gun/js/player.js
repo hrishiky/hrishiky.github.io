@@ -2706,6 +2706,18 @@ const m = {
 
                 Engine.world.add(engine.world, model);
             }
+            /*
+            bodyRect(x, y, width, height, chance = 1, properties = { friction: 0.05, frictionAir: 0.001 }) { //this is the command that adds blocks to the world in the middle of a level
+                if (Math.random() < chance) {
+                    body[body.length] = Bodies.rectangle(x + width / 2, y + height / 2, width, height, properties);
+                    const who = body[body.length - 1]
+                    who.collisionFilter.category = cat.body;
+                    who.collisionFilter.mask = cat.player | cat.map | cat.body | cat.bullet | cat.mob | cat.mobBullet
+                    Composite.add(engine.world, who); //add to world
+                    who.classType = "body"
+                }
+            }
+            */
         }
     },
     // *********************************************
@@ -3154,12 +3166,12 @@ const m = {
                     if (tech.isAddBlockMassExtra) {
                         const expand = function (that, massLimit) {
                             if (that.mass < massLimit) {
-                                const scale = 1.12;
+                                const scale = 2;
                                 Matter.Body.scale(that, scale, scale);
                                 setTimeout(expand, 20, that, massLimit);
                             }
                         };
-                        expand(m.holdingTarget, Math.min(20, m.holdingTarget.mass * 100))
+                        expand(m.holdingTarget, Math.min(20, m.holdingTarget.mass * 20))
                     }
                     if (tech.isGroupThrow) {
                         const range = 810000
