@@ -8227,6 +8227,11 @@ const tech = {
                         body[body.length] = Matter.Bodies.polygon(m.pos.x, m.pos.y + 60 + radius, 4, radius, {
                             friction: 0.05,
                             frictionAir: 0.001,
+                            render: {
+                                sprite: {
+                                  texture: '../img/animations/m1911/m1911.png',
+                                }
+                            },
                             collisionFilter: {
                                 category: cat.body,
                                 mask: cat.player | cat.map | cat.body | cat.bullet | cat.mob | cat.mobBullet
