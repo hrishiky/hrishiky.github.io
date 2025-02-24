@@ -1182,14 +1182,6 @@ const m = {
             ctx.restore();
         }
     },
-    /* 
-    m1911() {
-            m.isAltSkin = true
-            const image = new Image()
-            image.src = '../img/animations/m1911/m1911.png'
-            ctx.drawImage(image, m.pos.x + 20, m.pos.y, 50, 50)
-    }
-    */
     skin: {
         none() {
             m.isAltSkin = true
@@ -2711,7 +2703,7 @@ const m = {
                       }
                     }
                 });
-                
+
                 World.add(engine.world, model);
             }
         }
@@ -3160,12 +3152,14 @@ const m = {
                         expand(m.holdingTarget, Math.min(20, m.holdingTarget.mass * 3))
                     }
                     if (tech.isAddBlockMassExtra) {
-                        const expand = function (that) {
-                            const scale = 1.12;
-                            Matter.Body.scale(that, scale, scale);
-                            setTimeout(expand, 20, that);
+                        const expand = function (that, massLimit) {
+                            if (that.mass < massLimit) {
+                                const scale = 1.04;
+                                Matter.Body.scale(that, scale, scale);
+                                setTimeout(expand, 20, that, massLimit);
+                            }
                         };
-                        expand(m.holdingTarget)
+                        expand(m.holdingTarget, Math.min(20, m.holdingTarget.mass * 9))
                     }
                     if (tech.isGroupThrow) {
                         const range = 810000

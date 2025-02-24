@@ -10324,6 +10324,7 @@ const tech = {
         count: 0,
         frequency: 3,
         frequencyDefault: 3,
+        //isJunk: true,
         allowed() {
             return (tech.blockDamage > 0.075 || tech.isPrinter || tech.isAddBlockMass) && m.fieldMode !== 8 && m.fieldMode !== 9 && !tech.isTokamak
         },
