@@ -122,7 +122,7 @@ const simulation = {
             }
         });
 
-        World.add(engine.world, model);
+        Engine.world.add(engine.world, model);
     },
     testingLoop() {
         simulation.gravity();

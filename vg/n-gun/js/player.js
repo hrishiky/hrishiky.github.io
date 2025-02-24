@@ -2704,7 +2704,7 @@ const m = {
                     }
                 });
 
-                World.add(engine.world, model);
+                Engine.world.add(engine.world, model);
             }
         }
     },
