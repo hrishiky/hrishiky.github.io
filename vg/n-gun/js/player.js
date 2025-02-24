@@ -3154,7 +3154,7 @@ const m = {
                     if (tech.isAddBlockMassExtra) {
                         const expand = function (that, massLimit) {
                             if (that.mass < massLimit) {
-                                const scale = 1.04;
+                                const scale = 1.12;
                                 Matter.Body.scale(that, scale, scale);
                                 setTimeout(expand, 20, that, massLimit);
                             }

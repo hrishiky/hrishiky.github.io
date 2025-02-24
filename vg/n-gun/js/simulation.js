@@ -113,16 +113,6 @@ const simulation = {
         simulation.runEphemera();
         ctx.restore();
         simulation.drawCursor();
-        let model = Bodies.rectangle(m.pos.x, m.pos.y, 10, 30, {
-            isStatic: true,
-            render: {
-              sprite: {
-                texture: '../img/animations/m1911/m1911.png',
-              }
-            }
-        });
-
-        Engine.world.add(engine.world, model);
     },
     testingLoop() {
         simulation.gravity();
