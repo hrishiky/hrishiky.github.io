@@ -3159,7 +3159,7 @@ const m = {
                                 setTimeout(expand, 20, that, massLimit);
                             }
                         };
-                        expand(m.holdingTarget, Math.min(20, m.holdingTarget.mass * 9))
+                        expand(m.holdingTarget, Math.min(20, m.holdingTarget.mass * 100))
                     }
                     if (tech.isGroupThrow) {
                         const range = 810000
