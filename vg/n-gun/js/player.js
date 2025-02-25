@@ -2695,16 +2695,33 @@ const m = {
     models: {
         m1911() {
             m.drawModels = function () {
-                let model = Bodies.rectangle(m.pos.x, m.pos.y, 10, 30, {
-                    isStatic: true,
-                    render: {
-                      sprite: {
-                        texture: '../img/animations/m1911/m1911.png',
-                      }
-                    }
-                });
+                const loadImage = (url, onSuccess, onError) => {
+                    const img = new Image();
+                    img.onload = () => {
+                    onSuccess(img.src);
+                    };
+                    img.onerror = onError();
+                    img.src = url;
+                };
 
-                Engine.world.add(engine.world, model);
+                loadImage("./img/animations/m1911/m1911.png",
+                    url => {
+                    console.log("Success");
+                    World.add(world, [
+                        Bodies.circle(m.pos.x, m.pos.y, 10, {
+                        isStatic: true,
+                        render: {
+                            sprite: {
+                            texture: url
+                            }
+                        }
+                        })
+                    ]);
+                    },
+                    () => {
+                    console.log("Error  Loading ");
+                    }
+                );
             }
             /*
             bodyRect(x, y, width, height, chance = 1, properties = { friction: 0.05, frictionAir: 0.001 }) { //this is the command that adds blocks to the world in the middle of a level
@@ -3153,7 +3170,7 @@ const m = {
                     m.definePlayerMass() //return to normal player mass
 
                     if (tech.isStaticBlock) m.holdingTarget.isStatic = true
-                    if (tech.isAddBlockMass) {
+                    if (tech.isAddBlockMass && !tech.isAddBlockMassExtra) {
                         const expand = function (that, massLimit) {
                             if (that.mass < massLimit) {
                                 const scale = 1.04;
