@@ -5,3 +5,4 @@
   Content-Type: application/javascript
 /vg/ravenfield/Build/try3.wasm.gz
   Content-Encoding: gzip
+  Content-Type: application/wasm
