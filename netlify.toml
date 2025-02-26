@@ -1,5 +1,5 @@
 [[headers]]
-for = "/Build/try3.framework.js.gz"
+for = "/vg/ravenfield/Build/try3.framework.js.gz"
 [headers.values]
   Content-Encoding = "gzip"
   Content-Type = "application/javascript"
