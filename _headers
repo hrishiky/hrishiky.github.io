@@ -1,4 +1,6 @@
-/vg/ravenfield/index.html
-  Content-Encoding: gzip
 /Build/try3.data.gz
+  Content-Encoding: gzip
+/Build/try3.framework.js.gz
+  Content-Encoding: gzip
+/Build/try3.wasm.gz
   Content-Encoding: gzip
