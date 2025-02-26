@@ -1,3 +1,0 @@
-<FilesMatch \.gz$>
-    Header set Content-Encoding gzip
-</FilesMatch>
