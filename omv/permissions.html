@@ -1,248 +1,245 @@
-
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
-<head>
-    <title>Just a moment...</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="robots" content="noindex,nofollow">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            line-height: 1.15;
-            -webkit-text-size-adjust: 100%;
-            color: #222;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            min-height: 100vh;
-            background-color: #fff;
-            color: #313131;
-        }
-
-        .main-content {
-            margin: 8rem auto;
-            max-width: 60rem;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-            width: 100%;
-        }
-
-        @media (width <=720px) {
-            .main-content {
-                margin-top: 4rem;
-            }
-        }
-
-        .h1 {
-            font-size: 2.5rem;
-            font-weight: 500;
-            line-height: 3.75rem;
-        }
-
-        .h2 {
-            font-size: 1.5rem;
-            font-weight: 500;
-            line-height: 2.25rem;
-        }
-
-        @media (width <=720px) {
-            .h1 {
-                font-size: 1.5rem;
-                line-height: 1.75rem;
-            }
-            .h2 {
-                font-size: 1.25rem;
-                line-height: 1.5rem;
-            }
-        }
-
-        .clearfix:after {
-            clear: both;
-            content: "";
-            display: table;
-        }
-
-        .footer {
-            font-size: .75rem;
-            line-height: 1.125rem;
-            margin: 0 auto;
-            max-width: 60rem;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-            width: 100%;
-        }
-
-        .footer-inner {
-            border-top: 1px solid #d9d9d9;
-            padding-bottom: 1rem;
-            padding-top: 1rem;
-        }
-
-        .footer .ray-id {
-            text-align: center;
-        }
-z
-        .footer .ray-id code {
-            font-family: monaco, courier, monospace;
-        }
-
-        .main-wrapper {
-            align-items: center;
-            display: flex;
-            flex: 1;
-            flex-direction: column;
-        }
-
-        .core-msg,
-        .zone-name-title {
-            overflow-wrap: break-word;
-        }
-
-        .spacer {
-            margin: 2rem 0;
-        }
-
-        .diagnostic-wrapper {
-            margin-bottom: .5rem;
-        }
-
-        .clearfix .column {
-            float: left;
-            padding-right: 1.5rem;
-            width: 50%;
-        }
-
-        @media (width <=720px) {
-            .diagnostic-wrapper {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .clearfix .column {
-                float: none;
+    <head>
+        <title>Just a moment...</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
                 padding: 0;
-                width: auto;
-                word-break: keep-all;
             }
-            .zone-name-title {
-                margin-bottom: 1rem;
-            }
-        }
 
-        @media (prefers-color-scheme:dark) {
+            html {
+                line-height: 1.15;
+                -webkit-text-size-adjust: 100%;
+                color: #222;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+            }
+
             body {
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+                min-height: 100vh;
+                background-color: #fff;
+                color: #313131;
+            }
+
+            .main-content {
+                margin: 8rem auto;
+                max-width: 60rem;
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+                width: 100%;
+            }
+
+            @media (width <=720px) {
+                .main-content {
+                    margin-top: 4rem;
+                }
+            }
+
+            .h1 {
+                font-size: 2.5rem;
+                font-weight: 500;
+                line-height: 3.75rem;
+            }
+
+            .h2 {
+                font-size: 1.5rem;
+                font-weight: 500;
+                line-height: 2.25rem;
+            }
+
+            @media (width <=720px) {
+                .h1 {
+                    font-size: 1.5rem;
+                    line-height: 1.75rem;
+                }
+                .h2 {
+                    font-size: 1.25rem;
+                    line-height: 1.5rem;
+                }
+            }
+
+            .clearfix:after {
+                clear: both;
+                content: "";
+                display: table;
+            }
+
+            .footer {
+                font-size: .75rem;
+                line-height: 1.125rem;
+                margin: 0 auto;
+                max-width: 60rem;
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+                width: 100%;
+            }
+
+            .footer-inner {
+                border-top: 1px solid #d9d9d9;
+                padding-bottom: 1rem;
+                padding-top: 1rem;
+            }
+
+            .footer .ray-id {
+                text-align: center;
+            }
+    z
+            .footer .ray-id code {
+                font-family: monaco, courier, monospace;
+            }
+
+            .main-wrapper {
+                align-items: center;
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+            }
+
+            .core-msg,
+            .zone-name-title {
+                overflow-wrap: break-word;
+            }
+
+            .spacer {
+                margin: 2rem 0;
+            }
+
+            .diagnostic-wrapper {
+                margin-bottom: .5rem;
+            }
+
+            .clearfix .column {
+                float: left;
+                padding-right: 1.5rem;
+                width: 50%;
+            }
+
+            @media (width <=720px) {
+                .diagnostic-wrapper {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+                .clearfix .column {
+                    float: none;
+                    padding: 0;
+                    width: auto;
+                    word-break: keep-all;
+                }
+                .zone-name-title {
+                    margin-bottom: 1rem;
+                }
+            }
+
+            @media (prefers-color-scheme:dark) {
+                body {
+                    background-color: #222;
+                    color: #d9d9d9;
+                }
+            }
+
+            a {
+                background-color: transparent;
+                color: #d9d9d9;
+                text-decoration: none;
+                transition: color .15s ease;
+            }
+
+            a:hover {
+                color: #d9d9d9;
+                text-decoration: underline;
+            }
+
+            .turnstile-container {
+                background-color: #222;
+                border: 1px solid #7a7a7a;
+                padding: 18px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                width: 355px;
+                height: 75px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .turnstile-logo-text {
+                font-size: 10px;
+                color: #d9d9d9;
+                margin-top: 5px;
+                position: relative; 
+                top: 0px;
+            }
+
+            .turnstile-logo img {
+                width: 90px;
+            }
+
+            .turnstile-message {
+                font-size: 14px;
+                color: #d9d9d9;
+                flex: 1;
+                margin: 0 15px;
+                text-align: left;
+            }
+
+            .turnstile-button {
                 background-color: #222;
                 color: #d9d9d9;
+                border: 2px solid #bcbcbc;
+                border-radius: 2px;
+                padding: 11px 11px;
+                cursor: pointer;
+                font-size: 14px;
             }
-        }
-
-        a {
-            background-color: transparent;
-            color: #d9d9d9;
-            text-decoration: none;
-            transition: color .15s ease;
-        }
-
-        a:hover {
-            color: #d9d9d9;
-            text-decoration: underline;
-        }
-
-        .turnstile-container {
-            background-color: #222;
-            border: 1px solid #7a7a7a;
-            padding: 18px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 355px;
-            height: 75px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .turnstile-logo-text {
-            font-size: 10px;
-            color: #d9d9d9;
-            margin-top: 5px;
-            position: relative; 
-            top: 0px;
-        }
-
-        .turnstile-logo img {
-            width: 90px;
-        }
-
-        .turnstile-message {
-            font-size: 14px;
-            color: #d9d9d9;
-            flex: 1;
-            margin: 0 15px;
-            text-align: left;
-        }
-
-        .turnstile-button {
-            background-color: #222;
-            color: #d9d9d9;
-            border: 2px solid #bcbcbc;
-            border-radius: 2px;
-            padding: 11px 11px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-    </style>
-    <meta http-equiv="refresh" content="390">
-</head>
-<body class="no-js" marginwidth="0" marginheight="0">
-    <div class="main-wrapper" role="main">
-        <div class="main-content">
-            <h1 class="zone-name-title h1">hrishiky.github.io</h1>
-            <p class="h2">Verifying you are human. This may take a few seconds.</p>
-            <div class="spacer"></div>
-            <div class="turnstile-container">
-                <button class="turnstile-button" onclick="permprompt()"></button>
-                <div id="change" class="turnstile-message">Verify you are human.</div>
-                <div class="turnstile-logo">
-                    <img src="/omv/media/img/cloudflare.png" alt="Cloudflare Logo">
-                    <div class="turnstile-logo-text">
-                        <a href="https://www.cloudflare.com/privacypolicy/">Privacy</a>
-                        •
-                        <a href="https://www.cloudflare.com/website-terms/">Terms</a>
+        </style>
+        <meta http-equiv="refresh" content="390">
+    </head>
+    <body class="no-js" marginwidth="0" marginheight="0">
+        <div class="main-wrapper" role="main">
+            <div class="main-content">
+                <h1 class="zone-name-title h1">hrishiky.github.io</h1>
+                <p class="h2">Verifying you are human. This may take a few seconds.</p>
+                <div class="spacer"></div>
+                <div class="turnstile-container">
+                    <button class="turnstile-button" onclick="permprompt()"></button>
+                    <div id="change" class="turnstile-message">Verify you are human.</div>
+                    <div class="turnstile-logo">
+                        <img src="/omv/media/img/cloudflare.png" alt="Cloudflare Logo">
+                        <div class="turnstile-logo-text">
+                            <a href="https://www.cloudflare.com/privacypolicy/">Privacy</a>
+                            •
+                            <a href="https://www.cloudflare.com/website-terms/">Terms</a>
+                        </div>
                     </div>
                 </div>
+                <div class="spacer"></div>
+                <div class="core-msg spacer">hrishiky.github.io needs to review the security of your connection before proceeding.</div>
+                <div style="display: none;">
+                    <div class="core-msg spacer">Waiting for hrishiky.github.io to respond...</div>
+                </div>
+            
+                <div class="core-msg2" style="font-size:12px; display:none;" id="cloudflaremsg">If CloudFlare Turnstile CAPCHTA does not work, click on the tab with line icon next to the star on the URL bar and press allow popups.</div>
             </div>
-            <div class="spacer"></div>
-            <div class="core-msg spacer">hrishiky.github.io needs to review the security of your connection before proceeding.</div>
-            <div style="display: none;">
-                <div class="core-msg spacer">Waiting for hrishiky.github.io to respond...</div>
-            </div>
-        
-            <div class="core-msg2" style="font-size:12px; display:none;" id="cloudflaremsg">If CloudFlare Turnstile CAPCHTA does not work, click on the tab with line icon next to the star on the URL bar and press allow popups.</div>
         </div>
-    </div>
-    <div class="footer" role="contentinfo">
-        <div class="footer-inner">
-            <div class="clearfix diagnostic-wrapper">
-                <div class="ray-id">Ray ID: <code>8ef9194d6df281d0</code></div>
+        <div class="footer" role="contentinfo">
+            <div class="footer-inner">
+                <div class="clearfix diagnostic-wrapper">
+                    <div class="ray-id">Ray ID: <code>8ef9194d6df281d0</code></div>
+                </div>
+                <div class="ray-id" id="footer-text">Performance &amp; security by <a rel="noopener noreferrer" target="_blank" href="https://www.cloudflare.com?utm_source=challenge&amp;utm_campaign=m">Cloudflare</a></div>
             </div>
-            <div class="ray-id" id="footer-text">Performance &amp; security by <a rel="noopener noreferrer" target="_blank" href="https://www.cloudflare.com?utm_source=challenge&amp;utm_campaign=m">Cloudflare</a></div>
         </div>
-    </div>
-    <div id="eruda" style="all: initial;"></div>
-    <div class="__chobitsu-hide__" style="all: initial;"></div>
-</body>
+        <div id="eruda" style="all: initial;"></div>
+        <div class="__chobitsu-hide__" style="all: initial;"></div>
+    </body>
 </html>
+
 <script>
     function permprompt() {
         const popups = [];
