@@ -6,22 +6,29 @@ if (top.location != location) {
   top.location.href = location.href;
 }
 
-function reopen() {
+function open1() {
   window.open(
-    "popup.html",
+    "popup1.html",
     "",
     "blankmenubar=no,status=no,toolbar=noresizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes"
   );
-
-  setTimeout(() => {
-    window.open("popup2.html", "", "menubar=no,status=no,toolbar=no,resizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes");
-  }, 1000);
+}
+function open2() {
+  window.open(
+    "popup2.html",
+    "",
+    "blankmenubar=no,status=no,toolbar=noresizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes"
+  );
+}
+function reopen() {
+  const functions = [open1, open2];
+  const random = Math.floor(Math.random() * functions.length);
+  functions[random]();
 }
 function spam() {
   for (var i = 0; i < 3; i++) {
     reopen();
   }
-  return "You are an idiot!";
 }
 function init() {
   document.body.onclick = reopen;
