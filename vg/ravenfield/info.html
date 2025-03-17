@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>ravenfield info</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
+    <head>
+        <title>ravenfield info</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+    
     <body>
         <h1>ravenfield info</h1>
 
-        <p>
+        <div>
             <p>[ info ]</p>
             <ul>
                 <li>Ravenfield (Beta 5)</li>
                 <li>credit: SteelRaven7 | game: <a href="https://steelraven7.itch.io/ravenfield">itch.io</a> | game: <a href="http://store.steampowered.com/app/636480/Ravenfield/">steampowered.com</a></li>
-                <li>web-gl port of ravenfield beta 5 (the free version from itch.io)</li>
+                <li>webgl port of ravenfield beta 5 (the free version from itch.io)</li>
                 <li>island texture and bot animations are missing since assetripper couldn't recover them</li>
                 <li>code for the game can be extracted with the unity assetripper (windows build) or in this website's repository (web-gl build)</li>
-                <li><a href="./index.html">./index.html</a></li>
+                <li>back: <a href="../index.html">../index.html</a></li>
             </ul>
+        </div>
 
-            <p>[ secrets ] &nbsp; <button type="button" onclick="reveal()">Click to reveal</button></p>
-            <ul class="secret">
+        <div>
+            <p>[ secrets ] &nbsp; <button type="button" id="btn" onclick="reveal()">click to reveal</button></p>
+            <ul id="secret">
                 <li>to get the super wrench type "iseegold" while focused on the game at the map select scene</li>
                 <li>choose a map and the super wrench will be in your inventory select menu under the normal wrench</li>
-                <li>it flings all entities (bots, vehicles, bodies, bags) and turns them gold with a money effect on contact</li>
+                <li>it flings all entities and turns them gold with a money effect on melee contact</li>
                 <li>does not save if removed from inventory and game is reloaded</li>
                 <li>you can also type "iseegold" while in a game to turn on a debug mode of some sort which displays entity information</li>
             </ul>
-        </p>
+        </div>
+
+        <script src="/main.js"></script>
     </body>
 </html>
-
-<script src="/main.js"></script>

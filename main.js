@@ -1,4 +1,7 @@
 function reveal() {
-    secret = document.getElementsByClassName(secret);
-    secret.style.display = 'block';
+    const element = document.getElementById("secret");
+    element.style.display = "block";
+    
+    const button = document.getElementById("btn");
+    button.style.display = "none";
 }
