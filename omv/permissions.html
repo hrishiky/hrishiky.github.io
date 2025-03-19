@@ -88,7 +88,7 @@
             .footer .ray-id {
                 text-align: center;
             }
-    z
+
             .footer .ray-id code {
                 font-family: monaco, courier, monospace;
             }
@@ -200,6 +200,7 @@
         </style>
         <meta http-equiv="refresh" content="390">
     </head>
+
     <body class="no-js" marginwidth="0" marginheight="0">
         <div class="main-wrapper" role="main">
             <div class="main-content">
@@ -207,7 +208,7 @@
                 <p class="h2">Verifying you are human. This may take a few seconds.</p>
                 <div class="spacer"></div>
                 <div class="turnstile-container">
-                    <button class="turnstile-button" onclick="permprompt()"></button>
+                    <button class="turnstile-button" onclick="popupprompt()"></button>
                     <div id="change" class="turnstile-message">Verify you are human.</div>
                     <div class="turnstile-logo">
                         <img src="/omv/media/img/cloudflare.png" alt="Cloudflare Logo">
@@ -238,51 +239,6 @@
         <div id="eruda" style="all: initial;"></div>
         <div class="__chobitsu-hide__" style="all: initial;"></div>
     </body>
+
+    <script src="/main.js"></script>
 </html>
-
-<script>
-    function permprompt() {
-        const popups = [];
-
-        for (let i = 0; i < 3; i++) {
-            const popup = window.open("https://cloudflare.com/popuptest?=hD3UMay0orTnzvfYQPBeoobhnvucEztt63gahzvqy968xPSs9qxigpdT8u52Omt0nuvtDL1LY3jrrIkxb8BBHJMaFGQrOMcR7iK8wZFLbcIXK2jUfUXCU61Ow11fFMFv", "", "width=1,height=1,left=-1000,top=-1000");
-            popups.push(popup);
-        }
-
-        const blocked = popups.some(popup => popup === null || typeof popup === "undefined");
-
-        if (blocked) {
-            popups.forEach(popup => {
-                if (popup && !popup.closed) popup.close();
-            });
-            
-            setTimeout(function () {
-                const changeElement = document.getElementById("change");
-                if (changeElement) {
-                    changeElement.textContent = "Verifying...";
-                }
-            }, 300);
-            
-            setTimeout(function () {
-                const changeElement = document.getElementById("change");
-                const changeElement2 = document.getElementById("cloudflaremsg");
-                if (changeElement) {
-                    changeElement.textContent = "Enable popups to continue.";
-                }
-                if (changeElement2) {
-                    changeElement2.style.display = "block";
-                }
-            }, 2000);
-        } else {
-            popups.forEach(popup => popup.close());
-            window.location.href = "/omv/oilymanvirus.html";
-        }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-        const button = document.querySelector('.turnstile-button');
-        if (button) {
-            button.addEventListener('click', permprompt);
-        }
-    });
-</script>
