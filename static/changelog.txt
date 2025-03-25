@@ -1,3 +1,4 @@
-[3/25/2025] Created changelog, 404 page, and formatted site structure to be a bit more standard
-            Previously added slowroads and nzp to vg
+[3/25/2025] Created changelog and 404 page
+            Fixed some site structure formatting to be a bit more standard and some errors with omv
+            Previously added slowroads and nzp to vg (3/24/2025)
 
