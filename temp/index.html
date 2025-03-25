@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<link rel="icon" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- <link rel="icon" href="/favicon_dark.svg" type="image/x-icon" media="(prefers-color-scheme: dark)"> -->
+		<!-- <link rel="icon" href="/favicon_light.svg" type="image/x-icon" media="(prefers-color-scheme: light)"> -->
+		<link rel="preload" href="/fonts/Sono.ttf" as="font" type="font/ttf" crossorigin>
+		<link rel="preload" href="/fonts/Space.ttf" as="font" type="font/ttf" crossorigin>
+
+		<link rel="manifest" href="/manifest.json">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" >
+		<meta name="theme-color" content="#ffffff">
+		<meta name="title" content="Slow Roads">
+		<meta name="description" content="Endless driving zen">
+		<meta name="color-scheme" content="light only">
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://slowroads.io/">
+		<meta property="og:title" content="Slow Roads">
+		<meta property="og:description" content="Endless driving zen">
+		<meta property="og:image" content="/meta-2.0.0.jpg">
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image">
+		<meta property="twitter:url" content="https://slowroads.io/">
+		<meta property="twitter:title" content="Slow Roads">
+		<meta property="twitter:description" content="Endless driving zen">
+		<meta property="twitter:image" content="/meta-2.0.0.jpg">
+
+		<title>&#8202;s&#8202;l&#8202;o&#8202;w&nbsp;&nbsp;r&#8202;o&#8202;a&#8202;d&#8202;s</title>
+
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+			  if (window.location.hash) {
+				// Check if the URL contains a hash
+				const metas = document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]');
+
+				// Remove or modify the necessary meta tags
+				metas.forEach(meta => {
+				  	meta.parentNode.removeChild(meta);
+				});
+			  }
+			});
+
+		</script>
+
+		<style>
+
+			:root {
+				--sr-white: #F4F2ED;
+
+				--sr-white-0: #F4F2ED00;
+				--sr-white-25: #F4F2ED40;
+				--sr-white-50: #F4F2ED80;
+				--sr-white-75: #F4F2EDC0;
+
+				--sr-primary: #343c3e;
+				--sr-primary-0: #343c3e00;
+				--sr-primary-25: #343c3e40;
+				--sr-primary-50: #343c3e80;
+				--sr-primary-75: #343c3eC0;
+
+				--sr-secondary: #D2D1CD;
+				--sr-secondary-0: #D2D1CD00;
+				--sr-secondary-25: #D2D1CD40;
+				--sr-secondary-50: #D2D1CD80;
+				--sr-secondary-75: #D2D1CDC0;
+
+				--sr-warn: #ff992b;
+
+				--sr-dark: #444444;
+				--sr-darker: #333;
+				--sr-black: #222222;
+
+				--sr-bg: #F4F2ED;
+				--sr-lowlight: #343c3e80;
+
+				color-scheme: light only;
+			}
+
+			@font-face {
+				font-family: Sono;
+				src: url(/fonts/Sono.ttf);
+				font-variant: slashed-zero;
+			}
+
+			@font-face {
+				font-family: Space;
+				src: url(/fonts/Space.ttf);
+				font-variant: slashed-zero;
+			}
+
+			/* width */
+			::-webkit-scrollbar {
+				width: 0.6rem;
+			}
+
+			/* Track */
+			::-webkit-scrollbar-track {
+				background: var(--sr-primary-25);
+			}
+
+			/* Handle */
+			::-webkit-scrollbar-thumb {
+				background: var(--sr-primary-50);
+			}
+
+			/* Handle on hover */
+			::-webkit-scrollbar-thumb:hover {
+				background: var(--sr-primary);
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				scroll-behavior: smooth !important;
+				font-variant: slashed-zero;
+		    }
+
+			body {
+				overflow: hidden;
+				font-family: Space, Helvetica, sans-serif;
+			}
+
+			img {
+				-webkit-user-drag: none;
+				-khtml-user-drag: none;
+				-moz-user-drag: none;
+				-o-user-drag: none;
+			}
+
+			a {
+				text-decoration: none;
+			}
+
+			html {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				font-size: 16px;
+			}
+
+			@media screen and (orientation: landscape) and (max-width: 1361px)  {
+				html {
+					font-size: 14px;
+				}
+			}
+
+			@media screen and (orientation: landscape) and (max-width: 1180px) {
+				html {
+					font-size: 12px;
+				}
+			}
+
+			@media screen and (orientation: portrait) {
+				html {
+					font-size: 12px;
+				}
+			}
+
+		</style>
+
+		<script src="./alea.min.js"></script>
+
+		
+		<link rel="modulepreload" href="./_app/immutable/entry/start.420fd423.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.6cda8fd7.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.9f85c147.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.85bbc95f.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.e972eff3.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.f66a2b2d.js">
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">
+			<script>
+				{
+					__sveltekit_1rnf4ic = {
+						base: "",
+						env: {}
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("/_app/immutable/entry/start.420fd423.js"),
+						import("/_app/immutable/entry/app.e972eff3.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+
+					if ('serviceWorker' in navigator) {
+						addEventListener('load', function () {
+							navigator.serviceWorker.register('./service-worker.js');
+						});
+					}
+				}
+			</script>
+		</div>
+	</body>
+</html>
