@@ -6,4 +6,7 @@
 
 ㅤㅤ•ㅤcurrentry contains some small projects / games 
 
-ㅤㅤ•ㅤI will be updating it frequently
+ㅤㅤ•ㅤplease star if you like the site or stole stuff from it
+
+
+*Note: I will be updating this site frequently*
