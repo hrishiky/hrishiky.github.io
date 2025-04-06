@@ -1,10 +1,10 @@
+[4/4/2025]  revamped all of the assets to better fit the new site structure
+            added a personal page and projects page to make website more formal
+            the pages are placeholders for now; i need to research how to make them
+
 [3/25/2025] created changelog and 404 page
             fixed some site structure formatting to be a bit more standard
             fixed some errors with omv
             previously added slowroads and nzp to the vg directory (3/24/2025)
-
-[4/4/2025]  revamped all of the assets to better fit the new site structure
-            added a personal page and projects page to make website more formal
-            the pages are placeholders for now; i need to research how to make them
 
 
