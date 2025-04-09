@@ -1,9 +1,11 @@
 .info-container {
-    margin-bottom: 5px;
+    margin-bottom: 30px;
 }
 
-.info-container ul {
-    margin-top: 5px;
+.divider {
+    border: none;
+    border-top: 1px dashed gray;
+    padding: 5px
 }
 
 #secret {
