@@ -1,3 +1,5 @@
+[5/6/2025]  work has begun on the truth
+
 [4/4/2025]  revamped all of the assets to better fit the new site structure
             added a personal page and projects page to make website more formal
             the pages are placeholders for now; i need to research how to make them

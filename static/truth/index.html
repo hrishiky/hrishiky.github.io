@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+
+        <script>
+            document.getElementById("truth").addEventListener("submit", function(event) {
+                let answer = document.querySelector("textarea[name='textbox']").value;
+                if (textareaValue === "nothing") {
+                    window.location.href = "./win.html";
+                }
+            });
+        </script>
+
+        <style>
+			.inline { 
+            	display:inline-block; 
+            }
+        </style>
+    </head>
+    
+    <body>
+        <center>
+        <div>
+            <p>enter the truth here:</p>
+            
+            <form id="truth">
+                <textarea wrap="virtual" name="textbox" rows=3 cols=20 maxlength=100></textarea>
+                <br>
+                <input type="submit" value="submit">
+                <input type="reset" value="clear">
+            </form>
+        </div>
+
+        <br><br><br>
+
+        <div>
+            <p>if you do not know the truth yet</p>
+
+            <p class="inline">please </p> 
+            <img src="./assets/enlighten.gif" alt="enlighten " class="inline"/>
+            <p class="inline">yourself:</p>          
+
+			<br><br>
+            
+            <a href="./button/donotclick.html">move on</a>
+        </div>
+        </center>
+    </body>
+</html>
