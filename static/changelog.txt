@@ -1,4 +1,6 @@
-[5/6/2025]  work has begun on the truth
+[8/12/2025] added n-gon because landgreen's site got blocked
+            moved gunsim and n-gun to misc cause they are abandoned
+            renamed ravenfield to rf and slowroads to sr in order to circumvent blocks
 
 [4/4/2025]  revamped all of the assets to better fit the new site structure
             added a personal page and projects page to make website more formal
@@ -8,5 +10,3 @@
             fixed some site structure formatting to be a bit more standard
             fixed some errors with omv
             previously added slowroads and nzp to the vg directory (3/24/2025)
-
-
