@@ -6,24 +6,24 @@ if (top.location != location) {
   top.location.href = location.href;
 }
 
-function open1() {
+function openWhite() {
   window.open(
-    "./popups/popup-white.html",
+    "https://hrishiky.github.io/static/omv/popups/popup-white.html",
     "",
     "blankmenubar=no,status=no,toolbar=noresizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes"
   );
 }
 
-function open2() {
+function openBlack() {
   window.open(
-    "./popups/popup-black.html",
+    "https://hrishiky.github.io/static/omv/popups/popup-black.html",
     "",
     "blankmenubar=no,status=no,toolbar=noresizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes"
   );
 }
 
 function reopen() {
-  const functions = [open1, open2];
+  const functions = [openWhite, openBlack];
   const random = Math.floor(Math.random() * functions.length);
   functions[random]();
 }
@@ -35,6 +35,8 @@ function spam() {
 }
 
 function init() {
+  checkCookie();
+
   document.body.onclick = reopen;
   document.body.onmouseover = reopen;
   document.body.onmousemove = reopen;
@@ -61,8 +63,6 @@ function addCookie() {
 }
 
 function checkCookie() {
-  console.log(document.cookie);
-
   const cookies = document.cookie.split('; ').reduce((acc, cur) => {
     const [key, val] = cur.split('=');
     acc[key] = val;
@@ -77,6 +77,8 @@ function checkCookie() {
 }
 
 function popupPrompt() {
+  checkCookie();
+
   const popups = [];
 
   for (let i = 0; i < 3; i++) {
