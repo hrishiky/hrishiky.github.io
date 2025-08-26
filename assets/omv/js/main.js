@@ -81,7 +81,6 @@ function checkCookie() {
 }
 
 function popupPrompt() {
-  checkCookie();
   const popups = [];
 
   for (let i = 0; i < 3; i++) {
