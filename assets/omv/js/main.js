@@ -8,7 +8,7 @@ if (top.location != location) {
 
 function open1() {
   window.open(
-    "popup1.html",
+    "popups/popup-white.html",
     "",
     "blankmenubar=no,status=no,toolbar=noresizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes"
   );
@@ -16,7 +16,7 @@ function open1() {
 
 function open2() {
   window.open(
-    "popup2.html",
+    "popups/popup-black.html",
     "",
     "blankmenubar=no,status=no,toolbar=noresizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes"
   );
@@ -60,7 +60,25 @@ function playBall() {
   setTimeout(playBall, 3);
 }
 
-function popupprompt() {
+function addCookie() {
+  document.cookie = 'antiomv=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/';
+}
+
+function checkCookie() {
+  const cookies = document.cookie.split('; ').reduce((acc, cur) => {
+    const [key, val] = cur.split('=');
+    acc[key] = val;
+    return acc;
+  }, {});
+
+  let antiomvBool = cookies[antiomv] === "true";
+
+  if (antiomvBool) {
+    window.location.href = "./noredirect.html";
+  }
+}
+
+function popupPrompt() {
   const popups = [];
 
   for (let i = 0; i < 3; i++) {
@@ -94,7 +112,9 @@ function popupprompt() {
     }, 2000);
   } else {
     popups.forEach(popup => popup.close());
-    window.location.href = "./oilymanvirus.html";
+
+    checkCookie();
+    window.location.href = "./virus.html";
   }
 }
 
@@ -104,5 +124,3 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', popupprompt);
   }
 });
-
-/* eerw */

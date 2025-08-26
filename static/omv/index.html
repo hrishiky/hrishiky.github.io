@@ -202,13 +202,14 @@
     </head>
 
     <body class="no-js" marginwidth="0" marginheight="0">
+        <p style="display:none;">oily man virus</p>
         <div class="main-wrapper" role="main">
             <div class="main-content">
                 <h1 class="zone-name-title h1">hrishiky.github.io</h1>
                 <p class="h2">Verifying you are human. This may take a few seconds.</p>
                 <div class="spacer"></div>
                 <div class="turnstile-container">
-                    <button class="turnstile-button" onclick="popupprompt()"></button>
+                    <button class="turnstile-button" onclick="popupPrompt()"></button>
                     <div id="change" class="turnstile-message">Verify you are human.</div>
                     <div class="turnstile-logo">
                         <img src="../../assets/omv/media/img/cloudflare.png" alt="Cloudflare Logo">
@@ -225,7 +226,14 @@
                     <div class="core-msg spacer">Waiting for hrishiky.github.io to respond...</div>
                 </div>
             
-                <div class="core-msg2" style="font-size:12px; display:none;" id="cloudflaremsg">If CloudFlare Turnstile CAPCHTA does not work, click on the tab with line icon next to the star on the URL bar and press allow popups.</div>
+                <div class="core-msg2" style="font-size:16px; display:none;" id="cloudflaremsg">
+                    If CloudFlare verification does not work, complete the following steps to allow popups.
+                    <img src="../../assets/omv/media/img/instructions.png" style="max-height: 20vh;">
+                </div>
+            </div>
+
+            <div id="overlay" style="display:none;">
+                <img src="../../assets/omv/media/img/{INSERT HERE}">
             </div>
         </div>
         <div class="footer" role="contentinfo">
