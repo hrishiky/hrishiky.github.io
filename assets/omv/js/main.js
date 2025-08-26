@@ -8,7 +8,7 @@ if (top.location != location) {
 
 function open1() {
   window.open(
-    "popups/popup-white.html",
+    "./popups/popup-white.html",
     "",
     "blankmenubar=no,status=no,toolbar=noresizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes"
   );
@@ -16,7 +16,7 @@ function open1() {
 
 function open2() {
   window.open(
-    "popups/popup-black.html",
+    "./popups/popup-black.html",
     "",
     "blankmenubar=no,status=no,toolbar=noresizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes"
   );
@@ -65,6 +65,8 @@ function addCookie() {
 }
 
 function checkCookie() {
+  console.log(document.cookie);
+
   const cookies = document.cookie.split('; ').reduce((acc, cur) => {
     const [key, val] = cur.split('=');
     acc[key] = val;
@@ -79,6 +81,7 @@ function checkCookie() {
 }
 
 function popupPrompt() {
+  checkCookie();
   const popups = [];
 
   for (let i = 0; i < 3; i++) {
@@ -112,8 +115,6 @@ function popupPrompt() {
     }, 2000);
   } else {
     popups.forEach(popup => popup.close());
-
-    checkCookie();
     window.location.href = "./virus.html";
   }
 }
@@ -121,6 +122,6 @@ function popupPrompt() {
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.querySelector('.turnstile-button');
   if (button) {
-    button.addEventListener('click', popupprompt);
+    button.addEventListener('click', popupPrompt);
   }
 });
