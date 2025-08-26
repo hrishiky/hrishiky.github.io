@@ -41,9 +41,6 @@ function init() {
   window.onbeforeunload = spam;
   playBall();
   reopen();
-  setTimeout(function () {
-    window.close();
-  }, 10000);
 }
 
 var xOff = 5,
@@ -52,7 +49,6 @@ var xOff = 5,
   yPos = -100;
 
 function playBall() {
-
   xPos = Math.ceil(Math.random() * screen.width);
   yPos = Math.ceil(Math.random() * screen.height);
 
@@ -61,7 +57,7 @@ function playBall() {
 }
 
 function addCookie() {
-  document.cookie = 'antiomv=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/';
+  document.cookie = "antiomv=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
 }
 
 function checkCookie() {
@@ -73,7 +69,7 @@ function checkCookie() {
     return acc;
   }, {});
 
-  let antiomvBool = cookies[antiomv] === "true";
+  let antiomvBool = cookies["antiomv"] === "true";
 
   if (antiomvBool) {
     window.location.href = "./noredirect.html";
