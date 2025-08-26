@@ -117,10 +117,3 @@ function popupPrompt() {
     window.location.href = "./virus.html";
   }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  const button = document.querySelector('.turnstile-button');
-  if (button) {
-    button.addEventListener('click', popupPrompt);
-  }
-});
