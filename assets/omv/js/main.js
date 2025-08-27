@@ -8,7 +8,7 @@ if (top.location != location) {
 
 function openWhite() {
   window.open(
-    "https://hrishiky.github.io/static/omv/popups/popup-white.html",
+    "popup-white.html",
     "",
     "blankmenubar=no,status=no,toolbar=noresizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes"
   );
@@ -16,7 +16,7 @@ function openWhite() {
 
 function openBlack() {
   window.open(
-    "https://hrishiky.github.io/static/omv/popups/popup-black.html",
+    "popup-black.html",
     "",
     "blankmenubar=no,status=no,toolbar=noresizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes"
   );
@@ -70,9 +70,15 @@ function checkCookie() {
   }, {});
 
   let antiomvBool = cookies["antiomv"] === "true";
+  let path = window.location.pathname;
 
-  if (antiomvBool) {
-    window.location.href = "./noredirect.html";
+  if (antiomvBool) { 
+    if (path === "./popup-white.html" || path === "./popup-black.html") {
+        window.close();
+        return;
+    }
+
+    window.location.href = "./antivirus.html";
   }
 }
 
