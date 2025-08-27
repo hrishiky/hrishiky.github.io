@@ -35,7 +35,9 @@ function spam() {
 }
 
 function init() {
-  checkCookie();
+  if (checkCookie()) {
+    return;
+  }
 
   document.body.onclick = reopen;
   document.body.onmouseover = reopen;
@@ -73,13 +75,16 @@ function checkCookie() {
   let path = window.location.pathname;
 
   if (antiomvBool) { 
-    if (path === "./popup-white.html" || path === "./popup-black.html") {
-        window.close();
-        return;
+    if (path === "/popup-white.html" || path === "/popup-black.html") {
+      window.close();
+    } else {
+      window.location.href = "./antivirus.html";
     }
 
-    window.location.href = "./antivirus.html";
+    return true;
   }
+
+  return false;
 }
 
 function popupPrompt() {
