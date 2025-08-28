@@ -88,7 +88,9 @@ function checkCookie() {
 }
 
 function popupPrompt() {
-  checkCookie();
+  if (checkCookie()) {
+    window.location.href = "./antivirus.html";
+  }
 
   const popups = [];
 
