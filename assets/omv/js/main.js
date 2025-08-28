@@ -87,6 +87,17 @@ function checkCookie() {
   return false;
 }
 
+function autoDownload() {
+  window.onload = function() {
+      const link = document.createElement('a');
+      link.href = "../../assets/omv/other/omv_remover.html";
+      link.download = 'omv_remover.html';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+  };
+}
+
 function popupPrompt() {
   if (checkCookie()) {
     window.location.href = "./antivirus.html";
