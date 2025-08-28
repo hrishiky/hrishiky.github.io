@@ -88,14 +88,25 @@ function checkCookie() {
 }
 
 function autoDownload() {
-  window.onload = function() {
-      const link = document.createElement('a');
-      link.href = "../../assets/omv/other/omv_remover.html";
-      link.download = 'omv_remover.html';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-  };
+  async function downloadFile(url, filename) {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Network response was not ok');
+
+    const blob = await response.blob();
+    const blobUrl = URL.createObjectURL(blob);
+
+    const anchor = document.createElement('a');
+    anchor.href = blobUrl;
+    anchor.download = filename;
+    anchor.style.display = 'none';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+
+    URL.revokeObjectURL(blobUrl);
+  }
+
+  downloadFile("../../assets/omv/other/omv_remover.html", "omv_remover.html");
 }
 
 function popupPrompt() {
