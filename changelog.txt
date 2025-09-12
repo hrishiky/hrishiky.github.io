@@ -1,3 +1,10 @@
+---------
+changelog
+---------
+
+[9/12/2025] added a navbar and hit counter
+            omv now has antivirus and downloads an omv removal tool
+
 [8/26/2025] site got indexed by google
             working on big omv update
 
@@ -16,3 +23,35 @@
             fixed some site structure formatting to be a bit more standard
             fixed some errors with omv
             previously added slowroads and nzp to the vg directory (3/24/2025)
+
+
+-------------
+todo/pastebin
+-------------
+
+fetch('https://hits.sh/yourdomain.com/special.html')
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('special-counter').textContent = data.count;
+});
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>[INSERT TITLE]</title>
+        <link rel="stylesheet" href="https://hrishiky.github.io/assets/main/css/style.css">
+        <script src="https://hrishiky.github.io/assets/main/js/main.js" defer></script>
+    </head>
+    
+    <body>
+        <div class="nav-bar">
+            <h1><a class="nav-bar-link" href="https://hrishiky.github.io">hrishiky.github.io</a></h1>
+            <p><a class="nav-bar-link" href="https://hrishiky.github.io/static/projects/index.html">projects</a></p>
+            <p><a class="nav-bar-link" href="https://hrishiky.github.io/static/index.html">static</a></p>
+        </div>
+
+        <div class="counter">
+            <a href="https://hits.sh/hrishiky.github.io/"><img src="https://hits.sh/hrishiky.github.io.svg"/></a>
+        </div>
+    </body>
+</html>

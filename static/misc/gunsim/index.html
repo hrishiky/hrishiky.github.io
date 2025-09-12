@@ -1,127 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gunsim</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
-</head>
-<body>
-<script>
-    const { Engine, Render, Runner, Bodies, Body, World, Mouse, MouseConstraint, Composite, Constraint } = Matter;
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>gunsim</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
+    </head>
 
-    const engine = Engine.create();
-    const world = engine.world;
+    <body>
+        <script>
+            const { Engine, Render, Runner, Bodies, Body, World, Mouse, MouseConstraint, Composite, Constraint } = Matter;
 
-    const render = Render.create({
-        element: document.body,
-        engine: engine,
-        options: {
-            width: 800,
-            height: 600,
-            wireframes: false
-        }
-    });
+            const engine = Engine.create();
+            const world = engine.world;
 
-    Render.run(render);
+            const render = Render.create({
+                element: document.body,
+                engine: engine,
+                options: {
+                    width: 800,
+                    height: 600,
+                    wireframes: false
+                }
+            });
 
-    const runner = Runner.create();
-    Runner.run(runner, engine);
+            Render.run(render);
 
-    const magspring = Bodies.rectangle(400, 350, 52, 30);
-    const magplate = Bodies.rectangle(400, 550, 52, 20);
-    const magtop = Bodies.rectangle(395, 338, 50, 8);
-    const magtopedge = Bodies.rectangle(370, 340, 8, 12);
-    const magbase = Bodies.rectangle(400, 582, 68, 8);
-    const magedge1 = Bodies.rectangle(370, 470, 8, 215);
-    const magedge2 = Bodies.rectangle(430, 470, 8, 215);
-    const magstiff = 0.013;
+            const runner = Runner.create();
+            Runner.run(runner, engine);
 
-    const magspringConstraint = Constraint.create({
-        bodyA: magspring,
-        bodyB: magplate,
-        pointA: { x: 16, y: 0 },
-        pointB: { x: 16, y: 0 },
-        length: 200,
-        stiffness: 0.01,
-        damping: magstiff,
-        render: {
-            lineWidth: 2,
-            strokeStyle: '#ffffff'
-        }
-    });
-    
-    const magspringConstraint2 = Constraint.create({
-        bodyA: magspring,
-        bodyB: magplate,
-        pointA: { x: -16, y: 0 },
-        pointB: { x: -16, y: 0 },
-        length: 200,
-        stiffness: magstiff,
-        damping: 0.1,
-        render: {
-            lineWidth: 2,
-            strokeStyle: '#ffffff'
-        }
-    });
-    
-    const magspringConstraint3 = Constraint.create({
-        bodyA: magspring,
-        bodyB: magplate,
-        length: 200,
-        stiffness: magstiff,
-        damping: 0.1,
-        render: {
-            lineWidth: 2,
-            strokeStyle: '#ffffff'
-        }
-    });
+            const magspring = Bodies.rectangle(400, 350, 52, 30);
+            const magplate = Bodies.rectangle(400, 550, 52, 20);
+            const magtop = Bodies.rectangle(395, 338, 50, 8);
+            const magtopedge = Bodies.rectangle(370, 340, 8, 12);
+            const magbase = Bodies.rectangle(400, 582, 68, 8);
+            const magedge1 = Bodies.rectangle(370, 470, 8, 215);
+            const magedge2 = Bodies.rectangle(430, 470, 8, 215);
+            const magstiff = 0.013;
 
-    for (let i = 0; i < 8; i++) {
-        const bullet = Bodies.circle(210, -100 + i * 30, 10);
-        const casing = Bodies.rectangle(190, -100 + i * 30, 40, 20);
+            const magspringConstraint = Constraint.create({
+                bodyA: magspring,
+                bodyB: magplate,
+                pointA: { x: 16, y: 0 },
+                pointB: { x: 16, y: 0 },
+                length: 200,
+                stiffness: 0.01,
+                damping: magstiff,
+                render: {
+                    lineWidth: 2,
+                    strokeStyle: '#ffffff'
+                }
+            });
+            
+            const magspringConstraint2 = Constraint.create({
+                bodyA: magspring,
+                bodyB: magplate,
+                pointA: { x: -16, y: 0 },
+                pointB: { x: -16, y: 0 },
+                length: 200,
+                stiffness: magstiff,
+                damping: 0.1,
+                render: {
+                    lineWidth: 2,
+                    strokeStyle: '#ffffff'
+                }
+            });
+            
+            const magspringConstraint3 = Constraint.create({
+                bodyA: magspring,
+                bodyB: magplate,
+                length: 200,
+                stiffness: magstiff,
+                damping: 0.1,
+                render: {
+                    lineWidth: 2,
+                    strokeStyle: '#ffffff'
+                }
+            });
 
-        const cartridge = Body.create({
-            parts: [bullet, casing],
-            mass: 0.8,
-            isStatic: false
-        });
+            for (let i = 0; i < 8; i++) {
+                const bullet = Bodies.circle(210, -100 + i * 30, 10);
+                const casing = Bodies.rectangle(190, -100 + i * 30, 40, 20);
 
-        World.add(world, cartridge);
-    }
+                const cartridge = Body.create({
+                    parts: [bullet, casing],
+                    mass: 0.8,
+                    isStatic: false
+                });
 
-    const magborder = Body.create({
-        parts: [magbase, magedge1, magedge2, magtop, magtopedge],
-        isStatic: false
-    });
-
-    const magazinefull = Composite.create();
-    Composite.add(magazinefull, [magspring, magplate, magspringConstraint, magspringConstraint2, magspringConstraint3, magborder]);
-
-    World.add(world, magazinefull);
-
-    const floor = Bodies.rectangle(400, 590, 800, 20, { isStatic: true });
-    const leftWall = Bodies.rectangle(10, 300, 20, 600, { isStatic: true });
-    const rightWall = Bodies.rectangle(790, 300, 20, 600, { isStatic: true });
-
-    World.add(world, [floor, leftWall, rightWall]);
-
-    const mouse = Mouse.create(render.canvas);
-    const mouseConstraint = MouseConstraint.create(engine, {
-        mouse: mouse,
-        constraint: {
-            stiffness: 0.01,
-            angularStiffness: 0.0001,
-            damping: 0.1,
-            render: {
-                visible: false
+                World.add(world, cartridge);
             }
-        }
-    });
 
-    World.add(world, mouseConstraint);
+            const magborder = Body.create({
+                parts: [magbase, magedge1, magedge2, magtop, magtopedge],
+                isStatic: false
+            });
 
-    render.mouse = mouse;
-</script>
-</body>
+            const magazinefull = Composite.create();
+            Composite.add(magazinefull, [magspring, magplate, magspringConstraint, magspringConstraint2, magspringConstraint3, magborder]);
+
+            World.add(world, magazinefull);
+
+            const floor = Bodies.rectangle(400, 590, 800, 20, { isStatic: true });
+            const leftWall = Bodies.rectangle(10, 300, 20, 600, { isStatic: true });
+            const rightWall = Bodies.rectangle(790, 300, 20, 600, { isStatic: true });
+
+            World.add(world, [floor, leftWall, rightWall]);
+
+            const mouse = Mouse.create(render.canvas);
+            const mouseConstraint = MouseConstraint.create(engine, {
+                mouse: mouse,
+                constraint: {
+                    stiffness: 0.01,
+                    angularStiffness: 0.0001,
+                    damping: 0.1,
+                    render: {
+                        visible: false
+                    }
+                }
+            });
+
+            World.add(world, mouseConstraint);
+
+            render.mouse = mouse;
+        </script>
+    </body>
 </html>

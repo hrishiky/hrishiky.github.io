@@ -1,3 +1,35 @@
+.nav-bar {
+margin-top: 20px;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+display: flex;
+align-items: center;
+}
+
+.nav-bar h1 {
+padding-left: 5vw;
+padding-right: 5vw;
+}
+
+.nav-bar p {
+padding-left: 2vw;
+padding-right: 2vw;
+}
+
+.nav-bar-link {
+	text-decoration: none;
+    color: black;
+}
+
+.nav-bar-link:hover {
+    color: #0000ee;
+}
+
+.counter a {
+    width: 0px;
+    height: 0px;
+}
+
 .info-container {
     margin-bottom: 30px;
 }
