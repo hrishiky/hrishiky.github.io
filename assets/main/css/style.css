@@ -1,19 +1,19 @@
 .nav-bar {
-margin-top: 20px;
-border-top: 1px solid black;
-border-bottom: 1px solid black;
-display: flex;
-align-items: center;
+    margin-top: 20px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
 }
 
 .nav-bar h1 {
-padding-left: 5vw;
-padding-right: 5vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
 }
 
 .nav-bar p {
-padding-left: 2vw;
-padding-right: 2vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
 }
 
 .nav-bar-link {
@@ -25,7 +25,7 @@ padding-right: 2vw;
     color: #0000ee;
 }
 
-.counter a {
+.counter img {
     width: 0px;
     height: 0px;
 }
