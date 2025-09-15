@@ -22,18 +22,23 @@ changelog
 [3/25/2025] created changelog and 404 page
             fixed some site structure formatting to be a bit more standard
             fixed some errors with omv
-            previously added slowroads and nzp to the vg directory (3/24/2025)
+
+[3/24/2025] added slowroads and nzp to the vg directory
 
 
--------------
-todo/pastebin
--------------
+----------
+todo/ideas
+----------
 
-fetch('https://hits.sh/yourdomain.com/special.html')
-  .then(response => response.json())
-  .then(data => {
-    document.getElementById('special-counter').textContent = data.count;
-});
+xash3d (https://github.com/x8BitRain/webXash)
+includes folder for header and footer
+stats page by parsing html (https://hits.sh/hrishiky.github.io/)
+add omv counter
+add dropdowns for header that stay within navbar horizontally
+
+--------
+pastebin
+--------
 
 <!DOCTYPE html>
 <html lang="en">

@@ -5,9 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>gunsim</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
+        <script src="https://hrishiky.github.io/assets/main/js/main.js" defer></script>
     </head>
 
-    <body>
+    <body onload="fillPlaceholders();">
         <script>
             const { Engine, Render, Runner, Bodies, Body, World, Mouse, MouseConstraint, Composite, Constraint } = Matter;
 
@@ -124,5 +125,8 @@
 
             render.mouse = mouse;
         </script>
+
+        <footer id="footer-placeholder"> 
+        </footer>
     </body>
 </html>

@@ -6,8 +6,9 @@
     <title>Unity Web Player | Ravenfield</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="https://hrishiky.github.io/assets/main/js/main.js" defer></script>
   </head>
-  <body>
+  <body onload="fillPlaceholders();">
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
@@ -123,5 +124,7 @@
       document.body.appendChild(script);
 
     </script>
+    <footer id="footer-placeholder"> 
+    </footer>
   </body>
 </html>

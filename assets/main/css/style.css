@@ -7,21 +7,21 @@
 }
 
 .nav-bar h1 {
-    padding-left: 5vw;
-    padding-right: 5vw;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .nav-bar p {
-    padding-left: 2vw;
-    padding-right: 2vw;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-.nav-bar-link {
+.nav-bar a {
 	text-decoration: none;
     color: black;
 }
 
-.nav-bar-link:hover {
+.nav-bar a:hover {
     color: #0000ee;
 }
 
