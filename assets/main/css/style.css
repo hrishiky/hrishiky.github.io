@@ -1,4 +1,4 @@
-.nav-bar {
+nav {
     margin-top: 20px;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
@@ -6,22 +6,22 @@
     align-items: center;
 }
 
-.nav-bar h1 {
+nav h1 {
     padding-left: 25px;
     padding-right: 25px;
 }
 
-.nav-bar p {
+nav p {
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.nav-bar a {
+nav a {
 	text-decoration: none;
     color: black;
 }
 
-.nav-bar a:hover {
+nav a:hover {
     color: #0000ee;
 }
 
