@@ -25,6 +25,11 @@ nav a:hover {
     color: #0000ee;
 }
 
+.right-align {
+    margin-left: auto;
+    padding-right: 10px;
+}
+
 .counter img {
     width: 0px;
     height: 0px;

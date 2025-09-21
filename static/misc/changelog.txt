@@ -2,6 +2,9 @@
 changelog
 ---------
 
+[9/21/2025] added stats to navbar
+            added a unique hits counter
+
 [9/12/2025] added a navbar and hit counter
             omv now has antivirus and downloads an omv removal tool
 
@@ -32,6 +35,10 @@ todo/ideas
 
 xash3d (https://github.com/x8BitRain/webXash)
 add dropdowns for header that stay within navbar horizontally
+ultrakill prelude port
+lsd: revamped port
+index more of the site
+unique users
 
 
 --------
