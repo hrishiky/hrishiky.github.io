@@ -3,7 +3,8 @@ changelog
 ---------
 
 [9/21/2025] added up and pp to vg
-            we might be getting DMCA'ed guts
+            polished up site and changed some parts
+            we might be getting DMCA'ed guys
 
 [9/21/2025] added stats to navbar
             added a unique hits counter
