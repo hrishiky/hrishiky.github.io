@@ -25,6 +25,21 @@ nav a:hover {
     color: #0000ee;
 }
 
+nav span {
+	display: flex;
+}
+
+nav button {
+	border: none;
+    background-color: transparent;
+    margin-left: -10px;
+}
+
+.nav-spacer {
+	padding-left: 10px;
+    padding-right: 10px;
+}
+
 .right-align {
     margin-left: auto;
     padding-right: 20px;

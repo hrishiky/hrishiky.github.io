@@ -2,9 +2,14 @@
 changelog
 ---------
 
-[9/21/2025] added up and pp to vg
+[9/29/2025] improved navbar with dropdown menu
+            removed up and pp cause original repo got DMCA'ed
+            i am not taking that risk and also i have morals (pp is payed game)
+            
+            
+
+[9/23/2025] added up and pp to vg
             polished up site and changed some parts
-            we might be getting DMCA'ed guys
 
 [9/21/2025] added stats to navbar
             added a unique hits counter
@@ -37,12 +42,13 @@ changelog
 todo/ideas
 ----------
 
-xash3d (https://github.com/x8BitRain/webXash)
 add dropdowns for header that stay within navbar horizontally
+
 ultrakill prelude port
 lsd: revamped port
+babbdi port
+
 index more of the site
-unique users
 
 
 --------
