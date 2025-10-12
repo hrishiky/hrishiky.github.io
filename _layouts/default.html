@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ site.name }}{% if page.title %} – {{ page.title }}{% endif %}</title>
+
+    {% include meta.html %}
+
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+
+    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
+  </head>
+
+  <body class="main-container">
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <div class="site-info">
+            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
+          </div>
+        </header>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div id="main" role="main" class="container">
+        {{ content }}
+        
+        <div class ="wrapper-footer">
+          <footer>
+            @2025 <a href="{{ site.footer-links.github }}">{{ site.username }}</a>
+            <br></br>
+            Powered by Jekyll | Hosted on Github Pages
+          </footer>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <div class="sidebar-info">
+          <img class="site-avatar" src="{{ site.avatar }}" />
+          <h1 class="sidebar-name">{{ site.username }}</h1>
+          <span><a href="https://github.com/hrishiky">github</a> | <a href="{{ site.baseurl }}/about">about</a></span>
+        </div>
+      </div>
+    </div>
+
+    <script src="/assets/main/js/main.js"></script>
+  </body>
+</html>
