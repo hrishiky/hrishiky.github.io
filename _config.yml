@@ -10,10 +10,6 @@ url: http://hrishiky.github.io
 
 baseurl: ""
 
-#
-# !! You don't need to change any of the configuration flags below !!
-#
-
 permalink: /:title/
 
 version: v1.2.0
