@@ -2,19 +2,13 @@
 <html>
   <head>
     <title>{{ site.name }}{% if page.title %} – {{ page.title }}{% endif %}</title>
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/blog/css/style.scss">
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/blog/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/main/css/style.css">
   </head>
 
-  <body class="main-container">
-    <div class="wrapper-masthead">
-      <div class="container">
-        <header class="masthead clearfix">
-          <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-          </div>
-        </header>
-      </div>
-    </div>
+  <body class="main-container" onload="fillPlaceholders();">
+    <nav id="nav-placeholder">
+    </nav>
 
     <div class="content-container">
       <div id="main" role="main" class="container">
@@ -36,8 +30,11 @@
           <span><a href="https://github.com/hrishiky">github</a> | <a href="{{ site.baseurl }}/about">about</a></span>
         </div>
       </div>
+
+      <footer id="footer-placeholder"> 
+      </footer>
     </div>
 
-    <script src="/assets/main/js/main.js"></script>
+    <script src="{{ site.baseurl }}/assets/main/js/main.js"></script>
   </body>
 </html>
