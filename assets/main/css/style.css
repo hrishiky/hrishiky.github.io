@@ -18,11 +18,13 @@ nav {
 }
 
 nav h1 {
+	color: black;
     padding-left: 25px;
     padding-right: 25px;
 }
 
 nav p {
+	color: black;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -34,16 +36,6 @@ nav a {
 
 nav a:hover {
     color: #0000ee;
-}
-
-nav span {
-	display: flex;
-}
-
-nav button {
-	border: none;
-    background-color: transparent;
-    margin-left: -10px;
 }
 
 .nav-spacer {
@@ -227,20 +219,6 @@ strong, b {
 .site-description {
 	margin: -5px 0 0 0;
 	font-size: 15px;
-}
-
-nav {
-  float: center;
-	margin-top: 23px;
-	font-size: 20px;
-}
-
-nav a {
-  margin-left: 20px;
-	color: darkGray;
-  text-align: right;
-	font-weight: 300;
-	letter-spacing: 1px;
 }
 
 #main {
