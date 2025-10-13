@@ -4,11 +4,13 @@ name: hrishiky.github.io
 
 description: hrishiky.github.io
 
-avatar: https://avatars.githubusercontent.com/u/173004515?s=400&v=4
+avatar: http://avatars.githubusercontent.com/u/173004515?s=400&v=4
 
 url: http://hrishiky.github.io
 
 baseurl: ""
+
+github: http://github.com/hrishiky
 
 permalink: /:title/
 
