@@ -19,6 +19,7 @@ nav {
 
 nav h1 {
 	color: black;
+	font-weight: bold;
     padding-left: 25px;
     padding-right: 25px;
 }
@@ -85,42 +86,8 @@ nav a:hover {
   padding: 0 10px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	color: #000;
-	font-weight: 500;
-	line-height: 1.7;
-	padding: 0;
-	margin-top: 0.5em;
-	margin-bottom: 0.6em;
-}
-
-h1 {
-	font-size: 20px;
-}
-
-h1 a {
-	color: inherit;
-}
-
-h1 a:hover {
-	text-decoration: none;
-}
-
-h2 {
-	font-size: 24px;
-}
-
-h3 {
-	font-size: 20px;
-}
-
-h4 {
-	font-size: 18px;
-	color: gray;
-}
-
 a {
-	color: blue;
+	color: #4183c4;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -130,7 +97,7 @@ a:active {
 }
 
 a:hover {
-	color: #4183c4;
+	color: blue;
 	text-decoration: underline;
 }
 

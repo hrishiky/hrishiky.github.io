@@ -2,11 +2,12 @@
 changelog
 ---------
 
-[9/29/2025] improved navbar with dropdown menu
+[10/14/2025]converted root index.html to blog with jekyll
+            lots of updates to the css
+
+[9/29/2025] improved navbar
             removed up and pp cause original repo got DMCA'ed
-            i am not taking that risk and also i have morals (pp is payed game)
-            
-            
+            i am not taking that risk and also i have morals (pp is paid game)
 
 [9/23/2025] added up and pp to vg
             polished up site and changed some parts
@@ -41,8 +42,6 @@ changelog
 ----------
 todo/ideas
 ----------
-
-add dropdowns for header that stay within navbar horizontally
 
 ultrakill prelude port
 lsd: revamped port
