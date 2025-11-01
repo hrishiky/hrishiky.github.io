@@ -9,6 +9,10 @@ body {
 	min-height: 100vh;
 }
 
+h1 {
+	font-size: 20px
+}
+
 nav {
     margin-top: 20px;
     border-top: 1px solid black;
@@ -20,6 +24,7 @@ nav {
 nav h1 {
 	color: black;
 	font-weight: bold;
+	font-size: 25px;
     padding-left: 25px;
     padding-right: 25px;
 }

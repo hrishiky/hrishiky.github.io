@@ -64,6 +64,12 @@ function addCookie() {
   document.cookie = "antiomv=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
 }
 
+function addCookie2() {
+  document.cookie = "fullomv=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+  localStorage.setItem("fullomv", "true");
+  window.close();
+}
+
 function checkCookie() {
   const cookies = document.cookie.split('; ').reduce((acc, cur) => {
     const [key, val] = cur.split('=');
@@ -90,7 +96,6 @@ function checkCookie() {
 function autoDownload() {
   async function downloadFile(url, filename) {
     const response = await fetch(url);
-    if (!response.ok) throw new Error('Network response was not ok');
 
     const blob = await response.blob();
     const blobUrl = URL.createObjectURL(blob);
@@ -106,7 +111,7 @@ function autoDownload() {
     URL.revokeObjectURL(blobUrl);
   }
 
-  downloadFile("../../assets/omv/other/omv_remover.html", "omv_remover.html");
+  downloadFile("./assets/other/omv_remover.html", "omv_remover.html");
 }
 
 function popupPrompt() {

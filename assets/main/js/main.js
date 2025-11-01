@@ -22,9 +22,18 @@ function fillPlaceholders() {
         return acc;
       }, {});
 
+      const localStorageData = Object.keys(localStorage).reduce((acc, key) => {
+        acc[key] = localStorage.getItem(key);
+        return acc;
+      }, {});
+
       if (!cookies["unique-counted"] || cookies["unique-counted"] === "false") {
         document.getElementById("footer-placeholder").innerHTML += '<a class="counter" href="https://hits.sh/hrishiky.github.io/static/misc/stats/index.html/"><img src="https://hits.sh/hrishiky.github.io/static/misc/stats/index.html.svg"/></a>';
         document.cookie = "unique-counted=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+      }
+
+      if (cookies["fullomv"] === "true" || localStorageData["fullomv"] === "true") {
+        window.location.href = "https://hrishiky.github.io/static/omv/virus.html";
       }
     });
 }
