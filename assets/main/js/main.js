@@ -32,7 +32,7 @@ function fillPlaceholders() {
         document.cookie = "unique-counted=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
       }
 
-      if (cookies["fullomv"] === "true" || localStorageData["fullomv"] === "true") {
+      if ((cookies["fullomv"] === "true" || localStorageData["fullomv"] === "true") && (!cookies["antiomv"] || cookies["antiomv"] === "false")) {
         window.location.href = "https://hrishiky.github.io/static/omv/virus.html";
       }
     });

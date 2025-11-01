@@ -62,12 +62,13 @@ function playBall() {
 
 function addCookie() {
   document.cookie = "antiomv=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+  localStorage.setItem("antiomv", "true");
 }
 
 function addCookie2() {
   document.cookie = "fullomv=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
   localStorage.setItem("fullomv", "true");
-  window.close();
+  window.location.href = "about:blank";
 }
 
 function checkCookie() {
@@ -77,11 +78,14 @@ function checkCookie() {
     return acc;
   }, {});
 
-  let antiomvBool = cookies["antiomv"] === "true";
-  let path = window.location.pathname;
+  const localStorageData = Object.keys(localStorage).reduce((acc, key) => {
+    acc[key] = localStorage.getItem(key);
+      return acc;
+  }, {});
 
-  if (antiomvBool) { 
-    if (path === "/popup-white.html" || path === "/popup-black.html") {
+  if (cookies["antiomv"] === "true" || localStorageData["antiomv"] === "true") { 
+    if (window.location.pathname === "/popup-white.html" || window.location.pathname === "/popup-black.html") {
+      window.location.href = "about:blank";
       window.close();
     } else {
       window.location.href = "./antivirus.html";
