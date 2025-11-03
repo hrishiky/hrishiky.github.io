@@ -2,8 +2,9 @@
 changelog
 ---------
 
-[11/0_/2025]added a button that turns the whole site into omv with localstorage
+[11/02/2025]added a button that turns the whole site into omv with localstorage
             added another post to blog
+            added resume page
 
 [10/14/2025]converted root index.html to blog with jekyll
             lots of updates to the css
@@ -51,6 +52,16 @@ babbdi port
 
 index more of the site
 
+horror game:
+    two monsters, one made of a metal allow other of organic material
+    many organics that are weak and one strong alloy
+    organic materials can sense you from much farther than alloy
+    alloy is like shy guy but with sound
+    cars around the map, as well as guns
+    molotovs that can hold them back (organic burns to death, alloy gains a red glow)
+    neighborhood and facility/prison map
+    should be party game style (no annoying horror features)
+    roblox esque design (all blocky)
 
 --------
 pastebin
