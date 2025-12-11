@@ -231,6 +231,12 @@ strong, b {
  margin-bottom: 5px;
 }
 
+.entry img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 .sidebar {
  flex: 1;
  background-color: #efefef;

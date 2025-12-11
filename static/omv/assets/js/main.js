@@ -112,6 +112,9 @@ function checkCookie2() {
   if (cookies["directomv"] !== "true" && localStorageData["directomv"] !== "true") { 
     alert("NOTICE: \n This website is toy malaware. It uses a fake Cloudflare verification page to gain popup permissions. Following the instructions will lead you to a website that will spam open popups with flashing images and text. It will also autoplay an audio in the backgroud. The popups will bounce around the screen and replicate. This malaware will not automatically stop. Please visit at your own risk.");
   }
+  
+  document.cookie = "directomv=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  localStorage.removeItem("directomv");
 }
 
 function autoDownload() {
