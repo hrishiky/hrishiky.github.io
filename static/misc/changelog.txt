@@ -2,6 +2,9 @@
 changelog
 ---------
 
+[12/11/2025]new post
+            update to the omv so that it shows notification except from the omv redirect page
+
 [11/02/2025]added a button that turns the whole site into omv with localstorage
             added another post to blog
             added resume page

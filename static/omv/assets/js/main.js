@@ -97,6 +97,23 @@ function checkCookie() {
   return false;
 }
 
+function checkCookie2() {
+  const cookies = document.cookie.split('; ').reduce((acc, cur) => {
+    const [key, val] = cur.split('=');
+    acc[key] = val;
+    return acc;
+  }, {});
+
+  const localStorageData = Object.keys(localStorage).reduce((acc, key) => {
+    acc[key] = localStorage.getItem(key);
+      return acc;
+  }, {});
+
+  if (cookies["directomv"] !== "true" && localStorageData["directomv"] !== "true") { 
+    alert("NOTICE: \n This website is toy malaware. It uses a fake Cloudflare verification page to gain popup permissions. Following the instructions will lead you to a website that will spam open popups with flashing images and text. It will also autoplay an audio in the backgroud. The popups will bounce around the screen and replicate. This malaware will not automatically stop. Please visit at your own risk.");
+  }
+}
+
 function autoDownload() {
   async function downloadFile(url, filename) {
     const response = await fetch(url);
