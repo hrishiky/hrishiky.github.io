@@ -1,0 +1,17 @@
+---
+layout: post
+title: Music + Future City follow up
+---
+
+I have been listening to music for some time now (for the lack of a better place to mention this: my favorite artist is Ye). I used to simply listen to music from YouTube on my phone or laptop using wired earbuds. It was not a terrible experience, but there was much to be desired in the audio quality and ease of access. YouTube played ads between songs, relied on the internet, and had lossy audio compression. To fix this, I decided to use a YouTube video downloading website to get the .mp3 files of the songs, which I placed in a folder and used the OS's built-in media player to listen to the songs. This worked fine, but the audio quality was bad, due to the inherent data loss from .mp3 files, cheap earbuds, and low quality DAC (digital to audio converter) chips. 
+
+To fix this issue, I decided to study the methods I could use to listen to music. I narrowed it down to either streaming services or CDs (compact disks), since my computer and phone had low-quality hardware and it would be hard to find a lossless format (namely FLAC) of the songs to download and listen to, and since vinyl is too expensive and takes some care to prevent damage. 
+
+Corporate software is almost always horrible to use. They look and feel soulless, and are built for profit and not the users. Even if there was a good streaming application that does not feel like consuming corporate slop, there is always a price tag, regardless of it costing money or being free (if the product is free, then you are the product). Most streaming applications also require network connection to access and do not have a built-in feature to download songs. In addition to all of this, after the user pays the price and bears with using the streaming service, they still end up owning none of the songs. This effectively ruled out using streaming services. 
+
+CDs are a superior format. They are physical, and it is always a good idea to own something physically, contrary to what CEOs say (Bezos is full of shit for saying that people should give up their local hardware in favor of cloud counterparts). Additionally, CDs have a higher audio quality than .mp3 files and other lossy formats, which gives them better quality than most streaming services. Their higher dynamic range, compared to other methods of listening to music, allows users to hear minute details in the music that a compressed version would not have. The streaming services that do have lossless audio are still limited by phone and headphone hardware, since the average consumer just uses cheap headphones or more corporate slop like AirPods. CDs also have a matured manufacturing sector, meaning that buyers can find high-quality CDs and CD players for relatively cheap prices. This led me to decide on using CDs to listen to music. So far, my feeling is that it has been a great listening experience and was worth the money that I invested in it.
+
+
+A couple of days ago, my Future City team received the news that we had passed the preliminary round. This means that I will be able to go to Washington D.C. for the final competition. I am excited to present our city (Kalira), but also to visit D.C. itself. I am planning on bringing my camera to take pictures there, so that I can share them here or submit them to a photography competition (if they are good enough).
+
+<img src="{{ site.baseurl }}/assets/blog/yeezus.jpg" alt="Yeezus (Ye) cover art" width="200"/>
