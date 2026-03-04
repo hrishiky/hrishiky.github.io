@@ -2,69 +2,54 @@
 changelog
 ---------
 
-[12/11/2025]new post
-            update to the omv so that it shows notification except from the omv redirect page
+[03/03/2026]    new post
 
-[11/02/2025]added a button that turns the whole site into omv with localstorage
-            added another post to blog
-            added resume page
+[01/22/2026]    new post
 
-[10/14/2025]converted root index.html to blog with jekyll
-            lots of updates to the css
+[01/06/2026]    new post
 
-[9/29/2025] improved navbar
-            removed up and pp cause original repo got DMCA'ed
+[12/11/2025]    new post
+                update to the omv so that it shows notification except from the omv redirect page
 
-[9/23/2025] added up and pp to vg
-            polished up site and changed some parts
+[11/02/2025]    added a button that turns the whole site into omv with localstorage
+                added another post to blog
+                added resume page
 
-[9/21/2025] added stats to navbar
-            added a unique hits counter
+[10/14/2025]    converted root index.html to blog with jekyll
+                lots of updates to the css
 
-[9/12/2025] added a navbar and hit counter
-            omv now has antivirus and downloads an omv removal tool
+[09/29/2025]    improved navbar
+                removed up and pp cause original repo got DMCA'ed
 
-[8/26/2025] site got indexed by google
-            working on big omv update
+[09/23/2025]    added up and pp to vg
+                polished up site and changed some parts
 
-[8/14/2025] requested site indexing by google
-            hopefully I dont get DMCA'ed for the games
+[09/21/2025]    added stats to navbar
+                added a unique hits counter
 
-[8/12/2025] added ng because landgreen's site got blocked
-            moved gunsim and n-gun to misc cause they are abandoned
-            renamed ravenfield to rf and slowroads to sr in order to circumvent blocks
+[09/12/2025]    added a navbar and hit counter
+                omv now has antivirus and downloads an omv removal tool
 
-[4/4/2025]  revamped all of the assets to better fit the new site structure
-            added a personal page and projects page to make website more formal
-            the pages are placeholders for now; i need to research how to make them
+[08/26/2025]    site got indexed by google
+                working on big omv update
 
-[3/25/2025] created changelog and 404 page
-            fixed some site structure formatting to be a bit more standard
-            fixed some errors with omv
+[08/14/2025]    requested site indexing by google
+                hopefully I dont get DMCA'ed for the games
 
-[3/24/2025] added slowroads and nzp to the vg directory
+[08/12/2025]    added ng because landgreen's site got blocked
+                moved gunsim and n-gun to misc cause they are abandoned
+                renamed ravenfield to rf and slowroads to sr in order to circumvent blocks
 
+[04/04/2025]    revamped all of the assets to better fit the new site structure
+                added a personal page and projects page to make website more formal
+                the pages are placeholders for now; i need to research how to make them
 
-----------
-todo/ideas
-----------
+[03/25/2025]    created changelog and 404 page
+                fixed some site structure formatting to be a bit more standard
+                fixed some errors with omv
 
-ultrakill prelude port
-lsd: revamped port
-babbdi port
+[03/24/2025]    added slowroads and nzp to the vg directory
 
-index more of the site
-
-horror game:
-    two monsters, one made of a metal allow other of organic material
-    many organics that are weak and one strong alloy
-    organic materials can sense you from much farther than alloy
-    alloy is like shy guy but with sound
-    cars around the map, as well as guns
-    molotovs that can hold them back (organic burns to death, alloy gains a red glow)
-    neighborhood and facility/prison map
-    should be party game style (no annoying horror features)
-    roblox esque design (all blocky)
 
 --------
 pastebin

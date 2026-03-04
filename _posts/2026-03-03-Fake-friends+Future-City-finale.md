@@ -1,0 +1,19 @@
+---
+layout: post
+title: Fake friends + Future City finale
+---
+
+Fake people are everywhere. By fake people, I do not just mean people that prey on your downfall; I am also referring to basic people. The people who follow the newest bandwagon that they can find on social media. There is nothing too wrong with it, it's just that the bandwagons almost always happen to be consumerist slop trends.
+
+Starting off with fake people (as in basic people) the one thing that I have noticed about them is that they all tend to act similarly. They all suppress their true emotions and forcefully act a certain way. Many of them act shy, try too hard to be funny, or put on some persona that can be seen easily for what it truly is: fake. 
+My word to these fakes: We are all going to die in a few decades, so why don't you just be yourself? There is nothing to lose from it, and consider when you are in the last years where you reflect upon your life. Think about whether you will be happy with your life.
+
+Second, we have the fake friends, as in the ones who don't really care for you, or even actively want to hurt you. I have personally never experienced somebody who actively tried to prey on my downfall, but I have had plenty of experience with people who don't care about you. The hardest part about this is that feeling where one day you will get the care and respect that you put into the relationship back. Every time one of them actually talks and interacts with you, the figurative fire gets rekindled, but it always dies afterward. Many people are incapable of change. Many people decide the value they give to you when they first meet you. Even when confronting a person about it, many people, I have noticed, are alright talking about it then, but then avoid the topic later or act like nothing happened. It is because of laziness. Change takes work, and work is almost never fun. It would seem that letting go of a friend that does not value you the same way you value them would be easy, but what you need to realize is that this also change. And change takes work. It will not always be relieving, and it will not always be easy. It is always easy to take the path of least resistance and continue being a cuck for them, and that is what I believe keeps people in these types of relationships: ignorance of the issue itself or unwillingness to do the work for change. If you feel that you are not being valued, talk to them. A real friend will take it to heart and at least try to change. If you have been constantly cucked, and even talking to them won't change anything, just leave them. Staying is the equivalent of being in an abusive relationship. Just take the action. Immediately. Don't give yourself the time to craft another bullshit reason to continue being mistreated.
+My word to these fakes: Fuck you.
+
+
+In Future City, we finished the competition in 12th place. During the first round, before the in-person competition, we finished 6th place. The judges gave vague feedback for the first round, and did not bother to give any for the second round. After going to the competition, I realized that it is just a game of nepotism. If next year we place top 3, I will speak about this when they call us up to talk. There was never anything to lose anyway.
+
+
+Below is a photograph of a skateboard. I like the texture of the concrete and paint that you can see due to the lighting. The framing of the photograph could have been much better, though.
+<img src="{{ site.baseurl }}/assets/blog/2026_03_03/skateboard.jpg" alt="skateboard in an open, multi-story parking garage, with light seeping in and showing the texture of the paint, skateboard, and concrete" width="200"/>
