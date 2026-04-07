@@ -14,4 +14,4 @@ CDs are a superior format. They are physical, and it is always a good idea to ow
 
 A couple of days ago, my Future City team received the news that we had passed the preliminary round. This means that I will be able to go to Washington D.C. for the final competition. I am excited to present our city (Kalira), but also to visit D.C. itself. I am planning on bringing my camera to take pictures there, so that I can share them here or submit them to a photography competition (if they are good enough).
 
-<img src="{{ site.baseurl }}/assets/blog/2026_01_22/yeezus.jpg" alt="Yeezus (Ye) cover art" width="200"/>
+<img src="{{ site.baseurl }}/assets/blog/2026_01_22/yeezus.jpg" alt="Yeezus (Ye) album cover" width="200"/>

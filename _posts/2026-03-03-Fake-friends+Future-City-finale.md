@@ -16,4 +16,5 @@ In Future City, we finished the competition in 12th place. During the first roun
 
 
 Below is a photograph of a skateboard. I like the texture of the concrete and paint that you can see due to the lighting. The framing of the photograph could have been much better, though.
+
 <img src="{{ site.baseurl }}/assets/blog/2026_03_03/skateboard.jpg" alt="skateboard in an open, multi-story parking garage, with light seeping in and showing the texture of the paint, skateboard, and concrete" width="200"/>
