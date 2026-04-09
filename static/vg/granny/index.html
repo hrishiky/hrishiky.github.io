@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Unity WebGL Player | Granny</title>
+<style>
+body { background: #111; color: #fff; font-family: sans-serif; margin: 0; overflow: hidden; }
+#unity-container { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; }
+#unity-canvas { width: 100%; height: 100%; background: #000; }
+#loading-ui { position: absolute; text-align: center; width: 300px; }
+#bar-container { width: 100%; height: 6px; background: #333; margin-top: 10px; border-radius: 3px; }
+#bar-fill { width: 0%; height: 100%; background: #eee; border-radius: 3px; transition: width 0.1s; }
+#status-text { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+#unity-warning { position: absolute; top: 10px; background: red; padding: 5px; display: none; }
+</style>
+</head>
+<body>
+<div id="unity-container">
+<canvas id="unity-canvas" tabindex="-1"></canvas>
+<div id="loading-ui">
+<div id="status-text">port by bog, truffled.lol</div>
+<div id="bar-container"><div id="bar-fill"></div></div>
+</div>
+<div id="unity-warning"></div>
+</div>
+<script>
+const canvas = document.querySelector("#unity-canvas");
+const statusText = document.querySelector("#status-text");
+const barFill = document.querySelector("#bar-fill");
+const loadingUI = document.querySelector("#loading-ui");
+const warning = document.querySelector("#unity-warning");
+async function getCombinedBlob(path, count, label) {
+    const parts = [];
+    for (let i = 1; i <= count; i++) {
+        const num = i.toString().padStart(2, '0');
+        const url = `${path}.part${num}`;
+        statusText.textContent = `${label} ${Math.round((i/count)*100)}%`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Missing ${url}`);
+        parts.push(await res.arrayBuffer());
+        barFill.style.width = `${(i/count)*100}%`;
+    }
+    return URL.createObjectURL(new Blob(parts));
+}
+const buildUrl = "Build";
+const config = {
+    dataUrl: "",
+    frameworkUrl: buildUrl + "/GrannyBog.framework.js",
+    codeUrl: "",
+    streamingAssetsUrl: "StreamingAssets",
+    companyName: "Truffled",
+    productName: "Granny",
+    productVersion: "1.0",
+};
+async function start() {
+    try {
+        config.dataUrl = await getCombinedBlob(buildUrl + "/GrannyBog.data", 23, "data");
+        config.codeUrl = await getCombinedBlob(buildUrl + "/GrannyBog.wasm", 2, "wasm");
+        
+        statusText.textContent = "loading";
+        const script = document.createElement("script");
+        script.src = buildUrl + "/GrannyBog.loader.js";
+        script.onload = () => {
+            createUnityInstance(canvas, config, (progress) => {
+                barFill.style.width = (100 * progress) + "%";
+                statusText.textContent = "port by bog, truffled.lol";
+            }).then(() => {
+                loadingUI.style.display = "none";
+            }).catch(err => alert(err));
+        };
+        document.body.appendChild(script);
+    } catch (e) {
+        warning.textContent = e.message;
+        warning.style.display = "block";
+    }
+}
+start();
+</script>
+</body>
+</html>
