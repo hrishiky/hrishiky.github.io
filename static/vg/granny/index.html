@@ -1,81 +1,127 @@
-
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-<meta charset="utf-8">
-<title>Unity WebGL Player | Granny</title>
-<style>
-body { background: #111; color: #fff; font-family: sans-serif; margin: 0; overflow: hidden; }
-#unity-container { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; }
-#unity-canvas { width: 100%; height: 100%; background: #000; }
-#loading-ui { position: absolute; text-align: center; width: 300px; }
-#bar-container { width: 100%; height: 6px; background: #333; margin-top: 10px; border-radius: 3px; }
-#bar-fill { width: 0%; height: 100%; background: #eee; border-radius: 3px; transition: width 0.1s; }
-#status-text { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
-#unity-warning { position: absolute; top: 10px; background: red; padding: 5px; display: none; }
-</style>
+  <base href="https://cdn.jsdelivr.net/gh/web-ports/granny@main/">
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Unity WebGL Player | Granny</title>
+
+  <link rel="shortcut icon" href="TemplateData/favicon.ico">
+  <script src="TemplateData/UnityProgress.js"></script>
+  <script src="Build/UnityLoader.js"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+      background: black;
+    }
+
+    #unityContainer {
+      width: 100vw;
+      height: 100vh;
+    }
+
+  #loading-text {
+  font-weight: bold;
+  background: linear-gradient(
+    270deg,
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #00ff00,
+    #0000ff,
+    #4b0082,
+    #8f00ff
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 3s ease infinite;
+}
+
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+  </style>
+<div id="loading-text"
+    style="color: white; font-size: 48px; font-family: cursive; text-align: center; margin-top: 20px;"> LOADING...
+  </div>
+  <script>
+    var loadingText = document.querySelector("#loading-text");
+    let totalBytes = 0;
+    let loadedBytes = 0;
+
+    async function fetchWithProgress(url) {
+      const response = await fetch(url);
+      const reader = response.body.getReader();
+      let chunks = [];
+      let received = 0;
+      while (true) {
+        const {
+          done,
+          value
+        } = await reader.read();
+        if (done) break;
+        received += value.length;
+        loadedBytes += value.length;
+        chunks.push(value);
+        let mbDone = (loadedBytes / (1024 * 1024)).toFixed(2);
+        let mbTotal = '567.86';
+        loadingText.textContent = `LOADING... ${mbDone} MB / ${mbTotal} MB`;
+      }
+      let fullBuffer = new Uint8Array(received);
+      let offset = 0;
+      for (let chunk of chunks) {
+        fullBuffer.set(chunk, offset);
+        offset += chunk.length;
+      }
+      return fullBuffer.buffer;
+    }
+
+    async function mergeFiles(fileParts, cacheKey) {
+      const buffers = await Promise.all(
+        fileParts.map(part => fetchWithProgress(part))
+      );
+      const mergedBlob = new Blob(buffers);
+      return URL.createObjectURL(mergedBlob);
+    }
+
+    function getParts(file, start, end) {
+      let parts = [];
+      for (let i = start; i <= end; i++) {
+        parts.push(file + ".part" + i);
+      }
+      return parts;
+    }
+    (async () => {
+      const [dataUrl] = await Promise.all([
+        mergeFiles(getParts("Build/GrannyPortButBetter.data.unityweb", 1, 29), "GrannyPortButBetter.data.unityweb")
+      ]);
+            const originalOpen = XMLHttpRequest.prototype.open;
+      XMLHttpRequest.prototype.open = function (method, url, ...rest) {
+          if (url.includes("GrannyPortButBetter.data.unityweb")) {
+              url = dataUrl;
+          }
+          return originalOpen.call(this, method, url, ...rest);
+      };
+          var unityInstance = UnityLoader.instantiate(
+      "unityContainer",
+      "Build/GrannyPortButBetter.json",
+      { onProgress: UnityProgress }
+    );
+    loadingText.remove();
+    })();
+  </script>
 </head>
+
 <body>
-<div id="unity-container">
-<canvas id="unity-canvas" tabindex="-1"></canvas>
-<div id="loading-ui">
-<div id="status-text">port by bog, truffled.lol</div>
-<div id="bar-container"><div id="bar-fill"></div></div>
-</div>
-<div id="unity-warning"></div>
-</div>
-<script>
-const canvas = document.querySelector("#unity-canvas");
-const statusText = document.querySelector("#status-text");
-const barFill = document.querySelector("#bar-fill");
-const loadingUI = document.querySelector("#loading-ui");
-const warning = document.querySelector("#unity-warning");
-async function getCombinedBlob(path, count, label) {
-    const parts = [];
-    for (let i = 1; i <= count; i++) {
-        const num = i.toString().padStart(2, '0');
-        const url = `${path}.part${num}`;
-        statusText.textContent = `${label} ${Math.round((i/count)*100)}%`;
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`Missing ${url}`);
-        parts.push(await res.arrayBuffer());
-        barFill.style.width = `${(i/count)*100}%`;
-    }
-    return URL.createObjectURL(new Blob(parts));
-}
-const buildUrl = "Build";
-const config = {
-    dataUrl: "",
-    frameworkUrl: buildUrl + "/GrannyBog.framework.js",
-    codeUrl: "",
-    streamingAssetsUrl: "StreamingAssets",
-    companyName: "Truffled",
-    productName: "Granny",
-    productVersion: "1.0",
-};
-async function start() {
-    try {
-        config.dataUrl = await getCombinedBlob(buildUrl + "/GrannyBog.data", 23, "data");
-        config.codeUrl = await getCombinedBlob(buildUrl + "/GrannyBog.wasm", 2, "wasm");
-        
-        statusText.textContent = "loading";
-        const script = document.createElement("script");
-        script.src = buildUrl + "/GrannyBog.loader.js";
-        script.onload = () => {
-            createUnityInstance(canvas, config, (progress) => {
-                barFill.style.width = (100 * progress) + "%";
-                statusText.textContent = "port by bog, truffled.lol";
-            }).then(() => {
-                loadingUI.style.display = "none";
-            }).catch(err => alert(err));
-        };
-        document.body.appendChild(script);
-    } catch (e) {
-        warning.textContent = e.message;
-        warning.style.display = "block";
-    }
-}
-start();
-</script>
+
+  <div id="unityContainer"></div>
 </body>
 </html>
