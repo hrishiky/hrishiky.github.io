@@ -1,30 +1,14 @@
 "use strict";
 
-//list of the recent github hashes, shortened to the first 7 digits of the full hash.
-//the last element of the array is the most recent commit
-// const commitHashes = ['6472d6d', 'c8bf77d', 'eb8f4b0', 'f556371', '74f569b', 'c9f355b', '6814c10', '9402cf2', 'f8b4b6f', '82c0ea8', 'f9849d4', 'd00a94a', '3654198', '9bcf4d3', 'eecf763', 'be109bb', 'e2bf9aa', '3ea8bfd', 'c614451', '1752453', '34e05c7', '07af7a7', '2e76b5c', '1b23dec', '0b728fb', 'e6e5058', '4f87444', 'e418b93', 'b3fa1bf', '09c9e93', 'd8e978f', 'da559f4', '1d4b0c4', '4415942', '6cd2502', '8a211e8', '3d423a5', '4933ef5', '77cafe3', 'bffaeed', '99bd1c8', '8a3ac11', 'bf5f866', 'b14f2c1', 'ff613dc', '1129b9d', '3844d00', 'e9d2262', 'ce74f42', 'ad33cf6', '2d12f1d', 'c47d860', '4e6acdd', '778a2c9', '68f9269', '17f65cf', 'b5e4b0d', '38d9931', '64f2a9f', '64c81cd', '254ec00', '38ef45a', '1728b53', 'fde3a58', '6c3d97a', '951806d', '2b99e59', '3ce6bec', '773ee5c', '4c6b480', 'a1164ed', '507b060', '63bfaba', 'eabd146', '438c166', '1903b9e', '5e12cea', 'f43a5e3', '022e2fa', '20f9b79', 'fc70dfe', '5eae070', '8dacb02', '52046ca', '220a6b4', 'ebd2274', 'cea1c64', 'a47ef97', 'a8c6c0e', '9c2c9be', '8bb8222', '1fde74d', 'f1a6713', '97c5509', '1966173', '2daeae1', '1040d1f', 'c9a5ab9', '77e484c', 'b2426cd']
-// const lastShortHash = 'b2426cd'
-//Landgreen needs to update the commitHashes array with the most recent commit hash on each new upload, but the array will always be missing the current hash since it is generated with each new commit
-//write code to check the 2nd most recent hash and see if it match an element in the commitHashes array.  Use that to calculate how many commits have been made since the last update
-
-
-
 //convert text into numbers for seed
 Math.hash = s => {
     for (var i = 0, h = 9; i < s.length;) h = Math.imul(h ^ s.charCodeAt(i++), 9 ** 9);
     return h ^ h >>> 9
 }
 
-// const date1 = new Date()
-// console.log(date1.getUTCHours())
-// document.getElementById("seed").placeholder = Math.initialSeed = String(date1.getUTCDate() * date1.getUTCFullYear()) // daily seed,  day + year
-
-// document.getElementById("seed").placeholder = Math.initialSeed = Math.floor(Date.now() % 100000) //random every time:  just the time in milliseconds UTC
-
+// simulation.inGameConsole(`<strong style='color:red;'>ERROR:</strong> ${error.message}  <u>${error.filename}:${error.lineno}</u>`)
 window.addEventListener('error', error => {
-    // simulation.inGameConsole(`<strong style='color:red;'>ERROR:</strong> ${error.message}  <u>${error.filename}:${error.lineno}</u>`)
     simulation.inGameConsole(`<strong style='color:red;'>ERROR:</strong> ${(error.stack && error.stack.replace(/\n/g, "<br>")) || (error.message + ` <u>${error.filename}:${error.lineno}</u>`)}`);
-
 });
 
 document.getElementById("seed").placeholder = Math.initialSeed = String(Math.floor(Date.now() % 100000))
@@ -150,7 +134,7 @@ function beforeUnloadEventListener(event) {
     if (tech.isExitPrompt) {
         m.damageDone *= 1.25
         // simulation.inGameConsole(`<strong class='color-d'>damage</strong> <span class='color-symbol'>*=</span> ${1.25}`)
-        simulation.inGameConsole(`<span class='color-var'>tech</span>.damage *= ${1.25} //beforeunload`);
+        simulation.inGameConsole(`<span class='color-var'>tech</span>.<strong class='color-d'>damage</strong> *= ${1.25} //beforeunload`);
         if (Math.random() < 0.25) {
             removeEventListener('beforeunload', beforeUnloadEventListener);
         }
@@ -343,79 +327,6 @@ for (let i = 0, len = tech.tech.length; i < len; i++) {
     if (!tech.tech[i].link) tech.tech[i].link = `<a target="_blank" href='https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(tech.tech[i].name).replace(/'/g, '%27')}&title=Special:Search' class="link">${tech.tech[i].name}</a>`
 }
 const build = {
-    pixelDraw() {
-        let count = 0
-        let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        let data = imgData.data;
-
-        function loop() {
-            count++
-            if (!(count % 2)) {
-                for (let y = 0; y < canvas.height; ++y) {
-                    for (let x = 0; x < canvas.width; x += 1) {
-                        const index = (y * canvas.width + x) * 4;
-                        // let mag = 0;
-                        //   for (let j = 0, len = who.length; j < len; j++) {
-                        //     const dx = who[j].position.x - x;
-                        //     const dy = who[j].position.y - y;
-                        //     mag -= who[j].charge / (Math.sqrt(dx * dx + dy * dy) + 1);
-                        //   }
-
-                        //get dark
-                        // data[index + 0] *= 0.96
-                        // data[index + 1] *= 0.96
-                        // data[index + 2] *= 0.96
-                        // data[index + 3] -= 1; // alpha
-
-                        //invert
-                        data[index + 0] = 255 - data[index + 0] // red
-                        data[index + 1] = 255 - data[index + 1] // green
-                        data[index + 2] = 255 - data[index + 2] // blue
-                    }
-                }
-
-                // fade alpha for all pixels
-                // for (let i = 0; i < data.length; i += 4) {
-                //     if (data[i + 3] > 0) {
-                //         data[i + 3]--;
-                //     }
-                // }
-
-                //add random speckles
-                // for (let i = 0, len = Math.floor(data.length / 15000); i < len; ++i) {
-                //     const index = Math.floor((Math.random() * data.length) / 4) * 4;
-                //     data[index + 0] = 255; // red
-                //     data[index + 1] = 255; // green
-                //     data[index + 2] = 255; // blue
-                //     data[index + 3] = Math.floor(Math.random() * Math.random() * 155); // alpha
-                // }
-
-                // ctx.putImageData(imgData, 0, 1); //pixels fall because of the 1 in third parameter
-                ctx.putImageData(imgData, 0, 0);
-            }
-            if (simulation.paused && m.alive) requestAnimationFrame(loop);
-        }
-        requestAnimationFrame(loop);
-    },
-    showImages(from) { //on click event:  from all 3 different places to hide / show images 
-        localSettings.isHideImages = !localSettings.isHideImages
-        if (localSettings.isAllowed) localStorage.setItem("localSettings", JSON.stringify(localSettings)); //update local storage
-        if (from === 'experiment') {
-            build.reset();
-        } else if (from === 'pause') {
-            build.unPauseGrid()
-            build.pauseGrid() //redraw pause text with images
-        }
-        if (localSettings.isHideImages) {
-            document.getElementById("choose-grid").classList.add('choose-grid-no-images');
-            document.getElementById("choose-grid").classList.remove('choose-grid');
-        } else {
-            document.getElementById("choose-grid").classList.add('choose-grid');
-            document.getElementById("choose-grid").classList.remove('choose-grid-no-images');
-        }
-        document.getElementById("show-images").checked = !localSettings.isHideImages
-        // console.log(localSettings.isHideImages, from)
-    },
     hideHUD() {
         if (simulation.isTraining) {
             localSettings.isHideHUD = false
@@ -493,7 +404,7 @@ const build = {
 ${fullscreenWarning}
 <button onclick="build.shareURL(false)" class='sort-button' style="font-size:1em;float: right;">copy build URL</button>
 <input onclick="build.hideHUD('settings')" type="checkbox" id="hide-hud" name="hide-hud" ${localSettings.isHideHUD ? "checked" : ""}>
-<label for="hide-hud" title="hide: tech, damage taken, damage, in game console" style="font-size:1.15em;">minimal HUD</label>
+<label for="hide-hud" title="hide: tech, damage taken, damage, in game console, final boss health bar, tech: filament, tech: pair production, duplication animation, eigen animation, lower max body caps, no stroke on blocks" style="font-size:1.15em;">performance mode</label>
 </div>
 
 <div class="pause-grid-module">
@@ -537,7 +448,7 @@ ${simulation.isCheating ? "<br><br><em>lore disabled</em>" : ""}
         ${simulation.difficultyMode > 0 ? `<div class="pause-difficulty-row">spawn higher <strong class="color-tier">TIER</strong> mobs<br>after every <strong>4</strong> levels</div>` : " "}
         ${simulation.difficultyMode > 1 ? `<div class="pause-difficulty-row"><strong>0.5x</strong> <strong class='color-d'>damage</strong><br><strong>2x</strong> <strong class='color-defense'>damage taken</strong></div>` : " "}
         ${simulation.difficultyMode > 2 ? `<div class="pause-difficulty-row">spawn a <strong>2nd boss</strong><br>bosses spawn <strong>fewer</strong> ${powerUps.orb.tech()}</div>` : " "}
-        ${simulation.difficultyMode > 3 ? `<div class="pause-difficulty-row">one mob per level will<br>be from <strong>2</strong> <strong class="color-tier">TIER</strong> higher</div>` : " "}
+        ${simulation.difficultyMode > 3 ? `<div class="pause-difficulty-row">increase mob <strong class="color-tier">TIER</strong><br>after every <strong>3</strong> levels</div>` : " "}
         ${simulation.difficultyMode > 4 ? `<div class="pause-difficulty-row"><strong>+1</strong> random <strong class="constraint">constraint</strong><br>fewer initial <strong>power ups</strong></div>` : " "}
         ${simulation.difficultyMode > 5 ? `<div class="pause-difficulty-row"><strong>0.5x</strong> <strong class='color-d'>damage</strong><br><strong>2x</strong> <strong class='color-defense'>damage taken</strong></div>` : " "}
         ${simulation.difficultyMode > 6 ? `<div class="pause-difficulty-row"><strong>+1</strong> random <strong class="constraint">constraint</strong><br>fewer ${powerUps.orb.tech()} spawn</div>` : " "}
@@ -549,7 +460,7 @@ ${simulation.difficultyMode > 4 ? `<details id="constraints-details" style="padd
 <details id = "console-log-details" style="padding: 0 8px;">
 <summary>console log</summary>
 <div class="pause-details">
-    <div class="pause-grid-module" style="    background-color: #e2e9ec;font-size: 0.8em;">${document.getElementById("text-log").innerHTML}</div>
+    <div class="pause-grid-module" style="background-color: #e2e9ec;font-size: 0.85em; font-family: monospace;">${document.getElementById("text-log").innerHTML}</div>
 </div>
 </details>
 </div>`
@@ -558,31 +469,32 @@ ${simulation.difficultyMode > 4 ? `<details id="constraints-details" style="padd
             // const fieldNameN = m.fieldUpgrades[m.fieldMode === m.fieldUpgrades.length - 2 ? 1 : m.fieldMode + 1].name
             //button above for previous
             text += `<div class="pause-grid-module" id ="pause-field-previous" style="animation: fieldColorCycle 3s linear infinite alternate; border-top: 1px solid #000;border-bottom: 1px solid #000;">
-                           <div class="grid-title" style="text-align: center;">↑ <div class="circle-grid field"></div> ↑</div></div>`
+<div class="grid-title" style="text-align: center;">↑ <div class="circle-grid field"></div> ↑</div></div>`
             //button for current
-            const style = localSettings.isHideImages ? `style="height:auto;"` : `style="background-image: url('img/field/${m.fieldUpgrades[m.fieldMode].name}${m.fieldMode === 0 ? m.fieldUpgrades[0].imageNumber : ""}.webp');"`
+            const style = `style="height:auto;"`
             text += `<div class="pause-grid-module card-background" id="pause-field" ${style} >
-                                                    <div class="card-text">
-                                                        <div class="grid-title"><div class="circle-grid-title field"></div> &nbsp; ${build.nameLink(m.fieldUpgrades[m.fieldMode].name)}</div>
-                                                        ${m.fieldUpgrades[m.fieldMode].description}</div> </div>`
+<div class="card-text">
+<div class="grid-title"><div class="circle-grid-title field" onclick="speechHandler.speech('${m.fieldUpgrades[m.fieldMode].name}')"></div> &nbsp; ${build.nameLink(m.fieldUpgrades[m.fieldMode].name)}</div>
+${m.fieldUpgrades[m.fieldMode].description}</div> </div>`
             //button below for next
             text += `<div class="pause-grid-module" id="pause-field-next" style="animation: fieldColorCycle 3s linear infinite alternate;border-bottom: 1px solid #000;">
-                                                    <div class="grid-title" style="text-align: center;">↓ <div class="circle-grid field"></div> ↓</div></div>`
+<div class="grid-title" style="text-align: center;">↓ <div class="circle-grid field"></div> ↓</div></div>`
 
 
         } else {
-            const style = localSettings.isHideImages ? `style="height:auto;"` : `style="background-image: url('img/field/${m.fieldUpgrades[m.fieldMode].name}${m.fieldMode === 0 ? m.fieldUpgrades[0].imageNumber : ""}.webp');"`
-            text += `<div class="pause-grid-module card-background" id="pause-field" ${style} >
-                                                    <div class="card-text">
-                                                        <div class="grid-title"><div class="circle-grid-title field"></div> &nbsp; ${build.nameLink(m.fieldUpgrades[m.fieldMode].name)}</div>
-                                                        ${m.fieldUpgrades[m.fieldMode].description}</div> </div>`
+            const style = `style="height:auto;"`
+            text += `<div class="pause-grid-module card-background" id="pause-field" ${style}>
+<div class="card-text">
+<div class="grid-title"><div class="circle-grid-title field" onclick="speechHandler.speech('${m.fieldUpgrades[m.fieldMode].name}')"></div> &nbsp; ${build.nameLink(m.fieldUpgrades[m.fieldMode].name)}</div>
+${m.fieldUpgrades[m.fieldMode].description}</div> </div>`
         }
         for (let i = 0, len = b.inventory.length; i < len; i++) {
-            const style = localSettings.isHideImages ? `style="height:auto;"` : `style="background-image: url('img/gun/${b.guns[b.inventory[i]].name}.webp');"`
+            const style = `style="height:auto;"`
+            //onclick="speechHandler.speech('${tech.tech[i].name}')"
             text += `<div class="pause-grid-module card-background" ${style} >
-                                                    <div class="card-text">
-                                                        <div class="grid-title"><div class="circle-grid-title gun"></div> &nbsp; ${build.nameLink(b.guns[b.inventory[i]].name)} - <span style="font-size:100%;font-weight: 100;">${b.guns[b.inventory[i]].ammo}</span></div>
-                                                        ${b.guns[b.inventory[i]].descriptionFunction()}</div> </div>`
+<div class="card-text">
+<div class="grid-title"><div class="circle-grid-title gun" onclick="speechHandler.speech('${b.guns[b.inventory[i]].name}')"></div> &nbsp; ${build.nameLink(b.guns[b.inventory[i]].name)} - <span style="font-size:100%;font-weight: 100;">${b.guns[b.inventory[i]].ammo}</span></div>
+${b.guns[b.inventory[i]].descriptionFunction()}</div> </div>`
         }
         let el = document.getElementById("pause-grid-left")
         el.style.display = "grid"
@@ -604,14 +516,14 @@ ${simulation.difficultyMode > 4 ? `<details id="constraints-details" style="padd
     <button onclick="build.sortTech('damage taken')" class='sort-button'><strong style="letter-spacing: 1px;font-weight: 100;">dmg taken</strong></button>
     <button onclick="build.sortTech('heal')" class='sort-button'><strong class='color-h'>heal</strong></button>
     <button onclick="build.sortTech('energy')" class='sort-button'><strong class='color-f'>energy</strong></button>
-    <input type="search" id="sort-input" style="width: 8em;font-size: 0.6em;color:#000;" placeholder="sort by" />
-    <button onclick="build.sortTech('input')" class='sort-button' style="border-radius: 0em;border: 1.5px #000 solid;font-size: 0.6em;" value="damage">sort</button>
 </div>`;
-        const ejectClass = (tech.isPauseEjectTech && !simulation.isChoosing) ? 'pause-eject' : ''
+        // <input type="search" id="sort-input" style="width: 8em;font-size: 0.6em;color:#000;" placeholder="sort by" />
+        // <button onclick="build.sortTech('input')" class='sort-button' style="border-radius: 0em;border: 1.5px #000 solid;font-size: 0.6em;" value="damage">sort</button>
+        const ejectClass = (tech.isPauseEjectTech && !simulation.isChoosing && m.immuneCycle < m.cycle) ? 'pause-eject' : ''
         for (let i = 0, len = tech.tech.length; i < len; i++) {
             if (tech.tech[i].count > 0) {
-                const style = (localSettings.isHideImages || tech.tech[i].isJunk || tech.tech[i].isLore) ? `style="height:auto;"` : `style = "background-image: url('img/${tech.tech[i].name}.webp');"`
-                const techCountText = tech.tech[i].count > 1 ? `(${tech.tech[i].count}x)` : "";
+                const style = `style="height:auto;"`
+                // const techCountText = tech.tech[i].count > 1 ? `(${tech.tech[i].count}x)` : "";
                 if (tech.tech[i].isInstant) {
                     // text += `<div class="pause-grid-module" id ="${i}-pause-tech"  style = "border: 0px; opacity:0.5; font-size: 60%; line-height: 130%; margin: 1px; padding: 6px;"><div class="grid-title">${tech.tech[i].link} ${techCountText}</div>${tech.tech[i].descriptionFunction ? tech.tech[i].descriptionFunction() : tech.tech[i].description}</div></div>`
                 } else if (tech.tech[i].isFieldTech) {
@@ -639,14 +551,14 @@ ${simulation.difficultyMode > 4 ? `<details id="constraints-details" style="padd
         el.innerHTML = text
 
         //add event listener for pressing enter key when in sort
-        function pressEnterSort(event) {
-            if (event.key === 'Enter') {
-                requestAnimationFrame(() => { document.getElementById("sort-input").focus(); });
-                // event.preventDefault(); // Prevent the default action to avoid form submission or any other default action
-                build.sortTech('input')
-            }
-        }
-        document.getElementById("sort-input").addEventListener('keydown', pressEnterSort);
+        // function pressEnterSort(event) {
+        //     if (event.key === 'Enter') {
+        //         requestAnimationFrame(() => { document.getElementById("sort-input").focus(); });
+        //         // event.preventDefault(); // Prevent the default action to avoid form submission or any other default action
+        //         build.sortTech('input')
+        //     }
+        // }
+        // document.getElementById("sort-input").addEventListener('keydown', pressEnterSort);
         // requestAnimationFrame(() => { document.getElementById("sort-input").focus(); });
     },
     sortTech(find, isExperiment = false) {
@@ -716,21 +628,21 @@ ${simulation.difficultyMode > 4 ? `<details id="constraints-details" style="padd
                 if (!a.isBotTech && b.isBotTech) return 1; //sort to the bottom
                 return 0;
             });
-        } else if (document.getElementById("sort-input").value === 'skin') {
-            tech.tech.sort((a, b) => {
-                if (a.isSkin && b.isSkin) {
-                    return (a.allowed() === b.allowed()) ? 0 : a.allowed() ? -1 : 1;
-                }
-                if (a.isSkin && !b.isSkin) return -1; //sort to the top
-                if (!a.isSkin && b.isSkin) return 1; //sort to the bottom
-                return 0;
-            });
-        } else if (document.getElementById("sort-input").value === 'junk') {
-            tech.tech.sort((a, b) => {
-                if (a.isJunk && !b.isJunk) return -1; //sort to the top
-                if (!a.isJunk && b.isJunk) return 1; //sort to the bottom
-                return 0;
-            });
+            // } else if (document.getElementById("sort-input").value === 'skin') {
+            //     tech.tech.sort((a, b) => {
+            //         if (a.isSkin && b.isSkin) {
+            //             return (a.allowed() === b.allowed()) ? 0 : a.allowed() ? -1 : 1;
+            //         }
+            //         if (a.isSkin && !b.isSkin) return -1; //sort to the top
+            //         if (!a.isSkin && b.isSkin) return 1; //sort to the bottom
+            //         return 0;
+            //     });
+            // } else if (document.getElementById("sort-input").value === 'junk') {
+            //     tech.tech.sort((a, b) => {
+            //         if (a.isJunk && !b.isJunk) return -1; //sort to the top
+            //         if (!a.isJunk && b.isJunk) return 1; //sort to the bottom
+            //         return 0;
+            //     });
         } else if (find === 'damage') {
             tech.tech.sort(sortKeyword);
         } else if (find === 'damage taken') {
@@ -750,7 +662,7 @@ ${simulation.difficultyMode > 4 ? `<details id="constraints-details" style="padd
         } else {
             build.generatePauseRight() //makes the right side of the pause menu with the tech            
         }
-        document.getElementById("sort-input").value = find; //make the sorted string display in the keyword search input field
+        if (isExperiment) document.getElementById("sort-input").value = find; //make the sorted string display in the keyword search input field
         simulation.updateTechHUD();
     },
     unPauseGrid() {
@@ -787,44 +699,45 @@ ${simulation.difficultyMode > 4 ? `<details id="constraints-details" style="padd
     isExperimentSelection: false,
     isExperimentRun: false,
     techText(i) {
-        return `<div class="card-text" >
-                                <div class="grid-title" ><div class="circle-grid-title tech"></div> &nbsp; ${build.nameLink(tech.tech[i].name)} ${tech.tech[i].count > 1 ? `(${tech.tech[i].count}x)` : ""}</div>
-                                ${tech.tech[i].descriptionFunction ? tech.tech[i].descriptionFunction() : tech.tech[i].description}</div>`
+        return `<div class="card-text">
+                <div class="grid-title" ><div class="circle-grid-title tech" onclick="speechHandler.speech('${tech.tech[i].name}')"></div> &nbsp; ${build.nameLink(tech.tech[i].name)} ${tech.tech[i].count > 1 ? `(${tech.tech[i].count}x)` : ""}</div>
+                ${tech.tech[i].descriptionFunction ? tech.tech[i].descriptionFunction() : tech.tech[i].description}</div>`
     },
     instantTechText(i) {
         // 
-        return `<div class="card-text" >
-                                <div class="grid-title" > <div class="circle-grid-instant"></div> &nbsp; ${build.nameLink(tech.tech[i].name)} ${tech.tech[i].count > 1 ? `(${tech.tech[i].count}x)` : ""}</div>
-                                ${tech.tech[i].descriptionFunction ? tech.tech[i].descriptionFunction() : tech.tech[i].description}</div>`
+        return `<div class="card-text">
+                <div class="grid-title" > <div class="circle-grid-instant" onclick="speechHandler.speech('${tech.tech[i].name}')"></div> &nbsp; ${build.nameLink(tech.tech[i].name)} ${tech.tech[i].count > 1 ? `(${tech.tech[i].count}x)` : ""}</div>
+                ${tech.tech[i].descriptionFunction ? tech.tech[i].descriptionFunction() : tech.tech[i].description}</div>`
     },
     skinTechText(i) {
         return `<div class="card-text"> <div class="grid-title">
-                                <span style="position:relative;">
-                                    <div class="circle-grid-skin"></div>
-                                    <div class="circle-grid-skin-eye"></div>
-                                </span> &nbsp; &nbsp; &nbsp; &nbsp; ${build.nameLink(tech.tech[i].name)} ${tech.tech[i].count > 1 ? `(${tech.tech[i].count}x)` : ""}</div>
-                                ${tech.tech[i].descriptionFunction ? tech.tech[i].descriptionFunction() : tech.tech[i].description}</div>`
+                <span style="position:relative;" onclick="speechHandler.speech('${tech.tech[i].name}')">
+                    <div class="circle-grid-skin"></div>
+                    <div class="circle-grid-skin-eye"></div>
+                </span> &nbsp; &nbsp; &nbsp; &nbsp; ${build.nameLink(tech.tech[i].name)} ${tech.tech[i].count > 1 ? `(${tech.tech[i].count}x)` : ""}</div>
+                ${tech.tech[i].descriptionFunction ? tech.tech[i].descriptionFunction() : tech.tech[i].description}</div>`
     },
+    // speechHandler.speech(tech.tech[index].name)
     gunTechText(i) {
         return `<div class="card-text"> <div class="grid-title">
-                                <span style="position:relative;">
-                                    <div class="circle-grid-title tech" style="position:absolute; top:0.12em; left:0;opacity:0.8;"></div>
-                                    <div class="circle-grid-title gun" style="position:absolute; top:0.12em; left:10px; opacity:0.65;"></div>
-                                </span> &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; ${build.nameLink(tech.tech[i].name)} ${tech.tech[i].count > 1 ? `(${tech.tech[i].count}x)` : ""}</div>
-                                ${tech.tech[i].descriptionFunction ? tech.tech[i].descriptionFunction() : tech.tech[i].description}</div>`
+                <span style="position:relative;" onclick="speechHandler.speech('${tech.tech[i].name}')">
+                    <div class="circle-grid-title tech" style="position:absolute; top:0.12em; left:0;opacity:0.8;"></div>
+                    <div class="circle-grid-title gun" style="position:absolute; top:0.12em; left:10px; opacity:0.65;"></div>
+                </span> &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; ${build.nameLink(tech.tech[i].name)} ${tech.tech[i].count > 1 ? `(${tech.tech[i].count}x)` : ""}</div>
+                ${tech.tech[i].descriptionFunction ? tech.tech[i].descriptionFunction() : tech.tech[i].description}</div>`
     },
     fieldTechText(i) {
         return `<div class="card-text"><div class="grid-title">
-                                <span style="position:relative;">
-                                    <div class="circle-grid-title tech" style="position:absolute; top:0.12em; left:0;opacity:0.8;"></div>
-                                    <div class="circle-grid-title field" style="position:absolute; top:0.12em; left:10px;opacity:0.65;"></div>
-                                </span> &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; ${build.nameLink(tech.tech[i].name)} ${tech.tech[i].count > 1 ? `(${tech.tech[i].count}x)` : ""}</div>
-                                ${tech.tech[i].descriptionFunction ? tech.tech[i].descriptionFunction() : tech.tech[i].description}</div>`
+                <span style="position:relative;" onclick="speechHandler.speech('${tech.tech[i].name}')">
+                    <div class="circle-grid-title tech" style="position:absolute; top:0.12em; left:0;opacity:0.8;"></div>
+                    <div class="circle-grid-title field" style="position:absolute; top:0.12em; left:10px;opacity:0.65;"></div>
+                </span> &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; ${build.nameLink(tech.tech[i].name)} ${tech.tech[i].count > 1 ? `(${tech.tech[i].count}x)` : ""}</div>
+                ${tech.tech[i].descriptionFunction ? tech.tech[i].descriptionFunction() : tech.tech[i].description}</div>`
     },
     junkTechText(i) {
         return `<div class="card-text">
-                                <div class="grid-title"><div class="circle-grid-title junk"></div> &nbsp; ${build.nameLink(tech.tech[i].name)} ${tech.tech[i].count > 1 ? `(${tech.tech[i].count}x)` : ""}</div>
-                                ${tech.tech[i].descriptionFunction ? tech.tech[i].descriptionFunction() : tech.tech[i].description}</div>`
+                <div class="grid-title"><div class="circle-grid-title junk" onclick="speechHandler.speech('${tech.tech[i].name}')"></div> &nbsp; ${build.nameLink(tech.tech[i].name)} ${tech.tech[i].count > 1 ? `(${tech.tech[i].count}x)` : ""}</div>
+                ${tech.tech[i].descriptionFunction ? tech.tech[i].descriptionFunction() : tech.tech[i].description}</div>`
     },
     choosePowerUp(index, type, isAllowed = false) {
         if (type === "gun") {
@@ -976,28 +889,24 @@ ${simulation.difficultyMode > 4 ? `<details id="constraints-details" style="padd
 </div>`
         const hideStyle = `style="height:auto; border: none; background-color: transparent;"`
         for (let i = 0, len = m.fieldUpgrades.length; i < len; i++) {
-            const style = localSettings.isHideImages ? hideStyle : `style="background-image: url('img/field/${m.fieldUpgrades[i].name}${i === 0 ? m.fieldUpgrades[0].imageNumber : ""}.webp');"`
-            text += `<div id="field-${i}" class="experiment-grid-module card-background ${m.fieldMode === i ? " build-field-selected" : ""}" onclick="build.choosePowerUp(${i},'field')" ${style} >
+            text += `<div id="field-${i}" class="experiment-grid-module card-background ${m.fieldMode === i ? " build-field-selected" : ""}" onclick="build.choosePowerUp(${i},'field');" ${hideStyle} >
                             <div class="card-text">
-                                <div class="grid-title"><div class="circle-grid-title field"></div> &nbsp; ${build.nameLink(m.fieldUpgrades[i].name)}</div>
+                                <div class="grid-title"><div class="circle-grid-title field" onclick="speechHandler.speech('${m.fieldUpgrades[i].name}')"></div> &nbsp; ${build.nameLink(m.fieldUpgrades[i].name)}</div>
                                 ${m.fieldUpgrades[i].description}</div> </div>`
         }
         for (let i = 0, len = b.guns.length; i < len; i++) {
-            const style = localSettings.isHideImages ? hideStyle : `style="background-image: url('img/gun/${b.guns[i].name}.webp');"`
-            text += `<div id="gun-${i}" class="experiment-grid-module card-background ${b.guns[i].have ? " build-gun-selected" : ""}" onclick="build.choosePowerUp(${i},'gun')" ${style} >
+            text += `<div id="gun-${i}" class="experiment-grid-module card-background ${b.guns[i].have ? " build-gun-selected" : ""}" onclick="build.choosePowerUp(${i},'gun')" ${hideStyle} >
                         <div class="card-text">
-                            <div class="grid-title"><div class="circle-grid-title gun"></div> &nbsp; ${build.nameLink(b.guns[i].name)}</div>
+                            <div class="grid-title"><div class="circle-grid-title gun" onclick="speechHandler.speech('${b.guns[i].name}')"></div> &nbsp; ${build.nameLink(b.guns[i].name)}</div>
                             ${b.guns[i].descriptionFunction()}</div> </div>`
         }
         for (let i = 0, len = tech.tech.length; i < len; i++) {
             if ((!tech.tech[i].isJunk || localSettings.isJunkExperiment) && !tech.tech[i].isLore) {
-                const style = (localSettings.isHideImages || tech.tech[i].isJunk) ? hideStyle : `style="background-image: url('img/${tech.tech[i].name}.webp');"`
                 if ((tech.tech[i].allowed() || tech.tech[i].count > 0) && (!tech.tech[i].isInstant || localSettings.isJunkExperiment)) { // || tech.tech[i].name === "+1 cardinality") { //|| tech.tech[i].name === "leveraged investment"
-                    text += `<div id="tech-${i}" class="experiment-grid-module card-background ${tech.tech[i].count ? "build-tech-selected" : ""}" onclick="build.choosePowerUp(${i},'tech')" ${style}>`
+                    text += `<div id="tech-${i}" class="experiment-grid-module card-background ${tech.tech[i].count ? "build-tech-selected" : ""}" onclick="build.choosePowerUp(${i},'tech')" ${hideStyle}>`
                 } else { //disabled
-                    text += `<div id="tech-${i}" class="experiment-grid-module card-background experiment-grid-disabled" ${style}>`
+                    text += `<div id="tech-${i}" class="experiment-grid-module card-background experiment-grid-disabled" ${hideStyle}>`
                 }
-
                 if (tech.tech[i].isFieldTech) {
                     text += build.fieldTechText(i)
                 } else if (tech.tech[i].isGunTech) {
@@ -1046,6 +955,7 @@ ${simulation.difficultyMode > 4 ? `<details id="constraints-details" style="padd
         build.isExperimentSelection = true;
         build.isExperimentRun = true;
         simulation.paused = true;
+        powerUps.totalUsed = 0
         b.inventory = []; //removes guns and ammo
         for (let i = 0, len = b.guns.length; i < len; ++i) {
             b.guns[i].count = 0;
@@ -1461,7 +1371,6 @@ window.addEventListener("keydown", function (event) {
                                 }
                             }
                             m.energy = energy //return to current energy
-                            document.getElementById("pause-field").style.backgroundImage = `url('img/field/${m.fieldUpgrades[m.fieldMode].name}${m.fieldMode === 0 ? Math.floor(Math.random() * 10) : ""}.webp')`
                             document.getElementById("pause-field").innerHTML = `<div class="card-text"> <div class="grid-title"><div class="circle-grid field"></div> &nbsp; ${build.nameLink(m.fieldUpgrades[m.fieldMode].name)}</div>${m.fieldUpgrades[m.fieldMode].description}</div>`
                         });
 
@@ -1478,8 +1387,6 @@ window.addEventListener("keydown", function (event) {
                                 }
                             }
                             m.energy = energy //return to current energy
-                            // document.getElementById("pause-field").innerHTML = `<div class="grid-title"><div class="circle-grid field"></div> &nbsp; ${m.fieldUpgrades[m.fieldMode].name}</div> ${m.fieldUpgrades[m.fieldMode].description}`
-                            document.getElementById("pause-field").style.backgroundImage = `url('img/field/${m.fieldUpgrades[m.fieldMode].name}${m.fieldMode === 0 ? Math.floor(Math.random() * 10) : ""}.webp')`
                             document.getElementById("pause-field").innerHTML = `<div class="card-text"> <div class="grid-title"><div class="circle-grid field"></div> &nbsp; ${build.nameLink(m.fieldUpgrades[m.fieldMode].name)}</div> ${m.fieldUpgrades[m.fieldMode].description}</div>`
                         });
                     }
@@ -1523,6 +1430,9 @@ window.addEventListener("keydown", function (event) {
                     mouseMove.reset()
                     document.exitFullscreen();
                     input.reset(); //to prevent key ghosting reset all input keys
+
+
+
                 } else if (mouseMove.isMouseInWindow) { //if mouse is in the window enter fullscreen
                     document.documentElement.requestFullscreen().then(() => {//wait for fullscreen to be ready
                         input.reset(); //to prevent key ghosting reset all input keys
@@ -1634,10 +1544,10 @@ window.addEventListener("keydown", function (event) {
                 </tr>
                 <tr>
                     <td class='key-input-pause'>–/+</td>
-                    <td class='key-used'>zoom in / out</td>
+                    <td class='key-used'>zoom out / in</td>
                 </tr>
                 <tr>
-                    <td class='key-input-pause'>1-8</td>
+                    <td class='key-input-pause'>1-9</td>
                     <td class='key-used'>spawn things</td>
                 </tr>
                 <tr>
@@ -1693,13 +1603,13 @@ window.addEventListener("keydown", function (event) {
     if (simulation.testing) {
         if (event.key === "X") m.death(); //only uppercase
         switch (event.key.toLowerCase()) {
-            case "=":
+            case "-":
                 // simulation.isAutoZoom = false;
                 // simulation.zoomScale /= 0.9;
                 // simulation.setZoom();
                 simulation.zoomTransition(simulation.zoomScale / 0.9)
                 break;
-            case "-":
+            case "=":
                 // simulation.isAutoZoom = false;
                 // simulation.zoomScale *= 0.9;
                 // simulation.setZoom();
@@ -1731,6 +1641,9 @@ window.addEventListener("keydown", function (event) {
                 break
             case "8":
                 spawn.randomLevelBoss(simulation.mouseInGame.x, simulation.mouseInGame.y);
+                break
+            case "9":
+                powerUps.warp.effect()
                 break
             case "f":
                 const mode = (m.fieldMode === m.fieldUpgrades.length - 1) ? 0 : m.fieldMode + 1
@@ -1866,6 +1779,20 @@ const mouseMove = {
                 mouseMove.active = mouseMove.pointerLocked
             } else {
                 mouseMove.active = mouseMove.default
+                // if (true) {
+                //     //show where mouse is
+                //     simulation.ephemera.push({
+                //         count: 30, //cycles before it self removes
+                //         do() {
+                //             this.count--
+                //             if (this.count < 0) simulation.removeEphemera(this)
+                //             ctx.beginPath();
+                //             ctx.arc(simulation.mouse.x, -simulation.mouse.y, 50, 0, 2 * Math.PI);
+                //             ctx.fillStyle = "#f00"
+                //             ctx.fill();
+                //         },
+                //     })
+                // }
             }
         }
     },
@@ -2018,9 +1945,6 @@ if (localSettings.isAllowed && !localSettings.isEmpty) {
         localSettings.loreCount = 0; //this sets what conversation is heard
         if (localSettings.isAllowed) localStorage.setItem("localSettings", JSON.stringify(localSettings)); //update local storage
     }
-    if (localSettings.isHideImages === undefined) localSettings.isHideImages = true //default to hide images
-    document.getElementById("show-images").checked = !localSettings.isHideImages
-    // localSettings.isHideImages = true //no images
 
     if (localSettings.isHideHUD === undefined) localSettings.isHideHUD = true
     document.getElementById("hide-hud").checked = localSettings.isHideHUD
@@ -2036,6 +1960,10 @@ if (localSettings.isAllowed && !localSettings.isEmpty) {
 
     if (localSettings.pauseMenuDetailsOpen === undefined) {
         localSettings.pauseMenuDetailsOpen = [true, false, false, true]
+        localStorage.setItem("localSettings", JSON.stringify(localSettings)); //update local storage
+    }
+    if (localSettings.techHistory === undefined) {
+        localSettings.techHistory = []
         localStorage.setItem("localSettings", JSON.stringify(localSettings)); //update local storage
     }
 } else {
@@ -2057,15 +1985,14 @@ if (localSettings.isAllowed && !localSettings.isEmpty) {
         isLoreDoesNotNeedReset: false,
         isHuman: false,
         key: undefined,
-        isHideImages: true, //default to hide images
         isHideHUD: false,
-        pauseMenuDetailsOpen: [true, false, false, true]
+        pauseMenuDetailsOpen: [true, false, false, true],
+        techHistory: [],
     };
     input.setDefault()
     if (localSettings.isAllowed) localStorage.setItem("localSettings", JSON.stringify(localSettings)); //update local storage
     document.getElementById("community-maps").checked = localSettings.isCommunityMaps
     simulation.isCommunityMaps = localSettings.isCommunityMaps
-    document.getElementById("show-images").checked = !localSettings.isHideImages
     document.getElementById("fps-select").value = localSettings.fpsCapDefault
     document.getElementById("banned").value = localSettings.banList
 }
@@ -2140,7 +2067,7 @@ document.getElementById("updates").addEventListener("toggle", function () {
 
 
 
-    let text = `<pre><strong>n-gon</strong>: <a href="https://github.com/landgreen/n-gon/blob/master/todo.txt">todo list</a> and complete <a href="https://github.com/landgreen/n-gon/commits/master">change-log</a><hr>`
+    let text = `<pre><strong>n-gon</strong>: <a href="https://github.com/landgreen/n-gon/blob/master/todo.txt">todo list</a>, complete <a href="https://github.com/landgreen/n-gon/commits/master">change-log</a>, commit <a href="https://www.cornbread2100.com/n-gon-loader">loader</a><hr>`
     document.getElementById("updates-div").innerHTML = text
 
     ///  https://api.github.com/repos/landgreen/n-gon/stats/commit_activity
@@ -2153,11 +2080,13 @@ document.getElementById("updates").addEventListener("toggle", function () {
             //     text += "<br><em>https://github.com/landgreen/n-gon/</em>: hash does <strong>not</strong> match latest version<br><hr>"
             // }
             for (let i = 0, len = 20; i < len; i++) {
-                text += "<strong>" + data[i].commit.author.date.substr(0, 10) + "</strong> - "; //+ "<br>"
-                text += data[i].commit.message
-                if (i < len - 1) text += "<hr>"
+                if (data[i].commit.message !== "quick bug fix") {
+                    text += "<strong>" + data[i].commit.author.date.substr(0, 10) + "</strong> - "; //+ "<br>"
+                    text += data[i].commit.message
+                    if (i < len - 1) text += "<hr>"
+                }
             }
-            text += "</pre>"
+            text += `</pre><hr><em>complete <a href="https://github.com/landgreen/n-gon/commits/master">change-log</a></em>`
             document.getElementById("updates-div").innerHTML = text.replace(/\n/g, "<br />")
         },
         function (xhr) {
@@ -2201,56 +2130,7 @@ const sound = {
     }
 }
 
-// preload images so they load cleaner
-// MDN Scripting and preloads - https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/preload
-// if (!localSettings.isHideImages) {
-//     for (let i = 0, len = b.guns.length; i < len; i++) {
-//         const preloadLink = document.createElement("link");
-//         preloadLink.href = "img/gun/" + b.guns[i].name + ".webp";
-//         preloadLink.rel = "preload";
-//         preloadLink.as = "image";
-//         document.head.appendChild(preloadLink);
-//     }
-//     for (let i = 1, len = m.fieldUpgrades.length; i < len; i++) {
-//         const preloadLink = document.createElement("link");
-//         preloadLink.href = "img/field/" + m.fieldUpgrades[i].name + ".webp";
-//         preloadLink.rel = "preload";
-//         preloadLink.as = "image";
-//         document.head.appendChild(preloadLink);
-//     }
-//     for (let i = 0, len = tech.tech.length; i < len; i++) {
-//         if (!tech.tech[i].isJunk) {
-//             const preloadLink = document.createElement("link");
-//             preloadLink.href = "img/" + tech.tech[i].name + ".webp";
-//             preloadLink.rel = "preload";
-//             preloadLink.as = "image";
-//             document.head.appendChild(preloadLink);
-//         }
-//     }
-// }
-
-
-//preload images early
-if (!localSettings.isHideImages) {
-    addEventListener("load", () => {
-        let urls = new Array()
-        for (let i = 0, len = b.guns.length; i < len; i++) urls.push("img/gun/" + b.guns[i].name + ".webp")
-        for (let i = 1, len = m.fieldUpgrades.length; i < len; i++) urls.push("img/field/" + m.fieldUpgrades[i].name + ".webp")
-        for (let i = 0, len = tech.tech.length; i < len; i++) {
-            if (!tech.tech[i].isJunk && !tech.tech[i].isLore) urls.push("img/" + tech.tech[i].name + ".webp")
-        }
-        let images = new Array()
-        for (let i = 0; i < urls.length; i++) {
-            images[i] = new Image()
-            images[i].src = urls[i]
-        }
-        // console.log(urls, images)
-    });
-    document.getElementById("choose-grid").classList.add('choose-grid');
-} else {
-    document.getElementById("choose-grid").classList.add('choose-grid-no-images');
-}
-
+document.getElementById("choose-grid").classList.add('choose-grid-no-images');
 
 //**********************************************************************
 // main loop 

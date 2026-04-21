@@ -4,17 +4,31 @@
     --hover-card-color: #e5e5ed;
 }
 
+/* * {
+    cursor: crosshair;
+} */
+
+/* override for text elements */
+/* p,
+span,
+input,
+textarea {
+    cursor: auto;
+} */
+
 body {
     font-family: "Helvetica", "Arial", sans-serif;
     margin: 0;
     overflow: hidden;
     cursor: auto;
+    /* cursor: crosshair; */
+    /* cursor: text; */
     background-color: #f00;
     /* filter: grayscale(1); */
     /* transition: background-color 0.2s ease-in-out; */
 }
 
-canvas {
+#canvas {
     position: absolute;
     top: 0;
     left: 0;
@@ -244,6 +258,8 @@ summary {
     line-height: 160%;
     background-color: var(--card-color);
     font-size: 0.75em;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .choose-grid-module:hover {
@@ -304,6 +320,8 @@ summary {
     line-height: 160%;
     background-color: var(--card-color);
     font-size: 0.75em;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .sort {
@@ -360,6 +378,8 @@ summary {
     line-height: 160%;
     background-color: var(--card-color);
     font-size: 0.75em;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .experiment-grid-hide {
@@ -729,6 +749,22 @@ summary {
     border-radius: 5px;
 }
 
+/* #damage-num {
+    position: absolute;
+    top: 80px;
+    left: 15px;
+    z-index: 2;
+    font-size: 23px;
+    color: rgb(108, 0, 0);
+    text-align: right;
+    opacity: 0.7;
+    background-color: rgba(190, 210, 245, 0.25);
+    user-select: none;
+    pointer-events: none;
+    padding: 0px 5px 0px 5px;
+    border-radius: 5px;
+} */
+
 #right-HUD {
     position: absolute;
     top: 15px;
@@ -822,11 +858,12 @@ summary {
     padding: 10px;
     border-radius: 4px;
     line-height: 140%;
-    font-size: 1.15em;
     color: #555;
     background-color: rgba(255, 255, 255, 0.5);
     pointer-events: none;
     user-select: none;
+    font-size: 1.2em;
+    font-family: monospace;
 }
 
 .color-text {
@@ -957,6 +994,19 @@ summary {
 .color-dark-matter {
     color: #246;
     text-shadow: 0px 0px 7px #246;
+}
+
+.color-wire {
+    /* font-family: 'Century Gothic', AppleGothic, 'URW Gothic L', sans-serif; */
+    /* color: rgba(0, 0, 0, 0.05);
+    -webkit-text-stroke: 1px #000;
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    letter-spacing: 0px; */
+
+
+    text-decoration: #000 wavy underline 2px;
+    text-decoration-skip-ink: none;
 }
 
 .color-tokamak {
@@ -1116,10 +1166,10 @@ summary {
 }
 
 .circle-grid-instant {
-    width: 1.3em;
-    height: 1.3em;
+    width: 1.15em;
+    height: 1.15em;
     border-radius: 50%;
-    border: 0.15em solid hsl(255, 100%, 71%);
+    border: 0.18em solid hsl(255, 100%, 71%);
     display: inline-block;
     margin-bottom: -0.5em;
     margin-top: -0.3em;
@@ -1131,8 +1181,8 @@ summary {
     height: 1.3em;
     border-radius: 50%;
     display: inline-block;
-    background-color: #fff;
-    opacity: 0.8;
+    background-color: #eee;
+    opacity: 1;
     border: 0.08em solid #222;
     position: absolute;
     top: -0.05em;
@@ -1207,6 +1257,16 @@ summary {
     display: inline-block;
     background-color: #0ae;
     border: 0.05em #fff solid;
+    margin-bottom: -0.5px;
+}
+
+.energy-circle {
+    width: 0.7em;
+    height: 0.7em;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: #ff0;
+    border: 0.05em #000 solid;
     margin-bottom: -0.5px;
 }
 
@@ -1528,7 +1588,7 @@ summary {
 } */
 .blurry-text {
     user-select: none;
-    filter: blur(2.8px) contrast(1.4);
+    filter: blur(3.5px) contrast(1.4);
 }
 
 .blur-text {

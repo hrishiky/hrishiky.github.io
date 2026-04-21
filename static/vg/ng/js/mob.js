@@ -279,33 +279,22 @@ const mobs = {
                 ctx.stroke()
             },
             healthBar4() {
+                const w = this.radius * 0.43;
+                const x = this.position.x - this.radius;
+                const y = this.position.y - this.radius * 1.4;
+                ctx.fillStyle = "rgba(100, 100, 100, 0.3)";
+                ctx.fillRect(x, y, this.radius * 2, w);
+                let health
                 if (this.health > 0.5) {
-                    const h = this.radius * 0.36;
-                    const w = this.radius * 2;
-                    const x = this.position.x - w / 2;
-                    const y = this.position.y - w * 0.7;
-                    ctx.fillStyle = "rgba(100, 100, 100, 0.3)";
-                    ctx.fillRect(x, y, w, h);
                     ctx.fillStyle = "#000";
-                    const health = 2 * (this.health - 0.5)
-                    for (let j = 0; j < 5; j++) {
-                        if (health > j * 0.2) {
-                            ctx.fillRect(x + (j * 0.41) * this.radius, y, h, h);
-                        }
-                    }
+                    health = 2 * (this.health - 0.5)
                 } else {
-                    const h = this.radius * 0.36;
-                    const w = this.radius * 2;
-                    const x = this.position.x - w / 2;
-                    const y = this.position.y - w * 0.7;
-                    ctx.fillStyle = "rgba(100, 100, 100, 0.3)";
-                    ctx.fillRect(x, y, w, h);
                     ctx.fillStyle = "#fff";
-                    const health = 2 * this.health
-                    for (let j = 0; j < 5; j++) {
-                        if (health > j * 0.2) {
-                            ctx.fillRect(x + (j * 0.41) * this.radius, y, h, h);
-                        }
+                    health = 2 * this.health
+                }
+                for (let j = 0; j < 4; j++) {
+                    if (health > j * 0.25) {
+                        ctx.fillRect(x + (j * 0.52) * this.radius, y, w, w);
                     }
                 }
             },
@@ -498,6 +487,22 @@ const mobs = {
             //     this.force = Vector.mult(Vector.normalise(Vector.sub(this.hackedTarget.position, this.position)), this.mass * 0.0015)
             //   }
             // },
+            // blind(cycles = 90, brightness = 4) {
+            //     //remove other existing blind ephemera
+            //     for (let i = 0; i < simulation.ephemera.length; i++) {
+            //         if (simulation.ephemera[i].name === "blind") simulation.removeEphemera(simulation.ephemera[i])
+            //     }
+            //     simulation.ephemera.push({
+            //         name: "blind",
+            //         count: cycles,
+            //         do() {
+            //             canvas.style.filter = `brightness(${1 + (brightness - 1) * this.count / cycles})`;
+            //             this.count--
+            //             if (this.count < 0 || !m.alive) simulation.removeEphemera(this)
+            //         }
+            //     })
+            //     canvas.style.filter = `brightness(${brightness})`;
+            // },
             harmZone() {
                 if (this.seePlayer.yes) {
                     ctx.setLineDash([125 * Math.random(), 125 * Math.random()]);
@@ -530,7 +535,7 @@ const mobs = {
                     ctx.fill();
                 }
             },
-            wing(a, radius = 250, ellipticity = 0.4, dmg = 0.0006) {
+            wing(a, radius = 250, ellipticity = 0.4, dmg = 0.0003) {
                 const minorRadius = radius * ellipticity
                 const perp = { x: Math.cos(a), y: Math.sin(a) } //
                 const where = Vector.add(this.position, Vector.mult(perp, radius + 0.8 * this.radius))
@@ -543,9 +548,26 @@ const mobs = {
                 const hitPlayer = Matter.Query.ray([player], this.position, Vector.add(this.position, Vector.mult(perp, radius * 2.05)), minorRadius)
                 if (hitPlayer.length && m.immuneCycle < m.cycle) {
                     m.takeDamage(dmg * this.damageScale());
+                    // if (m.immuneCycle < m.cycle + immuneTime) m.immuneCycle = m.cycle + immuneTime; //player is immune to damage
+
+                    //push player away
+                    const sub = Vector.sub(m.pos, this.position)
+                    const push = Vector.mult(Vector.normalise(sub), 0.15 * player.mass)
+                    Matter.Body.setVelocity(player, {
+                        x: 0.9 * player.velocity.x + push.x,
+                        y: 0.9 * player.velocity.y + push.y - 0.1 * player.mass
+                    })
                 }
             },
             searchSpring() {
+                ctx.beginPath();
+                ctx.moveTo(this.cons.pointA.x, this.cons.pointA.y)
+                ctx.lineTo(this.cons.bodyB.position.x, this.cons.bodyB.position.y)
+                ctx.moveTo(this.cons2.pointA.x, this.cons2.pointA.y)
+                ctx.lineTo(this.cons2.bodyB.position.x, this.cons2.bodyB.position.y)
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = "#222";
+                ctx.stroke();
                 //draw the two dots on the end of the springs
                 ctx.beginPath();
                 ctx.arc(this.cons.pointA.x, this.cons.pointA.y, 6, 0, 2 * Math.PI);
@@ -990,6 +1012,67 @@ const mobs = {
                                         },
                                     })
                                 }
+                                if (tech.isChatter && !this.isInvulnerable) {
+                                    let isTalking = false
+                                    for (let i = 0; i < simulation.ephemera.length; i++) {
+                                        if (simulation.ephemera[i].name === "in game text") {
+                                            isTalking = true
+                                        }
+                                    }
+                                    if (!isTalking) {
+                                        //from https://github.com/landgreen/n-gon/discussions/500
+                                        const quotes = [
+                                            // Existing quotes
+                                            "I can do *anything!*",
+                                            "Chaos, chaos!",
+                                            "Let's make the devilskn-",
+                                            "Darmok and Jaled at Tanagra",
+                                            "Kiazi's children, their faces wet!",
+                                            "Sokath with his eyes uncovered!",
+                                            "Are you suggesting that coconuts can migrate?",
+                                            "One, Two, Five!",
+                                            "Is it an African swallow or a European swallow?",
+                                            "kept you waiting, huh?",
+                                            "This prison... to hold... me?",
+                                            "Did everyone see that? Because I will not be doing it again",
+                                            "I see the light... it's a [404 Error]!",
+                                            "I wish i took those digeridoo lessons",
+                                            "Your mother was a hamster, and your father smelt of elderberries",
+                                            "In Rod we trust",
+                                            "AAAAAAAA",
+                                            "the devil may cry?",
+                                            "hey Mr M? are you still mad at me?",
+
+                                            // New suggestions from discussion #500
+                                            "yippee",
+                                            "If you wish to defeat me train for another hundred years.",
+                                            "WE CALLED TO TALK ABOUT YOUR CAR'S LIMITED WARRANTY",
+                                            "KAMEHAMEHA!!!!!!!!!!",
+                                            "Who you gonna call? GHOST BUSTERS!",
+                                            "JARVIS evaporate this man",
+                                            "Squirtle use water beam!",
+                                            "El pollo está en llamas.",
+                                            "pentagon, hexagon, octagon, nevergon.. na give you up",
+                                            "Eat cube bozo",
+                                            "let's make the devilsknife!",
+                                            "you know, I really dislike you.",
+                                            "Good luck, and may the odds be ever in your favor",
+                                            "You dare defy the Lord of Darkness."
+                                        ];
+                                        const color = `#${Math.floor(Math.random() * 76 + 180).toString(16)}${Math.floor(Math.random() * 121).toString(16).padStart(2, '0')}${Math.floor(Math.random() * 121).toString(16).padStart(2, '0')}`
+                                        const quote = quotes[Math.floor(Math.random() * quotes.length)]
+                                        // simulation.inGameConsole(`<span style="color:"${color}">${quote}</span>`, 360)
+                                        level.inGameText(this.position.x, this.position.y - 50, quote, 240, color)
+                                    }
+                                    // simulation.ephemera.push({
+                                    //     count: 240, //cycles before it self removes
+                                    //     vertices: this.vertices,
+                                    //     do() {
+                                    //         this.count--
+                                    //         if (this.count < 0) simulation.removeEphemera(this)
+                                    //     },
+                                    // })
+                                }
                             } else if (tech.isMobLowHealth && this.health < 0.25) {
                                 dmg *= 3
                                 simulation.ephemera.push({
@@ -1029,7 +1112,10 @@ const mobs = {
                         if (tech.energySiphon && this.isDropPowerUp && m.immuneCycle < m.cycle) {
                             //dmg !== Infinity &&
                             const regen = Math.min(this.health, dmg) * tech.energySiphon * level.isReducedRegen
-                            if (!isNaN(regen) && regen !== Infinity) m.energy += regen
+                            if (!isNaN(regen) && regen !== Infinity) {
+                                m.energy += regen //max regen is 0.04 with one stack of tech.energySiphon
+                                simulation.energyGenGraphic(3 + Math.min(20, Math.floor(400 * regen)))
+                            }
                         }
                         dmg /= Math.sqrt(this.mass)
                     }
@@ -1184,6 +1270,11 @@ const mobs = {
                     }
 
                     if (tech.isVerlet && !m.isTimeDilated) {
+                        if (tech.isBarycenter) {
+                            b.orbitBot(player.position, false);
+                            bullet[bullet.length - 1].endCycle = simulation.cycle + 1320 //15 seconds
+                        }
+
                         requestAnimationFrame(() => {
                             simulation.timePlayerSkip(this.isBoss ? 60 : 30)
                             simulation.loop(); //ending with a wipe and normal loop fixes some very minor graphical issues where things are draw in the wrong locations
@@ -1236,6 +1327,20 @@ const mobs = {
                         } else {
                             for (let i = 0; i < amount; i++) b.spore(this.position)
                         }
+                    }
+                    if (tech.isChitin) {
+                        // add new segment where the current tip is
+                        for (let i = 0; i < 2; i++) {
+                            if (tech.wire.segments.length < 200) { //cap max length at 200 for performance
+                                const last = tech.wire.segments[tech.wire.segments.length - 1];
+                                tech.wire.segments.push({ x: last.x, y: last.y, oldX: last.x, oldY: last.y });
+                            }
+                        }
+                    }
+                    if (tech.isConchoidal) {
+                        const dmg = 1.04
+                        m.damageDone *= dmg
+                        tech.conchoidalDamage *= dmg
                     }
                     if (tech.isExplodeMob) {
                         b.explosion(this.position, Math.min(700, Math.sqrt(this.mass + 6) * (30 + 60 * Math.random())))
