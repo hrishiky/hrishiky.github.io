@@ -65,12 +65,6 @@ function addCookie() {
   localStorage.setItem("antiomv", "true");
 }
 
-function addCookie2() {
-  document.cookie = "fullomv=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
-  localStorage.setItem("fullomv", "true");
-  window.location.href = "about:blank";
-}
-
 function checkCookie() {
   const cookies = document.cookie.split('; ').reduce((acc, cur) => {
     const [key, val] = cur.split('=');
