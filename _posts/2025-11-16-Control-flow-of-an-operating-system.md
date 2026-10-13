@@ -1,7 +1,9 @@
 ---
 layout: post
-title: Control flow of an operating system
+title: My current understanding of the control flow of an operating system
 ---
+
+The following is a little dump of what I understand about operating system control flow:
 
 The first program on a computer that recieves control is the Basic Input/Output System (BIOS), which is replaced by Unified Extensible Firmware Interface (UEFI) in modern computers. These serve to run tests on the computer to make sure it is running properly, as well as to setup basic capabilities such as loading sectors into memory and writing characters to the screen.
 

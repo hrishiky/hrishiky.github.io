@@ -1,3 +1,5 @@
+const { lazy } = require("react");
+
 function reveal() {
     const element = document.getElementById("secret");
     element.style.display = "block";
@@ -41,6 +43,18 @@ function fillPlaceholders() {
 function addCookie(cookie, value) {
   document.cookie = `${cookie}=${value}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
   localStorage.setItem(cookie, value);
+}
+
+function loadImage(path, alt) {
+  const script = document.currentScript;
+  const container = script.parentElement;
+
+  const image = document.createElement("img");
+  image.src = path;
+  image.loading = lazy;
+  image.alt = alt;
+
+  container.appendChild(image);
 }
 
 /*

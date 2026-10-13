@@ -63,6 +63,13 @@ nav a:hover {
     margin-bottom: 30px;
 }
 
+.info-container img {
+  display: block;
+  width: 85vw;
+  height: auto;
+  margin: 24px auto;
+}
+
 .divider {
     border: none;
     border-top: 1px dashed gray;
