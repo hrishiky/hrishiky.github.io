@@ -43,6 +43,7 @@ function addCookie(cookie, value) {
   localStorage.setItem(cookie, value);
 }
 
+
 function loadImage(path, alt, container) {
     const target = document.getElementById(container);
 
