@@ -43,40 +43,14 @@ function addCookie(cookie, value) {
   localStorage.setItem(cookie, value);
 }
 
+function loadImage(path, alt, containerId) {
+  const container = document.getElementById(containerId);
+  const image = document.createElement("img");
+  image.src = path;
+  image.loading = "lazy";
+  image.alt = alt;
 
-function loadImage(path, alt, container) {
-    const target = document.getElementById(container);
-
-    if (!target) {
-        document.body.insertAdjacentHTML(
-            "beforeend",
-            `<p>container "${container}" not found.</p>`
-        );
-        return;
-    }
-
-    const image = document.createElement("img");
-    image.alt = alt;
-    image.loading = "eager";
-
-    image.onerror = () => {
-        target.insertAdjacentHTML(
-            "beforeend",
-            `<p style="color:red">
-                failed to load image "${path}"
-            </p>`
-        );
-    };
-
-    image.onload = () => {
-        target.insertAdjacentHTML(
-            "beforeend",
-            `<p style="color:green">image loaded</p>`
-        );
-    };
-
-    image.src = path;
-    target.appendChild(image);
+  container.appendChild(image);
 }
 
 /*
