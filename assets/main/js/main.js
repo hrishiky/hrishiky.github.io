@@ -1,5 +1,3 @@
-const { lazy } = require("react");
-
 function reveal() {
     const element = document.getElementById("secret");
     element.style.display = "block";
@@ -51,14 +49,13 @@ function loadImage(path, alt) {
 
   const image = document.createElement("img");
   image.src = path;
-  image.loading = lazy;
+  image.loading = "lazy";
   image.alt = alt;
 
   container.appendChild(image);
 }
 
 /*
-
 function dropdown() {
     const button = document.getElementById("archive-btn");
     const dropdown = document.getElementById("archive-list");
@@ -71,5 +68,4 @@ function dropdown() {
         button.innerHTML = "+";
     }
 }
-
 */
