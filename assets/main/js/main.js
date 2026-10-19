@@ -43,16 +43,13 @@ function addCookie(cookie, value) {
   localStorage.setItem(cookie, value);
 }
 
-function loadImage(path, alt) {
-  const script = document.currentScript;
-  const container = script.parentElement;
+function loadImage(path, alt, container) {
+    const image = document.createElement("img");
+    image.src = path;
+    image.loading = "lazy";
+    image.alt = alt;
 
-  const image = document.createElement("img");
-  image.src = path;
-  image.loading = "lazy";
-  image.alt = alt;
-
-  container.appendChild(image);
+    document.querySelector(container).appendChild(image);
 }
 
 /*
